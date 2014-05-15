@@ -8,6 +8,23 @@ appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
 
+; Doctype placeholder initialization
+resources.view.doctype = "HTML4_STRICT"
+
+; Layout scripts path definition. Place your phtml files there
+resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
+
+; Set default layout. If layout path is defined and no default layout is assigned here or in the controller
+; which is called than the responce object returned to the client will be empty
+resources.layout.layout = "public"
+
+;Database configuration
+;resources.db.adapter = "PDO_MYSQL"
+;resources.db.params.dbname = "<your database name>"
+;resources.db.params.host = "<your host name>"
+;resources.db.params.username = "<mysql username>"
+;resources.db.params.password = "<mysql password>"
+
 [staging : production]
 
 [testing : production]
