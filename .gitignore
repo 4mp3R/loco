@@ -1,0 +1,13 @@
+._*
+.~lock.*
+.buildpath
+.DS_Store
+.project
+.settings
+.idea/workspace.xml
+.idea/tasks.xml
+dataSources.ids
+datasources.xml 
+loco/composer.lock
+loco/vendor/bin
+loco/application/configs/application.ini
