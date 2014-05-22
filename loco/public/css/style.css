@@ -51,7 +51,9 @@ hr {
 /*
     Helper
  */
-
+.float {
+    overflow: auto;
+}
 .float-left {
     float: left;
 }
@@ -105,6 +107,41 @@ hr {
     Submenu
  */
 
+.submenu {
+    background: #3798dc;
+    height: 60px;
+    text-align: center;
+    color: #fff;
+}
+
+.submenu a {
+    color: #12293A;
+    text-decoration: none;
+    font-size: 21px;
+    line-height: 58px;
+    font-weight: bold;
+}
+.submenu a:hover {
+    color: #fff;
+}
+.submenu ul {
+    margin: 0;
+    height: 60px;
+}
+.submenu li {
+    padding: 0 60px;
+    height: 100%;
+}
+.submenu li.active {
+    background: url(../img/arrow.png) no-repeat bottom center;
+}
+.submenu li.active a {
+    color: #fff;
+}
+.submenu .badge {
+    top: -2px;
+    position: relative;
+}
 /*
     Splash
  */
@@ -170,11 +207,65 @@ hr {
 /*
     Sidebar
  */
+.sidebar {
+    min-height: 700px;
+    width: 20%;
+    display: inline-block;
+    float: left;
+    padding: 50px 5%;
+    background-color: #fff;
+}
+.sidebar-menu {
+    background-color: #e6e6e6;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 20px 0;
+}
+.sidebar-menu b {
+    padding: 5px 20px;
+}
+.sidebar-menu li {
+    font-size: 16px;
+    padding: 5px 20px;
+    margin-bottom: 5px;
+}
+.sidebar-menu li a {
+    color: #666;
+    text-decoration: none;
+    display: block;
+}
+.sidebar-menu li:hover a {
+    color: #333;
+}
+.sidebar-menu li:hover {
+    background-color: #ccc;
+}
+.sidebar-menu li.active {
+    background-color: #3798dc;
+    border-left: 1px solid #2A77AD;
+    border-right: 1px solid #2A77AD;
+}
+.sidebar-menu li.active a {
+    color: #fff;
+}
+
 
 /*
     Content
  */
-
+.content {
+    min-height: 700px;
+    background: #fff;
+    width: 80%;
+    display: inline-block;
+    float: left;
+    padding: 50px 5%;
+}
+.content .title {
+    margin-top: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
 /*
     Tables
  */
