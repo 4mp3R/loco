@@ -212,13 +212,13 @@ hr {
     width: 20%;
     display: inline-block;
     float: left;
-    padding: 50px 5%;
     background-color: #fff;
 }
 .sidebar-menu {
     background-color: #e6e6e6;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    min-height: 700px;
     padding: 20px 0;
 }
 .sidebar-menu b {
@@ -259,11 +259,13 @@ hr {
     width: 80%;
     display: inline-block;
     float: left;
-    padding: 50px 5%;
+    padding: 20px 15px;
+    border-right: 1px solid #ccc;
 }
 .content .title {
     margin-top: 0;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
 }
 /*
