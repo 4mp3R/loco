@@ -22,7 +22,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view = $this->getResource('view');
         $this->_view->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8');
         $this->_view->headMeta()->appendHttpEquiv('Content-Language', 'it-IT');
+        $this->_view->headMeta()->appendHttpEquiv('Viewport', 'width=device-width, initial-scale=1.0');
+        $this->_view->headMeta()->appendHttpEquiv('Description', '');
+
+        $this->_view->headLink()->appendStylesheet("http://yui.yahooapis.com/pure/0.4.2/base-min.css");
+        $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/base.css'));
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/style.css'));
+
         $this->_view->headTitle('Loco!');
     }
 }
