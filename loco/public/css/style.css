@@ -16,6 +16,7 @@ body {
     background: #e0e0e0;
     font-size: 15px;
     color:#0F1418;
+    margin: 0;
 }
 a {
     color: #3798dc;
@@ -35,7 +36,7 @@ a {
 }
 
 .container {
-    width: 1100px;
+    width: 1024px;
     margin: 0 auto;
     overflow: auto;
 }
