@@ -1,5 +1,180 @@
-/* test style */
+/*
+    Base
+ */
+
+/*
+    COLORI: 
+
+    primario: #3798dc
+    primario scuro: #12293A
+    background: #e0e0e0
+    testo: #0F1418
+    
+ */
+
 body {
-    background-color: #919EFF;
+    background: #e0e0e0;
+    font-size: 15px;
+    color:#0F1418;
 }
-/**************/
+a {
+    color: #3798dc;
+}
+.logo {
+    background: url("../img/logo_color.png") 0 0 no-repeat;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width: 130px;
+    height: 50px;
+    margin: 0;
+}
+.logo a {
+    display: block;
+}
+
+.container {
+    width: 1100px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+hr {
+    height: 1px;
+    color: #ccc;
+    background: #ccc;
+    font-size: 0;
+    border: 0;
+}
+
+/*
+    Helper
+ */
+
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.float-none {
+    float: none;
+}
+.float-auto {
+    float: auto;
+}
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+
+/*
+    Menu
+ */
+
+.menu {
+    background: #fff;
+    padding: 10px;
+}
+.menu ul {
+    margin: 7px 0;
+}
+.menu li a {
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.menu li a.button {
+    color: #fff;
+}
+.menu li.active a {
+    color: #3798dc;
+}
+.menu li:hover a {
+    color: #12293A;
+}
+
+/*
+    Submenu
+ */
+
+/*
+    Splash
+ */
+
+.splash {
+    height: 700px;
+    background: #222 url(../img/ancona.jpg) no-repeat center center;
+}
+.splash .container {
+    padding-top: 175px;
+}
+.splash h1, .splash h2 {
+    color: #12293A;
+}
+.splash h1 {
+    font-size: 50px;
+}
+/*
+    CTA
+ */
+
+.cta {
+    position: absolute;
+    top: 571px;
+    width: 100%;
+}
+.cta .container {
+    height: 100%;
+}
+.cta .container > div {
+    min-height: 200px;
+    padding: 20px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+/*
+    Features
+ */
+.features {
+}
+.features .container {
+    background: #f3f3f3;
+    min-height: 600px;
+}
+/*
+    Footer
+ */
+.footer {
+    background: #333;
+    color: #888;
+    height: 300px;
+}
+.footer .container {
+    padding: 50px 0;    
+}
+.footer .logo {
+    background-image: url(../img/logo_gray.png);
+    display: block;
+}
+.footer ul a {
+    text-decoration: none;
+}
+/*
+    Sidebar
+ */
+
+/*
+    Content
+ */
+
+/*
+    Tables
+ */
