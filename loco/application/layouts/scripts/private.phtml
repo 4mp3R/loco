@@ -18,7 +18,12 @@
                     <b>Ciao, Luca!</b>
                 </li>
                 <li>
-                    <a href="#" class="button button-primary">Logout</a>
+                    <a href="<?= $this->url(
+                        array(
+                        'controller' => 'user',
+                        'action' => 'logout'
+                        ), 'default', true
+                    ); ?>" class="button button-primary">Logout</a>
                 </li>
             </ul>        
         </div>

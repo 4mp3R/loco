@@ -1,1 +1,6 @@
-<h3>index action of user controller</h3>
+<?php if(isset($this->userData)): ?>
+    <h1>Welcome aboard, <?= $this->userData->username ?></h1>
+    <h3>Your role is <?= $this->userData->role ?></h3>
+<?php else: ?>
+    <h1>You're not logged in. Shame on you. Dickhead.</h1>
+<?php endif; ?>

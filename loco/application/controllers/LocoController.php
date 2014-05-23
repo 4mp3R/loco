@@ -7,7 +7,12 @@ class LocoController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $this->_helper->layout->setLayout("public");
+    }
+
+
+    public function logoutAction() {
+
     }
 
     public function indexAction()
