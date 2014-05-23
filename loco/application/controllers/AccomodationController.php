@@ -14,6 +14,10 @@ class AccomodationController extends Zend_Controller_Action
         $this->_helper->layout->setLayout('private');
     }
 
+    public function getAction() {
+
+    }
+
     public function addAction() {
 
     }

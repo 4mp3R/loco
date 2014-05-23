@@ -10,11 +10,6 @@ class LocoController extends Zend_Controller_Action
         $this->_helper->layout->setLayout("public");
     }
 
-
-    public function logoutAction() {
-
-    }
-
     public function indexAction()
     {
         // action body

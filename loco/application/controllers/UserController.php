@@ -35,10 +35,6 @@ class UserController extends Zend_Controller_Action
 
     }
 
-    public function confirmAction() {
-
-    }
-
     public function loginAction() {
         $this->view->loginMessage = "Per favore, esegua il log in";
     }

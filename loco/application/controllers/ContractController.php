@@ -8,6 +8,10 @@ class ContractController extends Zend_Controller_Action
         /* Initialize action controller here */
     }
 
+    public function createAction() {
+
+    }
+
     public function indexAction()
     {
         // action body

@@ -31,5 +31,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $this->_view->headTitle('Loco!');
     }
+
+    protected function _initCustomModuleAutoload() {
+        $loader = Zend_Loader_Autoloader::getInstance();
+
+        $loader->registerNamespace("App_");
+    }
+
+    protected function _initAclHookPlugin() {
+        Zend_Controller_Front::getInstance()->registerPlugin(new App_Controller_Plugin_Acl());
+    }
 }
 
