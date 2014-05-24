@@ -9,6 +9,7 @@ class Application_Model_Acl extends Zend_Acl {
 
     public function __construct() {
         $this->addRole(new Zend_Acl_Role("unregistered"))
+            ->addResource(new Zend_Acl_Resource("index_index"))
             ->addResource(new Zend_Acl_Resource("error_error"))
             ->addResource(new Zend_Acl_Resource("error_authorization-error"))
             ->addResource(new Zend_Acl_Resource("loco_index"))
@@ -18,7 +19,7 @@ class Application_Model_Acl extends Zend_Acl {
             ->addResource(new Zend_Acl_Resource("user_authenticate"))
             ->allow("unregistered", array(
                 "error_error", "loco_index", "loco_faq-view", "user_register", "user_login", "user_authenticate",
-                "error_authorization-error"
+                "error_authorization-error", "index_index"
             ));
 
         $this->addRole(new Zend_Acl_Role("lessee"), "unregistered")

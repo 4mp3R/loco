@@ -20,7 +20,7 @@ class App_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
 
         $resource = $request->getControllerName() . "_" . $request->getActionName();
 
-        if(!$acl->isAllowed($role, $resource)) {
+        if(!$acl->has($resource) || !$acl->isAllowed($role, $resource)) {
             //$auth->clearIdentity();
             $this->_request->setControllerName("error")
                            ->setActionName("authorization-error");

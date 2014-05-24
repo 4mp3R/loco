@@ -11,13 +11,14 @@ class Application_Form_Registration extends Zend_Form
         $this->addElement('text', 'username', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
+                'Alnum',
                 array('StringLength', true, array(4, 128))
             ),
             'required'   => true,
             'label'      => 'Username',
         ));
 
-        $this->addElement('password', 'passwd', array(
+        $this->addElement('password', 'password', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
                 array('StringLength', true, array(4, 64))
@@ -26,60 +27,61 @@ class Application_Form_Registration extends Zend_Form
             'label'      => 'Password',
         ));
 
-        $this->addElement(array(
-            'type' => 'Zend\Form\Element\Email',
-            'name' => 'email',
-            'options' => array(
-                'label' => 'Email'
-            ),
-            'attributes' => array(
-                'placeholder' => 'you@domain.com'
-            )
+        $this->addElement('text', 'email', array(
+            'filters' => array('StringTrim'),
+            'validators' => array('EmailAddress', array('StringLength', true, array(4, 256))),
+            'required' => true,
+            'label' => 'Email'
         ));
 
         $this->addElement('text', 'name', array(
+            'filters' => array('StringTrim'),
             'validators' => array(
-                array('StringLength', true, array(2, 128))
+                array('StringLength', true, array(2, 128)),
+                'Alpha'
             ),
             'required'   => true,
             'label'      => 'Nome',
         ));
 
         $this->addElement('text', 'surname', array(
+            'filter' => array('StringTrim'),
             'validators' => array(
-                array('StringLength', true, array(4, 128))
+                array('StringLength', true, array(4, 128)),
+                'Alpha'
             ),
-            'required'   => true,
+            'required'   => false,
             'label'      => 'Cognome',
         ));
 
-        $this->addElement(array(
-            'type' => 'Zend\Form\Element\Date',
-            'name' => 'birth',
-            'options' => array(
-                'label' => 'Data di Nascita'
-            )
+        $this->addElement('text', 'birth', array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Date', 'format' => 'yyyy-mm-dd')
+            ),
+            'required' => true,
+            'label' => 'Data di nascita (aaaa-mm-gg)'
         ));
 
-        $this->addElement(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'sex',
-            'options' => array(
-                'label' => 'Sesso',
-                'value_options' => array(
-                    '1' => 'Seleziona il tuo sesso',
-                    '2' => 'Uomo',
-                    '3' => 'Donna'
-                ),
+        $this->addElement('select', 'sex', array(
+            'multiOptions' => array(
+                'M' => 'M',
+                'F' => 'F'
             ),
-            'attributes' => array(
-                'value' => '1'
+            'filter' => array('StringTrim'),
+            'validator' => array(
+                array('StringLength', true, array(1,1)),
+                'Alpha'
+                ),
+            'required' => true,
+            'label' => 'Sesso'
             )
-        ));
+        );
 
         $this->addElement('text', 'cf', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
+                'Alnum',
                 array('StringLength', true, array(16, 16))
             ),
             'required'   => true,
@@ -88,43 +90,41 @@ class Application_Form_Registration extends Zend_Form
 
         $this->addElement('file', 'profile_image', array(
             'validators' => array(
-                array(
                     array('Count', false, 1),
                     array('Size', false, 102400),
-                    array('Extension', false, array('jpg', 'gif'))),
-            'required'   => true,
-            'label'      => 'Immagine profilo',
+                    array('Extension', false, array('jpg', 'gif'))
+            ),
+            'required'   => false,
+            'label'      => 'Immagine profilo'
         ));
 
-        $this->addElement(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'role',
-            'options' => array(
-        'label' => 'Ruolo',
-        'value_options' => array(
-            '1' => 'Seleziona il tuo ruolo',
-            '2' => 'Locatore',
-            '3' => 'Locatario'
-        ),
-    ),
-            'attributes' => array(
-        'value' => '1'
-    )
-        ));
+        $this->addElement('select', 'role', array(
+                'multiOptions' => array(
+                    'lesser' => 'Locatore',
+                    'lessee' => 'Locatario'
+                ),
+                'filter' => array('StringTrim'),
+                'validators' => array(
+                    'Alpha',
+                    array('StringLength', true, array(6,6))
+                ),
+                'required' => 'true',
+                'label' => 'Ruolo'
+            )
+        );
 
         $this->addElement('text', 'phone', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
-                array('StringLength', true, array(10, 16))
+                array('StringLength', true, array(8, 16))
             ),
             'required'   => true,
             'label'      => 'Telefono',
         ));
 
         $this->addElement('submit', 'registration', array(
-            'label'    => 'Regista',
+            'label'    => 'Regista'
         ));
-
 
     }
 }

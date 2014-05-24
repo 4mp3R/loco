@@ -18,7 +18,10 @@
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Supporto</a></li>
                 <li>
-                    <a href="#" class="button button-primary">Registra</a>
+                    <a href="<?= $this->url(array(
+                        'controller' => 'user',
+                        'action' => 'register'
+                    ), 'default', true); ?>" class="button button-primary">Registra</a>
                     <a href="<?= $this->url(array(
                         'controller' => 'user',
                         'action' => 'login'

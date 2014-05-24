@@ -3,10 +3,13 @@
 class UserController extends Zend_Controller_Action
 {
     protected $_loginForm;
+    protected $_profileModel;
 
     public function init()
     {
         $this->_helper->layout->setLayout("public");
+
+        $this->_profileModel = new Application_Model_Profile();
 
         $urlHelper = $this->_helper->getHelper("url");
         $actionUrl = $urlHelper->url(array(
@@ -32,7 +35,34 @@ class UserController extends Zend_Controller_Action
     }
 
     public function registerAction() {
+        $registrationForm = new Application_Form_Registration();
+        $request = $this->getRequest();
+        $keys = array('username', 'password', 'email', 'name', 'surname', 'birth', 'sex', 'cf', 'profile_image', 'role', 'phone');
 
+        if($request->isPost()) {
+            if($registrationForm->isValid($request->getParams())) {
+
+                /*
+                echo "keys to be preserved => " . print_r($keys);
+                echo "request array => " . print_r($request->getParams());
+                echo "stuff that goes to db => " . print_r(array_intersect_key($request->getParams(), array_flip($keys)));
+                */
+
+                if(0 === $this->_profileModel->getProfile($request->getParam('username'))->count()) {
+                    $this->_profileModel->addProfile(array_intersect_key($request->getParams(), array_flip($keys)));
+
+                    $this->view->message = 'La registrazione è andata a buon fine';
+                } else {
+                    $this->view->message = 'Utente ' . $request->getParam('username') . ' già esiste. Riprova';
+                }
+            } else {
+                $this->view->message = 'I dati inseriti non sono corretti, riprova';
+            }
+        } else {
+            $this->view->message = 'Inserisci i dati necessari per la registrazione';
+        }
+
+        $this->view->registrationForm = $registrationForm;
     }
 
     public function loginAction() {
@@ -58,8 +88,8 @@ class UserController extends Zend_Controller_Action
                     ->setCredentialColumn("password");
 
                 //Pass username and password read from submitted form to the authentication adapter
-                $authAdapter->setIdentity($this->_loginForm->getValues()["username"])
-                    ->setCredential($this->_loginForm->getValues()["password"]);
+                $authAdapter->setIdentity($this->_loginForm->getValue("username"))
+                            ->setCredential($this->_loginForm->getValue("password"));
 
                 //Get an instance of Zend_Auth singleton
                 $auth = Zend_Auth::getInstance();

@@ -3,7 +3,7 @@
 class Application_Model_Resources_Profile  extends Zend_Db_Table_Abstract {
 
     protected $_name = 'profile';
-    protected $_primary = 'email';
+    protected $_primary = 'username';
 
     public function init() {
 
@@ -14,20 +14,19 @@ class Application_Model_Resources_Profile  extends Zend_Db_Table_Abstract {
         return $this->fetchAll($query);
     }
 
-    public function getProfile($email) {
-        return $this->find($email);
+    public function getProfile($username) {
+        return $this->find($username);
     }
 
-    public function addProfile($dati) {
-        $this->insert($dati);
+    public function addProfile($data) {
+        $this->insert($data);
     }
 
-    public function updateProfile($email , $datiaggiornati ) {
-        //$this->update("email = $email");
-        $this->update($datiaggiornati, "email = $email");
+    public function updateProfile($username , $data) {
+        $this->update($data, "username = $username");
     }
 
-    public function deleteProfile($email) {
-        $this->delete("email = $email");
+    public function deleteProfile($username) {
+        $this->delete("username = $username");
     }
 }
