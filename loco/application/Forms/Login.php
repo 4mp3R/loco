@@ -1,27 +1,35 @@
 <?php
 
-class Application_Form_Login extends Zend_Form {
+class Application_Form_Login extends Zend_Form
+{
+    public function init()
+    {
+        $this->setMethod("post");
+        $this->setName("login_form");
+        $this->setAction("");
 
-    public function init() {
-        $this->setAction("")
-             ->setMethod("post")
-             ->setName("login_form");
-
-        $this->addElement("text", "username", array(
-            "filters" => array("StringTrim"),
-            "validators" => array(array("StringLength", true, array(4,64))),
-            "required" => true,
-            "label" => "Username"
+        $this->addElement('text', 'username', array(
+            'filters'    => array('StringTrim'),
+            'validators' => array(
+                array('StringLength', true, array(4, 128))
+            ),
+            'required'   => true,
+            'label'      => 'Username',
         ));
 
-        $this->addElement("password", "password", array(
-            "filter" => array("StringTrim"),
-            "validators" => array(array("StringLength", true, array(4, 64))),
-            "required" => true,
-            "label" => "Password"
+        $this->addElement('password', 'password', array(
+            'filters'    => array('StringTrim'),
+            'validators' => array(
+                array('StringLength', true, array(4, 64))
+            ),
+            'required'   => true,
+            'label'      => 'Password',
         ));
 
-        $this->addElement("submit", "Log In Now!");
+        $this->addElement('submit', 'login', array(
+            'label'    => 'Login',
+        ));
+
+
     }
-
 }

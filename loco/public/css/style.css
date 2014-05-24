@@ -276,3 +276,54 @@ hr {
 
 
 /****************************************/
+
+/*
+ *  Test forms style, hope we won't use decorators
+ *  Default Zend decorator packs each form like this:
+ *
+ *  <form>
+ *      <dl class="zend_form">
+ *          <dt>Label for the form element</dt>
+ *          <dd>
+ *              <input> <!--form input element-->
+ *              <ul class="errors">
+ *                  <li>Error messages</li>
+ *              </ul>
+ *          </dd>
+ *      </dl>
+ *  </form>
+ *
+ *
+ *
+*/
+
+dl.zend_form     {
+    border-radius: 10px;
+    background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(125,185,232,0) 100%);
+    padding: 1em;
+    margin: 2em;
+}
+
+dl.zend_form dt {
+    float: left;
+    text-align: right;
+    width: 20%;
+    font-weight: bold;
+}
+
+dl.zend_form dd {
+    margin-left: 20%;
+    padding-left: 1em;
+    margin-top: 0;
+}
+
+dl.zend_form ul {
+    display: inline-block;
+    margin-left: 5%;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+    font-weight: bold;
+    color: red;
+}
+
