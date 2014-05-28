@@ -1,0 +1,9 @@
+
+<table style="text-align: left">
+    <?php foreach($this->faq as $item): ?>
+        <tr>
+            <th><?= $item['question'] ?>?</th>
+            <td><?= $item['answer'] ?>.</td>
+        </tr>
+    <?php endforeach ?>
+</table>
