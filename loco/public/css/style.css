@@ -94,13 +94,13 @@ hr {
     font-weight: bold;
     text-decoration: none;
 }
-.menu li a.button {
+.menu li a.button-primary {
     color: #fff;
 }
-.menu li.active a {
+.menu li.active a.link {
     color: #3798dc;
 }
-.menu li:hover a {
+.menu li:hover a.link {
     color: #12293A;
 }
 
