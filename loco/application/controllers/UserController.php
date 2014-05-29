@@ -29,9 +29,6 @@ class UserController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->_helper->layout->setLayout("private");
-
-        if(Zend_Auth::getInstance()->hasIdentity())
-            $this->view->userData = Zend_Auth::getInstance()->getIdentity();
     }
 
     public function registerAction() {
