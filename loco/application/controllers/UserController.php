@@ -2,12 +2,14 @@
 
 class UserController extends Zend_Controller_Action
 {
+    protected $_default_profile_image;
+
     protected $_loginForm;
     protected $_profileModel;
 
     public function init()
     {
-
+        $this->_default_profile_image = APPLICATION_PATH . "/../public/img/default_profile.jpg";
     }
 
     public function indexAction()
@@ -35,10 +37,16 @@ class UserController extends Zend_Controller_Action
 
                 if(0 === $this->_profileModel->getProfile($request->getParam('username'))->count()) {
                     $upload = new Zend_File_Transfer_Adapter_Http();
-                    $upload->receive("profile_image");
+                    $image_file = null;
 
                     $profile_data = array_intersect_key($request->getParams(), array_flip($keys));
-                    $profile_data['profile_image'] = file_get_contents($upload->getFileName("profile_image"));
+
+                    if($upload->isValid("profile_image")) {
+                        $upload->receive("profile_image");
+                        $profile_data['profile_image'] = file_get_contents($upload->getFileName("profile_image"));
+                    } else {
+                        $profile_data['profile_image'] = file_get_contents($this->_default_profile_image);
+                    }
 
                     $this->_profileModel->addProfile($profile_data);
 
@@ -79,7 +87,7 @@ class UserController extends Zend_Controller_Action
     }
 
     public function authenticateAction() {
-        $this->_helper->layout->setLayout("private");
+        $this->_helper->layout->setLayout("public");
 
         $this->_loginForm = new Application_Form_Login();
 

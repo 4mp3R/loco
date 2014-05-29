@@ -92,10 +92,10 @@ class Application_Form_Registration extends Zend_Form
         $this->addElement('file', 'profile_image', array(
             'validators' => array(
                     array('Count', false, 1),
-                    array('Size', false, 5242880),
+                    array('Size', false, 5335040),
                     array('Extension', false, array('jpg'))
             ),
-            'required'   => true,
+            'required'   => false,
             'label'      => 'Immagine profilo'
         ));
 
