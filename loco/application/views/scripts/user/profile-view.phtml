@@ -1,1 +1,14 @@
-<h3>profileView action in user controller</h3>
+<h3>Informazioni sul profilo dell'utente</h3>
+<div class="container">
+    <img class="float-left" src="data:image/jpeg;base64,<?php echo base64_encode($this->profile_info->profile_image); ?>" /><br>
+
+    Nome: <?= $this->profile_info->name; ?><br>
+    Cognome: <?= $this->profile_info->surname; ?><br>
+    Username: <?= $this->profile_info->username; ?><br>
+    Email: <?= $this->profile_info->email; ?><br>
+    Data di nascita: <?= $this->profile_info->birth; ?><br>
+    Sesso: <?= $this->profile_info->sex; ?><br>
+    Codice fiscale: <?= $this->profile_info->cf; ?><br>
+    Ruolo: <?= $this->profile_info->role; ?><br>
+    Telefono: <?= $this->profile_info->phone; ?><br>
+</div>

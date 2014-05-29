@@ -7,6 +7,56 @@ class UserController extends Zend_Controller_Action
 
     public function init()
     {
+
+    }
+
+    public function indexAction()
+    {
+        $this->_helper->layout->setLayout("private");
+    }
+
+    public function registerAction() {
+        $this->_helper->layout->setLayout("public");
+
+        $this->_profileModel = new Application_Model_Profile();
+
+        $registrationForm = new Application_Form_Registration();
+        $request = $this->getRequest();
+        $keys = array('username', 'password', 'email', 'name', 'surname', 'birth', 'sex', 'cf', 'profile_image', 'role', 'phone');
+
+        if($request->isPost()) {
+            if($registrationForm->isValid($request->getParams())) {
+
+                /*
+                echo "keys to be preserved => " . print_r($keys);
+                echo "request array => " . print_r($request->getParams());
+                echo "stuff that goes to db => " . print_r(array_intersect_key($request->getParams(), array_flip($keys)));
+                */
+
+                if(0 === $this->_profileModel->getProfile($request->getParam('username'))->count()) {
+                    $upload = new Zend_File_Transfer_Adapter_Http();
+                    $upload->receive("profile_image");
+
+                    $profile_data = array_intersect_key($request->getParams(), array_flip($keys));
+                    $profile_data['profile_image'] = file_get_contents($upload->getFileName("profile_image"));
+
+                    $this->_profileModel->addProfile($profile_data);
+
+                    $this->view->message = 'La registrazione è andata a buon fine';
+                } else {
+                    $this->view->message = 'Utente ' . $request->getParam('username') . ' già esiste. Riprova';
+                }
+            } else {
+                $this->view->message = 'I dati inseriti non sono corretti, riprova';
+            }
+        } else {
+            $this->view->message = 'Inserisci i dati necessari per la registrazione';
+        }
+
+        $this->view->registrationForm = $registrationForm;
+    }
+
+    public function loginAction() {
         $this->_helper->layout->setLayout("public");
 
         $this->_profileModel = new Application_Model_Profile();
@@ -24,49 +74,15 @@ class UserController extends Zend_Controller_Action
         $this->_loginForm = $form;
 
         $this->view->loginForm = $form;
-    }
 
-    public function indexAction()
-    {
-        $this->_helper->layout->setLayout("private");
-    }
-
-    public function registerAction() {
-        $registrationForm = new Application_Form_Registration();
-        $request = $this->getRequest();
-        $keys = array('username', 'password', 'email', 'name', 'surname', 'birth', 'sex', 'cf', 'profile_image', 'role', 'phone');
-
-        if($request->isPost()) {
-            if($registrationForm->isValid($request->getParams())) {
-
-                /*
-                echo "keys to be preserved => " . print_r($keys);
-                echo "request array => " . print_r($request->getParams());
-                echo "stuff that goes to db => " . print_r(array_intersect_key($request->getParams(), array_flip($keys)));
-                */
-
-                if(0 === $this->_profileModel->getProfile($request->getParam('username'))->count()) {
-                    $this->_profileModel->addProfile(array_intersect_key($request->getParams(), array_flip($keys)));
-
-                    $this->view->message = 'La registrazione è andata a buon fine';
-                } else {
-                    $this->view->message = 'Utente ' . $request->getParam('username') . ' già esiste. Riprova';
-                }
-            } else {
-                $this->view->message = 'I dati inseriti non sono corretti, riprova';
-            }
-        } else {
-            $this->view->message = 'Inserisci i dati necessari per la registrazione';
-        }
-
-        $this->view->registrationForm = $registrationForm;
-    }
-
-    public function loginAction() {
         $this->view->loginMessage = "Per favore, esegua il log in";
     }
 
     public function authenticateAction() {
+        $this->_helper->layout->setLayout("private");
+
+        $this->_loginForm = new Application_Form_Login();
+
         $request = $this->getRequest();
 
         //Accept only post reuqests for authenitication procedure
@@ -100,7 +116,7 @@ class UserController extends Zend_Controller_Action
                     $auth->getStorage()->write($authAdapter->getResultRowObject());
 
                     //Go to profile page
-                    $this->_helper->redirector("index", "user");
+                    $this->_helper->redirector("profile-view", "user");
 
                 } else {    //Authentication failed
 
@@ -118,13 +134,26 @@ class UserController extends Zend_Controller_Action
     }
 
     public function logoutAction() {
+        $this->_helper->layout->setLayout("public");
+
         Zend_Auth::getInstance()->clearIdentity();
 
         $this->_helper->redirector("index", "loco");
     }
 
     public function profileViewAction() {
+        $username = null;
+        $profile = null;
 
+        $this->_helper->layout->setLayout("private");
+
+        $username = Zend_Auth::getInstance()->getIdentity()->username;
+
+        $this->_profileModel = new Application_Model_Profile();
+
+        $profile = $this->_profileModel->getProfile($username);
+
+        $this->view->profile_info = $profile[0];
     }
 
     public function profileEditAction() {

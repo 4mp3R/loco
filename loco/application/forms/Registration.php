@@ -6,6 +6,7 @@ class Application_Form_Registration extends Zend_Form
     {
         $this->setMethod("post");
         $this->setName("registration_form");
+        $this->setAttrib('enctype', 'multipart/form-data');
         $this->setAction("");
 
         $this->addElement('text', 'username', array(
@@ -91,10 +92,10 @@ class Application_Form_Registration extends Zend_Form
         $this->addElement('file', 'profile_image', array(
             'validators' => array(
                     array('Count', false, 1),
-                    array('Size', false, 102400),
-                    array('Extension', false, array('jpg', 'gif'))
+                    array('Size', false, 5242880),
+                    array('Extension', false, array('jpg'))
             ),
-            'required'   => false,
+            'required'   => true,
             'label'      => 'Immagine profilo'
         ));
 
