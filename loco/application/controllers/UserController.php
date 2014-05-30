@@ -165,7 +165,43 @@ class UserController extends Zend_Controller_Action
     }
 
     public function profileEditAction() {
+        $this->_helper->layout->setLayout("private");
 
+        $profileEditForm = null;
+        $request = $this->_request;
+        $profileData = null;
+        $upload = null;
+
+        $keys = array("name", "surname", "email", "birth", "sex", "cf", "phone");
+
+        $upload = new Zend_File_Transfer_Adapter_Http();
+        $profileEditForm = new Application_Form_ProfileEdit();
+        $this->_profileModel = new Application_Model_Profile();
+        $profileData = $this->_profileModel->getProfile(Zend_Auth::getInstance()->getIdentity()->username);
+        $profileData = $profileData[0]->toArray();
+
+        if($request->isPost()) {
+            if($profileEditForm->isValid($request->getParams())) {
+                foreach($keys as $k)
+                    $profileData[$k] = $request->getParam($k);
+
+                if(null != $request->getParam("password"))
+                    $profileData['password'] = $request->getParam('password');
+
+                if($upload->isValid('profile_image')) {
+                    $upload->receive('profile_image');
+                    $profileData['profile_image'] = file_get_contents($upload->getFileName('profile_image'));
+                }
+
+                $this->_profileModel->updateProfile($profileData['username'], $profileData);
+
+                $this->view->message = "L'aggiornamento del profilo è andato a buon file";
+            } else $this->view->message = "I dati inseriti non sono corretti. Riprova";
+        } else $this->view->message = "Modifica del profilo utente";
+
+        $profileEditForm->populate($profileData);
+
+        $this->view->form = $profileEditForm;
     }
 
     public function viewAllAction() {

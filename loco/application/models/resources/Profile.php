@@ -23,10 +23,10 @@ class Application_Model_Resources_Profile  extends Zend_Db_Table_Abstract {
     }
 
     public function updateProfile($username , $data) {
-        $this->update($data, "username = $username");
+        $this->update($data, "username = '$username'");
     }
 
     public function deleteProfile($username) {
-        $this->delete("username = $username");
+        $this->delete("username = '$username'");
     }
 }
