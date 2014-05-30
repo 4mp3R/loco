@@ -205,16 +205,28 @@ class UserController extends Zend_Controller_Action
     }
 
     public function viewAllAction() {
+        $this->_helper->layout->setLayout("private");
+
         $this->_profileModel = new Application_Model_Profile();
 
         $this->view->allProfiles = $this->_profileModel->getAllProfiles();
     }
 
-    public function addAction() {
-
-    }
-
     public function deleteAction() {
+        $request = $this->_request;
+        $username = $request->getParam('username');
+        $confirm = $request->getParam('confirm');
+
+        $this->_profileModel = new Application_Model_Profile();
+
+        if(isset($username) && count($this->_profileModel->getProfile($username)) == 1) {
+            if(isset($confirm) && $confirm == 'yes') {
+                $this->_profileModel->deleteProfile($username);
+                $this->view->message = "Profilo eliminato";
+            } else $this->view->message = "Devi confermare l'eliminazione profilo utente";
+        }
+         else
+            $this->view->message = "Devi specificare l'utente da eliminare";
 
     }
 }
