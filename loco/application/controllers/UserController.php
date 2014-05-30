@@ -205,7 +205,9 @@ class UserController extends Zend_Controller_Action
     }
 
     public function viewAllAction() {
+        $this->_profileModel = new Application_Model_Profile();
 
+        $this->view->allProfiles = $this->_profileModel->getAllProfiles();
     }
 
     public function addAction() {

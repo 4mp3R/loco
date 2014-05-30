@@ -327,3 +327,7 @@ dl.zend_form ul {
     color: red;
 }
 
+img.profile {
+    height: 100px;
+    width: 100px;
+}
