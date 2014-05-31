@@ -35,7 +35,8 @@ class AccomodationController extends Zend_Controller_Action
     }
 
     public function searchAction() {
-
+        $searchForm = new Application_Form_Search();
+        $this->view->form = $searchForm;
     }
 
     public function typeManageAction() {

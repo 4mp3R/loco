@@ -11,3 +11,4 @@ datasources.xml
 loco/composer.lock
 loco/vendor/bin
 loco/application/configs/application.ini
+loco/public/img/ancona.jpg
