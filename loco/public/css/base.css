@@ -28,8 +28,6 @@
 
 .grid {
     width: 100%;
-    max-width: 1140px;
-    min-width: 755px;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -227,6 +225,30 @@ a.button-selected {
 .form {
     position: relative;
     margin: 20px 0;
+
+}
+.form ul {
+    display: inline-block;
+    margin-left: 5%;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+    font-weight: bold;
+    color: red;
+}
+img.profile {
+    height: 100px;
+    width: 100px;
+}
+.form dt, .form dd {
+    display: block;
+    float: none;
+}
+.form dt {
+    font-weight: bold;
+}
+.form dd {
+    margin: 1px 0 10px;
 }
 
 .form input[type="text"],
@@ -253,10 +275,6 @@ a.button-selected {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-.form dt, .form dd {
-    margin-bottom: 13px;
 }
 
 /*
@@ -441,6 +459,9 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     display:inline-block;
     padding-left:10px;
     padding-right:10px;
+}
+.list-inline>li:last-child{
+    padding-right:0px;
 }
 .list-unstyled{
     padding-left:0;
