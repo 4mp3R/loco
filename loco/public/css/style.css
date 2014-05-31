@@ -334,3 +334,7 @@ hr {
     background-color: #f7f7f7;
     border-top: 1px solid #ddd;
 }
+
+.login_error {
+    color: red;
+}

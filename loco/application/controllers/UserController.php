@@ -65,6 +65,9 @@ class UserController extends Zend_Controller_Action
     }
 
     public function loginAction() {
+        $request = $this->getRequest();
+        $form = null;
+
         $this->_helper->layout->setLayout("public");
 
         $this->_profileModel = new Application_Model_Profile();
@@ -72,28 +75,14 @@ class UserController extends Zend_Controller_Action
         $urlHelper = $this->_helper->getHelper("url");
         $actionUrl = $urlHelper->url(array(
                 'controller' => 'user',
-                'action' => 'authenticate'),
+                'action' => 'login'),
             'default'
         );
 
         $form = new Application_Form_Login();
         $form->setAction($actionUrl);
-
         $this->_loginForm = $form;
 
-        $this->view->loginForm = $form;
-
-        $this->view->loginMessage = "Per favore, esegua il log in";
-    }
-
-    public function authenticateAction() {
-        $this->_helper->layout->setLayout("public");
-
-        $this->_loginForm = new Application_Form_Login();
-
-        $request = $this->getRequest();
-
-        //Accept only post reuqests for authenitication procedure
         if($request->isPost()) {
 
             //Check whether all the form parameters were passed in the request
@@ -110,7 +99,7 @@ class UserController extends Zend_Controller_Action
 
                 //Pass username and password read from submitted form to the authentication adapter
                 $authAdapter->setIdentity($this->_loginForm->getValue("username"))
-                            ->setCredential($this->_loginForm->getValue("password"));
+                    ->setCredential($this->_loginForm->getValue("password"));
 
                 //Get an instance of Zend_Auth singleton
                 $auth = Zend_Auth::getInstance();
@@ -128,17 +117,17 @@ class UserController extends Zend_Controller_Action
 
                 } else {    //Authentication failed
 
-                    $this->view->loginMessage = "Autenticazione fallita, riprova.";
+                    $this->view->message = "Autenticazione fallita, riprova.";
 
                     //Show the form again
-                    $this->render("login");
+                    //$this->render("login");
                 }
             } else {    //Form parameters are wrong
-                $this->_helper->redirector("index", "loco");
+                $this->view->message = "Il login non è corretto. Riprova";
             }
-        } else {    //If current request wasn't made by POST, go back to the home page
-            $this->_helper->redirector("index", "loco");
         }
+
+        $this->view->loginForm = $form;
     }
 
     public function logoutAction() {
