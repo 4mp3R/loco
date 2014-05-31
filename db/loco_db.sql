@@ -48,7 +48,7 @@ CREATE TABLE `accomodation` (
   KEY `type` (`type`),
   KEY `lesser` (`lesser`),
   CONSTRAINT `accomodation_ibfk_1` FOREIGN KEY (`type`) REFERENCES `accomodation_type` (`id`),
-  CONSTRAINT `accomodation_ibfk_2` FOREIGN KEY (`lesser`) REFERENCES `profile` (`email`)
+  CONSTRAINT `accomodation_ibfk_2` FOREIGN KEY (`lesser`) REFERENCES `profile` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `accomodation_feature`;
@@ -89,8 +89,8 @@ CREATE TABLE `contract` (
   PRIMARY KEY (`id`),
   KEY `lesser` (`lesser`),
   KEY `lessee` (`lessee`),
-  CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`lesser`) REFERENCES `profile` (`email`),
-  CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`lessee`) REFERENCES `profile` (`email`)
+  CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`lesser`) REFERENCES `profile` (`username`),
+  CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`lessee`) REFERENCES `profile` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `message`;
@@ -103,8 +103,8 @@ CREATE TABLE `message` (
   PRIMARY KEY (`id`),
   KEY `sender` (`sender`),
   KEY `recipient` (`recipient`),
-  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `profile` (`email`),
-  CONSTRAINT `message_ibfk_2` FOREIGN KEY (`recipient`) REFERENCES `profile` (`email`)
+  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `profile` (`username`),
+  CONSTRAINT `message_ibfk_2` FOREIGN KEY (`recipient`) REFERENCES `profile` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `photo`;
