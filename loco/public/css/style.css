@@ -306,6 +306,9 @@ hr {
 /*
     Messages
  */
+.messages .content {
+    padding: 0 10px;
+}
 .messages .messages-list img {
     border: 1px solid #ccc;
 }
