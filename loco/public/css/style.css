@@ -76,6 +76,9 @@ hr {
 .text-right {
     text-align: right;
 }
+.text-justified {
+    text-align: justify;
+}
 
 /*
     Menu
@@ -285,26 +288,45 @@ hr {
     background: #222 url(../img/ancona.jpg) no-repeat left center;
 }
 
-.login
+/*
+    Search
+ */
 
-/****************************************/
+.prezzo {
+    color: #b94a48;
+}
 
 /*
- *  Test forms style, hope we won't use decorators
- *  Default Zend decorator packs each form like this:
- *
- *  <form>
- *      <dl class="zend_form">
- *          <dt>Label for the form element</dt>
- *          <dd>
- *              <input> <!--form input element-->
- *              <ul class="errors">
- *                  <li>Error messages</li>
- *              </ul>
- *          </dd>
- *      </dl>
- *  </form>
- *
- *
- *
-*/
+    Panel
+ */
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+.panel-image img {
+    width: 100%;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid transparent;
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+}
+.panel-title > a {
+    color: inherit;
+}
+.panel-body {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+    background-color: #f7f7f7;
+    border-top: 1px solid #ddd;
+}

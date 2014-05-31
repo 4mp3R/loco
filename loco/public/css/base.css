@@ -21,11 +21,6 @@
     padding-right: 20px;
 }
 
-[class*='col-']:last-of-type {
-    padding-right: 0px;
-}
-
-
 .grid {
     width: 100%;
     margin: 0 auto;
@@ -472,6 +467,9 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .list-unstyled{
     padding-left:0;
     list-style:none;
+}
+.list-unstyled > li {
+    margin-bottom: 3px;
 }
 
 /*
