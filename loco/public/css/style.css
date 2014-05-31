@@ -47,6 +47,7 @@ hr {
     background: #ccc;
     font-size: 0;
     border: 0;
+    margin: 10px 0;
 }
 
 /*
@@ -213,17 +214,19 @@ hr {
     Sidebar
  */
 .sidebar {
-    min-height: 700px;
     width: 20%;
     display: inline-block;
     float: left;
 }
-.sidebar-menu {
-    background-color: #fff;
-    border-left: 1px solid #ccc;
+.sidebar-content {
     border-right: 1px solid #ccc;
     min-height: 700px;
-    padding: 20px 0;
+    padding: 10px 5px;
+}
+.sidebar-menu {
+    border-right: 1px solid #ccc;
+    min-height: 700px;
+    padding: 20px 10px;
 }
 .sidebar-menu b {
     padding: 5px 20px;
@@ -316,6 +319,7 @@ hr {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid transparent;
+    background-color: #f9f9f9;
 }
 .panel-title {
     margin-top: 0;
@@ -331,6 +335,6 @@ hr {
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     padding: 10px 15px;
-    background-color: #f7f7f7;
+    background-color: #fff;
     border-top: 1px solid #ddd;
 }
