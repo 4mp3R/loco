@@ -291,10 +291,14 @@ hr {
 /*
     Search
  */
-
-.prezzo {
+.search .prezzo {
     color: #b94a48;
 }
+
+.search .panel-body .button {
+    margin-top: 15px;
+}
+
 
 /*
     Panel
