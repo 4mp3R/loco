@@ -47,6 +47,7 @@ hr {
     background: #ccc;
     font-size: 0;
     border: 0;
+    margin: 10px 0;
 }
 
 /*
@@ -213,36 +214,39 @@ hr {
     Sidebar
  */
 .sidebar {
-    min-height: 700px;
     width: 20%;
     display: inline-block;
     float: left;
 }
-.sidebar-menu {
-    background-color: #fff;
-    border-left: 1px solid #ccc;
+.sidebar-content {
     border-right: 1px solid #ccc;
-    min-height: 700px;
-    padding: 20px 0;
+    padding: 10px 5px;
+}
+.sidebar-menu {
+    border-right: 1px solid #ccc;
+    padding: 0 0 20px 10px;
 }
 .sidebar-menu b {
-    padding: 5px 20px;
+    padding: 5px 20px 5px 10px;
 }
 .sidebar-menu li {
     font-size: 16px;
-    padding: 5px 20px;
-    margin-bottom: 5px;
+    width: 100%;
+    margin: 5px 0;
+    padding: 0;
+    border-left: 2px solid transparent;
 }
 .sidebar-menu li a {
     color: #666;
     text-decoration: none;
     display: block;
+    padding: 5px 20px 5px 5px;
 }
 .sidebar-menu li:hover a {
     color: #333;
 }
 .sidebar-menu li:hover {
-    background-color: #ccc;
+    border-left-color: #3798dc;
 }
 .sidebar-menu li.active {
     background-color: #3798dc;
@@ -258,7 +262,7 @@ hr {
     Content
  */
 .content, .content-full {
-    min-height: 700px;
+    min-height: 600px;
     background: #f3f3f3;
     width: 100%;
     display: inline-block;
@@ -299,6 +303,17 @@ hr {
     margin-top: 15px;
 }
 
+/*
+    Messages
+ */
+.messages .messages-list img {
+    border: 1px solid #ccc;
+}
+.messages .messages-list b {
+    line-height: 32px;
+}
+
+
 
 /*
     Panel
@@ -316,6 +331,7 @@ hr {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid transparent;
+    background-color: #f9f9f9;
 }
 .panel-title {
     margin-top: 0;
@@ -331,7 +347,7 @@ hr {
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     padding: 10px 15px;
-    background-color: #f7f7f7;
+    background-color: #fff;
     border-top: 1px solid #ddd;
 }
 

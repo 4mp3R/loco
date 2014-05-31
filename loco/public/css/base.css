@@ -226,16 +226,6 @@ a.button-danger {
 .form {
     position: relative;
     margin: 20px 0;
-
-}
-.form ul {
-    display: inline-block;
-    margin-left: 5%;
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style: none;
-    font-weight: bold;
-    color: red;
 }
 img.profile {
     height: 100px;
@@ -276,6 +266,7 @@ img.profile {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    width: 100%;
 }
 
 /*
@@ -340,9 +331,13 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 .form .checkbox,
 .form .radio {
-    margin: 0.5em 0;
-    display: block;
+    margin: .2em .5em;
 }
+.form .checkbox + label,
+.form .radio + label{
+    font-weight: normal;
+}
+
 
 .form input[type="text"][disabled],
 .form input[type="password"][disabled],
@@ -408,6 +403,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .form label {
     display: inline-block;
     margin: 0.5em 0 0.2em;
+    font-weight: bold;
 }
 .form fieldset {
     margin: 0;
