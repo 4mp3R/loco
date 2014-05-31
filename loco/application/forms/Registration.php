@@ -8,7 +8,6 @@ class Application_Form_Registration extends Zend_Form
         $this->setName("registration_form");
         $this->setAttrib('enctype', 'multipart/form-data');
         $this->setAction("");
-        $this->setAttrib('class', 'form');
 
         $this->addElement('text', 'username', array(
             'filters'    => array('StringTrim'),
@@ -125,9 +124,8 @@ class Application_Form_Registration extends Zend_Form
         ));
 
         $this->addElement('submit', 'registration', array(
-            'label'    => 'Registrati',
-            'class'    => 'button button-primary'
-        ))->removeDecorator('label');
+            'label'    => 'Regista'
+        ));
 
     }
 }

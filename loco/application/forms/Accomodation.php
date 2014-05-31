@@ -7,7 +7,7 @@ class Application_Form_Accomodation extends Zend_Form
         $this->setMethod("post");
         $this->setName("accomodation_form");
         $this->setAction("");
-        $this->setAttrib('class', 'form');
+
 
         $this->addElement('text', 'title', array(
             'validators' => array(

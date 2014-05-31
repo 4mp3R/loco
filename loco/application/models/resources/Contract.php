@@ -17,8 +17,8 @@ class Application_Model_Resources_Contract  extends Zend_Db_Table_Abstract {
         return $this->find($id);
     }
 
-    public function addContract($contratto) {
-        $this->insert($contratto);
+    public function addContract($data) {
+        $this->insert($data);
     }
 
     public function deleteContract($id) {

@@ -7,7 +7,7 @@ class Application_Form_Contract extends Zend_Form
         $this->setMethod("post");
         $this->setName("contract_form");
         $this->setAction("");
-        $this->setAttrib('class', 'form');
+
 
         $this->addElement('text', 'lessee', array(
             'validators' => array(

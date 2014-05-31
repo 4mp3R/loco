@@ -58,9 +58,10 @@ class Application_Model_Acl extends Zend_Acl {
             ->addResource(new Zend_Acl_Resource("loco_faq-edit"))
             ->addResource(new Zend_Acl_Resource("loco_statistics"))
             ->addResource(new Zend_Acl_Resource("user_view-all"))
+            ->addResource(new Zend_Acl_Resource("user_add"))
             ->addResource(new Zend_Acl_Resource("user_delete"))
             ->allow("admin", array(
-                "accomodation_type-manage", "loco_faq-edit", "loco_statistics", "user_view-all", "user_delete"
+                "accomodation_type-manage", "loco_faq-edit", "loco_statistics", "user_view-all", "user_add", "user_delete"
             ));
     }
 
