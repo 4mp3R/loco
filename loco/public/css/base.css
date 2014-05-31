@@ -524,3 +524,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
  .table-horizontal tbody > tr:last-child td {
      border-bottom-width: 0;
  }
+
+ p {
+     margin: 0 0 20px 0;
+ }

@@ -1,14 +1,19 @@
-<div class="container">
-    <div class="grid">
+<div class="page">
+    <div class="container">
 
-        <?php foreach($this->faq as $i): ?>
-            <div class="col-3-12">
-                <b><?php echo $i->question; ?></b>
-            </div>
-            <div class="col-9-12">
-                <p><?php echo $i->answer; ?></p>
-            </div>
-        <?php endforeach ?>
+        <h1 class="page-heading">Domande Frequenti</h1>
 
+        <div class="grid faq">
+
+            <?php foreach($this->faq as $i): ?>
+                <div class="col-3-12">
+                    <b><?php echo $i->question; ?></b>
+                </div>
+                <div class="col-9-12">
+                    <p><?php echo $i->answer; ?></p>
+                </div>
+            <?php endforeach ?>
+
+        </div>
     </div>
 </div>

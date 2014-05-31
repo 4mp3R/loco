@@ -17,8 +17,10 @@ class LocoController extends Zend_Controller_Action
 
     public function faqViewAction() {
         $this->_staticsModel = new Application_Model_Statics();
-
         $this->view->faq = $this->_staticsModel->getFaq();
+    }
+
+    public function supportViewAction() {
     }
 
     public function faqEditAction() {
