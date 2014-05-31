@@ -220,32 +220,33 @@ hr {
 }
 .sidebar-content {
     border-right: 1px solid #ccc;
-    min-height: 700px;
     padding: 10px 5px;
 }
 .sidebar-menu {
     border-right: 1px solid #ccc;
-    min-height: 700px;
-    padding: 20px 10px;
+    padding: 0 0 20px 10px;
 }
 .sidebar-menu b {
-    padding: 5px 20px;
+    padding: 5px 20px 5px 10px;
 }
 .sidebar-menu li {
     font-size: 16px;
-    padding: 5px 20px;
-    margin-bottom: 5px;
+    width: 100%;
+    margin: 5px 0;
+    padding: 0;
+    border-left: 2px solid transparent;
 }
 .sidebar-menu li a {
     color: #666;
     text-decoration: none;
     display: block;
+    padding: 5px 20px 5px 5px;
 }
 .sidebar-menu li:hover a {
     color: #333;
 }
 .sidebar-menu li:hover {
-    background-color: #ccc;
+    border-left-color: #3798dc;
 }
 .sidebar-menu li.active {
     background-color: #3798dc;
@@ -261,7 +262,7 @@ hr {
     Content
  */
 .content, .content-full {
-    min-height: 700px;
+    min-height: 600px;
     background: #f3f3f3;
     width: 100%;
     display: inline-block;
@@ -301,6 +302,17 @@ hr {
 .search .panel-body .button {
     margin-top: 15px;
 }
+
+/*
+    Messages
+ */
+.messages .messages-list img {
+    border: 1px solid #ccc;
+}
+.messages .messages-list b {
+    line-height: 32px;
+}
+
 
 
 /*
