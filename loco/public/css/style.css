@@ -184,7 +184,7 @@ hr {
 .page {
 }
 .page .page-content {
-    padding: 10px 20px;
+    padding: 10px 20px 100px;
     background: #f5f5f5;
     min-height: 200px;
 }
@@ -214,10 +214,9 @@ hr {
     width: 20%;
     display: inline-block;
     float: left;
-    background-color: #fff;
 }
 .sidebar-menu {
-    background-color: #e6e6e6;
+    background-color: #fff;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     min-height: 700px;
@@ -257,7 +256,7 @@ hr {
  */
 .content, .content-full {
     min-height: 700px;
-    background: #fff;
+    background: #f3f3f3;
     width: 100%;
     display: inline-block;
     float: left;

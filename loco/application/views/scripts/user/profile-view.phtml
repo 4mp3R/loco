@@ -1,14 +1,32 @@
-<h3>Informazioni sul profilo dell'utente</h3>
-<div class="container">
-    <img class="float-left" src="data:image/jpeg;base64,<?php echo base64_encode($this->profile_info->profile_image); ?>" /><br>
+<div class="page">
+    <div class="container page-content">
 
-    Nome: <?= $this->profile_info->name; ?><br>
-    Cognome: <?= $this->profile_info->surname; ?><br>
-    Username: <?= $this->profile_info->username; ?><br>
-    Email: <?= $this->profile_info->email; ?><br>
-    Data di nascita: <?= $this->profile_info->birth; ?><br>
-    Sesso: <?= $this->profile_info->sex; ?><br>
-    Codice fiscale: <?= $this->profile_info->cf; ?><br>
-    Ruolo: <?= $this->profile_info->role; ?><br>
-    Telefono: <?= $this->profile_info->phone; ?><br>
+        <h1 class="page-heading">Informazioni sul profilo dell'utente <a class="button button-primary float-right" href="<?= $this->url(
+                array(
+                    'controller' => 'user',
+                    'action' => 'profile-edit'
+                ), 'default', true
+            ); ?>">Edita Profilo</a></h1>
+
+        <div class="grid">
+
+            <div class="col-1-4">
+                <img class="float-left" src="data:image/jpeg;base64,<?php echo base64_encode($this->profile_info->profile_image); ?>" />
+            </div>
+            <div class="col-3-4">
+                <ul class="list-unstyled">
+                    <li><b>Nome: </b> <?= $this->profile_info->name; ?></li>
+                    <li><b>Cognome: </b> <?= $this->profile_info->surname; ?></li>
+                    <li><b>Username: </b> <?= $this->profile_info->username; ?></li>
+                    <li><b>Email: </b> <?= $this->profile_info->email; ?></li>
+                    <li><b>Data di nascita: </b> <?= $this->profile_info->birth; ?></li>
+                    <li><b>Sesso: </b> <?= $this->profile_info->sex; ?></li>
+                    <li><b>Codice fiscale: </b> <?= $this->profile_info->cf; ?></li>
+                    <li><b>Ruolo: </b> <?= $this->profile_info->role; ?></li>
+                    <li><b>Telefono: </b> <?= $this->profile_info->phone; ?></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
 </div>

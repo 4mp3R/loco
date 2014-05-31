@@ -8,6 +8,7 @@ class Application_Form_ProfileEdit extends Zend_Form
         $this->setName("profile_edit_form");
         $this->setAttrib('enctype', 'multipart/form-data');
         $this->setAction("");
+        $this->setAttrib('class', 'form');
 
         $this->addElement('password', 'password', array(
             'filters'    => array('StringTrim'),

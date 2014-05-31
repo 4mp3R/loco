@@ -1,2 +1,21 @@
-<h3><?= $this->message; ?></h3>
-<?= $this->form; ?>
+<div class="page">
+    <div class="container page-content">
+
+        <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
+                array(
+                    'controller' => 'user',
+                    'action' => 'profile-view'
+                ), 'default', true
+            ); ?>">Anulla</a></h1>
+
+        <div class="grid">
+            <div class="col-1-4">
+                <img class="float-left" src="data:image/jpeg;base64,<?php echo base64_encode($this->profile_info->profile_image); ?>" />
+            </div>
+            <div class="col-3-4">
+                <?= $this->form; ?>
+            </div>
+
+        </div>
+    </div>
+</div>

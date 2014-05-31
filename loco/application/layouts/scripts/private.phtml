@@ -15,7 +15,12 @@
 
             <ul class="list-inline float-right">
                 <li>
-                    <b>Ciao, <?= $this->whoIs()->name; ?>!</b>
+                    <b>Ciao, <?= $this->whoIs()->name; ?></b><a href="<?= $this->url(
+                        array(
+                            'controller' => 'user',
+                            'action' => 'profile-view'
+                        ), 'default', true
+                    ); ?>"> (Profilo)</a>
                 </li>
                 <li>
                     <a href="<?= $this->url(
@@ -32,10 +37,10 @@
     <div class="submenu">
         <div class="container">
             <ul class="list-inline">
-                <li class="active"><a href="#">Uno</a></li>
-                <li><a href="#">Due </a></li>
-                <li><a href="#">Tre <span class="badge badge-active">42</span> </a></li>
-            </ul>      
+                <li><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'search'), 'default', true); ?>">Cerca Locali</a></li>
+                <li><a href="<?= $this->url(array('controller' => 'message', 'action' => 'list'), 'default', true); ?>">Messaggi <span class="badge badge-active">42</span> </a></li>
+                <li><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi locali </a></li>
+            </ul>
         </div>
     </div>
 

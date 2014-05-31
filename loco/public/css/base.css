@@ -218,6 +218,12 @@ a.button-selected {
     color: #fff;
 }
 
+.button-danger,
+a.button-danger {
+    background-color: #DC3737;
+    color: #fff;
+}
+
 /*
     FORMS
  */

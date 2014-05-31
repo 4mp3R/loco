@@ -6,12 +6,12 @@ class AccomodationController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+        $this->_helper->layout->setLayout('private');
     }
 
     public function indexAction()
     {
         // action body
-        $this->_helper->layout->setLayout('private');
     }
 
     public function getAction() {

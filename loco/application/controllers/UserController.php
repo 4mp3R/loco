@@ -124,7 +124,7 @@ class UserController extends Zend_Controller_Action
                     $auth->getStorage()->write($authAdapter->getResultRowObject());
 
                     //Go to profile page
-                    $this->_helper->redirector("profile-view", "user");
+                    $this->_helper->redirector("search", "accomodation");
 
                 } else {    //Authentication failed
 
@@ -178,6 +178,7 @@ class UserController extends Zend_Controller_Action
         $profileEditForm = new Application_Form_ProfileEdit();
         $this->_profileModel = new Application_Model_Profile();
         $profileData = $this->_profileModel->getProfile(Zend_Auth::getInstance()->getIdentity()->username);
+        $this->view->profile_info = $profileData[0];
         $profileData = $profileData[0]->toArray();
 
         if($request->isPost()) {
@@ -197,7 +198,9 @@ class UserController extends Zend_Controller_Action
 
                 $this->view->message = "L'aggiornamento del profilo è andato a buon file";
             } else $this->view->message = "I dati inseriti non sono corretti. Riprova";
-        } else $this->view->message = "Modifica del profilo utente";
+        } else {
+            $this->view->message = "Modifica del profilo utente";
+        }
 
         $profileEditForm->populate($profileData);
 
