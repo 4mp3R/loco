@@ -7,6 +7,7 @@ class Application_Form_Login extends Zend_Form
         $this->setMethod("post");
         $this->setName("login_form");
         $this->setAction("");
+        $this->setAttrib('class', 'form');
 
         $this->addElement('text', 'username', array(
             'filters'    => array('StringTrim'),
@@ -28,7 +29,8 @@ class Application_Form_Login extends Zend_Form
 
         $this->addElement('submit', 'login', array(
             'label'    => 'Login',
-        ));
+            'class'    => 'button button-primary'
+        ))->removeDecorator('label');
 
 
     }
