@@ -5,7 +5,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     protected $_name = 'accomodation';
     protected $_primary = 'id';
 
-    public function getAccomodationByProfile($lessor) {
+    public function getAccomodationsByProfile($lessor) {
         $query = $this->select()
                       ->where("lessor = '$lessor'");
 
@@ -21,8 +21,8 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
         return $this->find($id);
     }
 
-    public function addAccomodation($data) {
-        $this->insert($data);
+    public function addAccomodation($contratto) {
+        $this->insert($contratto);
     }
 
     public function deleteAccomodation($id) {

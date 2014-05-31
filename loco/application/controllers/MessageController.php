@@ -2,13 +2,12 @@
 
 class MessageController extends Zend_Controller_Action
 {
-    protected $_messageForm;
 
     public function init()
     {
+        /* Initialize action controller here */
         $this->_helper->layout->setLayout('private');
 
-        $this->_messageForm = new Application_Form_Message();
     }
 
     public function indexAction()

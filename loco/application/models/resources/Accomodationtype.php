@@ -2,7 +2,7 @@
 
 class Application_Model_Resources_Accomodationtype  extends Zend_Db_Table_Abstract {
 
-    protected $_name = 'accomodationtype';
+    protected $_name = 'accomodation_type';
     protected $_primary = 'id';
 
     public function init() {
