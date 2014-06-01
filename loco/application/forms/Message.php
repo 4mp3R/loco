@@ -21,7 +21,9 @@ class Application_Form_Message extends Zend_Form {
             "filters" => array("StringTrim")
         ))->removeDecorator("Label");
 
-        $this->addElement("submit", "Manda")->removeDecorator("Label");
+        $this->addElement("submit", "Manda", array(
+            "class" => "button button-primary"
+        ))->removeDecorator("Label");
     }
 
 }
