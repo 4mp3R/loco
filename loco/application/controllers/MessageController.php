@@ -101,7 +101,12 @@ class MessageController extends Zend_Controller_Action
     }
 
     public function viewAction() {
-
+        /* per testare la getNewMessages */
+        $int1 = $this->_request->getParam('interlocutor1');
+        $int2 = $this->_request->getParam('interlocutor2');
+        $timestamp = $this->_request->getParam('after');
+        $msg = $this->_messageModel->getNewMessages($int1, $int2, $timestamp);
+        foreach($msg as $m) echo "<h3>".$m->send_date." :: ".$m->content."<br></h3>";
     }
 
     public function deleteAction() {

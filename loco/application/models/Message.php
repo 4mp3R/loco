@@ -16,6 +16,10 @@ class Application_Model_Message  {
         return $this->_messageModel->getMessagesFromInterlocutor($interlocutor1, $interlocutor2);
     }
 
+    public function getNewMessages($interlocutor1, $interlocutor2, $timestamp) {
+        return $this->_messageModel->getNewMessagesFromInterlocutors($interlocutor1, $interlocutor2, $timestamp);
+    }
+
     public function sendMessage($data) {
         $this->_messageModel->addMessage($data);
     }
