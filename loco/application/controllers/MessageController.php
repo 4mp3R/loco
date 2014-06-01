@@ -31,6 +31,7 @@ class MessageController extends Zend_Controller_Action
     public function listAction() {
         $data = array();
         $messages = array();
+        $interlocutor = null;
 
         $interlocutors = $this->_messageModel->getInterlocutors(
             Zend_Auth::getInstance()->getIdentity()->username
@@ -44,21 +45,29 @@ class MessageController extends Zend_Controller_Action
             $data[$i]['profile_image'] = $profile[0]->profile_image;
         }
 
-        if(null != $this->_request->getParam('interlocutor')) {
-            $this->view->selectedInterlocutor = $this->_request->getParam('interlocutor');
+        $interlocutor = $this->_request->getParam('interlocutor');
 
-            $msg = $this->_messageModel->getMessages(Zend_Auth::getInstance()->getIdentity()->username, $this->_request->getParam('interlocutor'));
+        if(null != $interlocutor) {
+            if(1 === count($this->_profileModel->getProfile($interlocutor))) {
 
-            foreach($msg as $m) {
-                $sender = $this->_profileModel->getProfile($m->sender);
+                $this->view->selectedInterlocutor = $interlocutor;
 
-                $messages[] = array(
-                  'author' => $m->sender,
-                  'author_profile_image' => $sender[0]->profile_image,
-                  'timestamp' => $m->send_date,
-                  'content' => $m->content
-                );
-            }
+                $msg = $this->_messageModel->getMessages(Zend_Auth::getInstance()->getIdentity()->username, $interlocutor);
+
+                foreach($msg as $m) {
+                    $sender = $this->_profileModel->getProfile($m->sender);
+
+                    $messages[] = array(
+                      'author' => $m->sender,
+                      'author_profile_image' => $sender[0]->profile_image,
+                      'timestamp' => $m->send_date,
+                      'content' => $m->content
+                    );
+                }
+
+                $this->_messageForm->getElement('sender')->setValue(Zend_Auth::getInstance()->getIdentity()->username);
+                $this->_messageForm->getElement('recipient')->setValue($interlocutor);
+            } else $this->_helper->redirector("list", "message");
         }
 
         $this->view->data = $data;
@@ -72,7 +81,19 @@ class MessageController extends Zend_Controller_Action
     public function addAction() {
         $request = $this->_request;
 
-        if($request->isPost()) {}
+        $keys = array('sender', 'recipient', 'content');
+
+        if($request->isPost()) {
+            if($this->_messageForm->isValid($request->getParams())) {
+                $this->_messageModel->sendMessage(
+                    array_intersect_key(
+                        $request->getParams(), array_flip($keys)
+                    )
+                );
+            }
+        }
+
+        $this->_helper->redirector("list", "message", 'default', array('interlocutor' => $request->getParam('recipient')));
     }
 
     public function viewAction() {
