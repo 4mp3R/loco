@@ -10,6 +10,7 @@ class UserController extends Zend_Controller_Action
     public function init()
     {
         $this->_default_profile_image = APPLICATION_PATH . "/../public/img/default_profile.jpg";
+        $this->_profileModel = new Application_Model_Profile();
     }
 
     public function indexAction()
@@ -19,8 +20,6 @@ class UserController extends Zend_Controller_Action
 
     public function registerAction() {
         $this->_helper->layout->setLayout("public");
-
-        $this->_profileModel = new Application_Model_Profile();
 
         $registrationForm = new Application_Form_Registration();
         $request = $this->getRequest();
@@ -69,8 +68,6 @@ class UserController extends Zend_Controller_Action
         $form = null;
 
         $this->_helper->layout->setLayout("public");
-
-        $this->_profileModel = new Application_Model_Profile();
 
         $urlHelper = $this->_helper->getHelper("url");
         $actionUrl = $urlHelper->url(array(
@@ -144,9 +141,10 @@ class UserController extends Zend_Controller_Action
 
         $this->_helper->layout->setLayout("private");
 
-        $username = Zend_Auth::getInstance()->getIdentity()->username;
+        $username = $this->_request->getParam('username');
 
-        $this->_profileModel = new Application_Model_Profile();
+        if(null === $username || 1 != count($this->_profileModel->getProfile($username)))
+            $username = Zend_Auth::getInstance()->getIdentity()->username;
 
         $profile = $this->_profileModel->getProfile($username);
 
