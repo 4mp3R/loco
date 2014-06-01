@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS `loco`;
 CREATE DATABASE `loco`;
 USE `loco`;
 
@@ -17,12 +16,6 @@ CREATE TABLE `profile` (
   `phone` varchar(16) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `profile` (`username`, `password`, `email`, `name`, `surname`, `birth`, `sex`, `cf`, `profile_image`, `role`, `phone`) VALUES
-  ('admin', 'pass', 'admin@loco.it', 'Luca', 'Verdi', '2014-05-13', 'M', '9637418521237895', NULL, 'admin', '3331725333'),
-  ('latario', 'pass', 'latario.rossi@gmail.com', 'Latario', 'Rossi', '2014-05-01', 'M', '7891234569638527', NULL, 'lessee', '3334465777'),
-  ('latore', 'pass', 'latore.pallini@gmail.com', 'Latore', 'Pallini', '2013-01-01', 'M', '1234567891234567', NULL, 'lesser', '3331725887');
-
 
 DROP TABLE IF EXISTS `accomodation_type`;
 CREATE TABLE `accomodation_type` (
@@ -48,7 +41,7 @@ CREATE TABLE `accomodation` (
   KEY `type` (`type`),
   KEY `lesser` (`lesser`),
   CONSTRAINT `accomodation_ibfk_1` FOREIGN KEY (`type`) REFERENCES `accomodation_type` (`id`),
-  CONSTRAINT `accomodation_ibfk_2` FOREIGN KEY (`lesser`) REFERENCES `profile` (`email`)
+  CONSTRAINT `accomodation_ibfk_2` FOREIGN KEY (`lesser`) REFERENCES `profile` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `accomodation_feature`;
@@ -89,8 +82,8 @@ CREATE TABLE `contract` (
   PRIMARY KEY (`id`),
   KEY `lesser` (`lesser`),
   KEY `lessee` (`lessee`),
-  CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`lesser`) REFERENCES `profile` (`email`),
-  CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`lessee`) REFERENCES `profile` (`email`)
+  CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`lesser`) REFERENCES `profile` (`username`),
+  CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`lessee`) REFERENCES `profile` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `message`;
@@ -103,8 +96,8 @@ CREATE TABLE `message` (
   PRIMARY KEY (`id`),
   KEY `sender` (`sender`),
   KEY `recipient` (`recipient`),
-  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `profile` (`email`),
-  CONSTRAINT `message_ibfk_2` FOREIGN KEY (`recipient`) REFERENCES `profile` (`email`)
+  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`sender`) REFERENCES `profile` (`username`),
+  CONSTRAINT `message_ibfk_2` FOREIGN KEY (`recipient`) REFERENCES `profile` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `photo`;
@@ -126,10 +119,3 @@ CREATE TABLE `faq` (
   `answer` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
-  (1, 'Domanda Uno', 'Bacon ipsum dolor sit amet pig shankle pork chop corned beef sirloin, pancetta ham capicola pork rump boudin filet mignon fatback. Jerky salami meatball beef ribs shank fatback pastrami ribeye frankfurter venison bresaola sirloin ham hock bacon ground round. Meatball corned beef biltong pork loin. Tri-tip fatback doner chuck, meatloaf pig shankle boudin brisket shoulder short ribs tongue.'),
-  (2, 'DOmanda Due', 'Bacon ipsum dolor sit amet pig shankle pork chop corned beef sirloin, pancetta ham capicola pork rump boudin filet mignon fatback. Jerky salami meatball beef ribs shank fatback pastrami ribeye frankfurter venison bresaola sirloin ham hock bacon ground round. Meatball corned beef biltong pork loin. Tri-tip fatback doner chuck, meatloaf pig shankle boudin brisket shoulder short ribs tongue.'),
-  (3, 'Domanda Tre', 'Doner meatball sausage, ball tip turducken pork chop leberkas turkey t-bone strip steak kielbasa pork loin hamburger bacon shank. Biltong rump chuck tongue beef ribs fatback pork chop corned beef jowl meatball tri-tip pancetta tenderloin capicola. Tri-tip fatback pork drumstick swine pork loin pork belly shank jerky meatloaf capicola brisket. Ham pork boudin pork chop filet mignon capicola turkey drumstick pig bacon hamburger fatback short loin leberkas. Prosciutto rump biltong meatloaf, pork chop ribeye chuck jowl shoulder ham hock drumstick swine. Ground round biltong tenderloin salami prosciutto pastrami shank shankle. Fatback tenderloin tail filet mignon bresaola rump ribeye swine landjaeger ball tip chuck flank.'),
-  (4, 'Domanda Quattro', 'Pork chop beef sausage swine tongue. Ribeye andouille corned beef rump landjaeger porchetta ham tail pig turducken swine. Leberkas drumstick pork chop, corned beef tri-tip pork loin kevin rump pancetta flank. Bacon jowl pancetta, pork loin swine hamburger frankfurter boudin ball tip pork belly t-bone biltong salami. Hamburger filet mignon short ribs, shankle cow chicken doner flank.');
