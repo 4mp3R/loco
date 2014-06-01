@@ -10,12 +10,20 @@ class Application_Model_Resources_Message  extends Zend_Db_Table_Abstract {
     }
 
     public function getInterlocutors($user) {
+        $interlocutors = array();
+
         $q1 = $this->select("recipient")->where("sender = '$user'")->distinct();
         $q2 = $this->select("sender")->where("recipient = '$user'")->distinct();
 
-        $query = $this->select()->union(array($q1, $q2));
-    print_r($this->fetchAll($query));
-        return $this->fetchAll($query);
+        $r1 = $this->fetchAll($q1);
+        $r2 = $this->fetchAll($q2);
+
+        $interlocutors = array();
+
+        foreach($r1 as $r) $interlocutors[] = $r->recipient;
+        foreach($r2 as $r) $interlocutors[] = $r->sender;
+
+        return array_unique($interlocutors);
     }
 
     public function getMessagesFromInterlocutor($interlocutor1, $interlocutor2) {

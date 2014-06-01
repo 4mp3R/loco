@@ -6,7 +6,7 @@ class TestController extends Zend_Controller_Action {
 
     public function init() {
         $this->_testModel = new Application_Model_Test();
-        $this->_helper->layout->setLayout("public")
+        $this->_helper->layout->setLayout("public");
     }
 
     public function indexAction() {

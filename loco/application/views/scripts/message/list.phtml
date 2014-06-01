@@ -6,6 +6,22 @@
         <div class="sidebar-menu">
 
             <ul class="list-inline messages-list">
+
+                <?php foreach($this->data as $i): ?>
+                    <li <?php if($this->selectedInterlocutor == $i['username']) echo 'class="active"'; ?>>
+                        <a href="<?= $this->url(
+                            array(
+                                'controller' => 'message',
+                                'action' => 'list',
+                                'interlocutor' => $i['username']
+                            )
+                        ); ?>">
+                            <img src="data:image/jpeg;base64,<?php echo base64_encode($i['profile_image']); ?>" class="float-left profile_img_32x32" alt=""/>
+                            <b><?= $i['username']; ?></b>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+<!--
                 <li class="active">
                     <a href="#">
                         <img src="http://placehold.it/32x32" class="float-left" alt=""/>
@@ -36,6 +52,7 @@
                         <b>Alexei Liulin</b>
                     </a>
                 </li>
+-->
             </ul>
 
         </div>
