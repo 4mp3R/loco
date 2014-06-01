@@ -24,6 +24,13 @@
                     <li><b>Codice fiscale: </b> <?= $this->profile_info->cf; ?></li>
                     <li><b>Ruolo: </b> <?= $this->profile_info->role; ?></li>
                     <li><b>Telefono: </b> <?= $this->profile_info->phone; ?></li>
+                    <li><a class="button button-primary" href="
+                        <?= $this->url(array(
+                            'controller' => 'message',
+                            'action' => 'list',
+                            'interlocutor' => $this->profile_info->username
+                        ), 'default', true); ?>
+                    ">Manda un messaggio</a></li>
                 </ul>
             </div>
 

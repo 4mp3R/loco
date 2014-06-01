@@ -77,7 +77,7 @@ class MessageController extends Zend_Controller_Action
         $this->view->data = $data;
         $this->view->messages = $messages;
 
-        if(null != $this->_request->getParam('interlocutor')) {
+        if(null != $interlocutor) {
             $this->view->form = $this->_messageForm;
         }
     }
