@@ -229,8 +229,12 @@ a.button-danger {
     margin: 20px 0;
 }
 img.profile {
-    height: 100px;
-    width: 100px;
+    height: 32px;
+    width: 32px;
+}
+img.profile-big {
+    height: 96px;
+    width: 96px;
 }
 .form dt, .form dd {
     display: block;
@@ -478,6 +482,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
      border-collapse: collapse;
      border-spacing: 0;
      empty-cells: show;
+     width:100%;
      border: 1px solid #cbcbcb;
  }
 
@@ -530,23 +535,6 @@ since IE8 won't execute CSS that contains a CSS3 selector.
  .table-bordered td {
      border-bottom: 1px solid #cbcbcb;
  }
- .table-bordered tbody > tr:last-child td,
- .table-horizontal tbody > tr:last-child td {
+ .table-bordered tbody > tr:last-child td {
      border-bottom-width: 0;
- }
-
-
- /* HORIZONTAL BORDERED TABLES */
-
- .table-horizontal td,
- .table-horizontal th {
-     border-width: 0 0 1px 0;
-     border-bottom: 1px solid #cbcbcb;
- }
- .table-horizontal tbody > tr:last-child td {
-     border-bottom-width: 0;
- }
-
- p {
-     margin: 0 0 20px 0;
  }

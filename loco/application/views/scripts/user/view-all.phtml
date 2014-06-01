@@ -1,7 +1,42 @@
-<div class="container">
-    <?php foreach($this->allProfiles as $profile): ?>
-        <img class="profile" src="data:image/jpeg;base64,<?php echo base64_encode($profile->profile_image); ?>" />
-        <h4><?= $profile->username; ?></h4>
-    <?php endforeach; ?>
-</div>
+<div class="page">
+    <div class="container page-content">
 
+        <h1 class="page-heading">Utenti</h1>
+
+        <div class="grid">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Avatar</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Nome</th>
+                        <th>Sesso</th>
+                        <th>Ruolo</th>
+                        <th>Telefono</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($this->allProfiles as $profile): ?>
+                        <tr>
+                            <td><img class="profile" src="data:image/jpeg;base64,<?php echo base64_encode($profile->profile_image); ?>" /></td>
+                            <td><?= $profile->username; ?></td>
+                            <td><?= $profile->email; ?></td>
+                            <td><?= $profile->name; ?> <?= $profile->surname; ?></td>
+                            <td><?= $profile->sex; ?></td>
+                            <td><?= $profile->role; ?></td>
+                            <td><?= $profile->phone; ?></td>
+                            <td>
+                                <a class="button" href="#">Edita</a>
+                                <a class="button button-danger" href="#">Cancella</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
