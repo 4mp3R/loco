@@ -22,7 +22,13 @@
                     <?php foreach($this->allProfiles as $profile): ?>
                         <tr>
                             <td><img class="profile" src="data:image/jpeg;base64,<?php echo base64_encode($profile->profile_image); ?>" /></td>
-                            <td><?= $profile->username; ?></td>
+                            <td><a href="
+                                <?= $this->url(array(
+                                    'controller' => 'user',
+                                    'action' => 'profile-view',
+                                    'username' => $profile->username
+                                ), 'default', true) ?>
+                            "><?= $profile->username; ?></a></td>
                             <td><?= $profile->email; ?></td>
                             <td><?= $profile->name; ?> <?= $profile->surname; ?></td>
                             <td><?= $profile->sex; ?></td>
