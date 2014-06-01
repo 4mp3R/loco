@@ -27,7 +27,7 @@ class Application_Model_Resources_Message  extends Zend_Db_Table_Abstract {
     }
 
     public function getMessagesFromInterlocutor($interlocutor1, $interlocutor2) {
-        $query = $this->select()->where("(sender = $interlocutor1 and recipient = $interlocutor2) or (sender = $interlocutor2 and sender = $interlocutor1)");
+        $query = $this->select()->where("(sender = '$interlocutor1' and recipient = '$interlocutor2') or (sender = '$interlocutor2' and recipient = '$interlocutor1')");
         return $this->fetchAll($query);
     }
 

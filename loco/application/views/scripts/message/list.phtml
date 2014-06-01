@@ -61,6 +61,19 @@
     <div class="content grid">
 
         <div class="messages-content">
+
+            <?php foreach($this->messages as $m): ?>
+                <div class="message grid">
+                    <div class="col-2-6">
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($m['author_profile_image']); ?>" class="float-left profile_img_32x32" alt=""/>
+                        <b><?= $m['author']; ?></b>
+                    </div>
+                    <div class="col-4-6">
+                        <p><?= $m['content']; ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+<!--
             <div class="message grid">
                 <div class="col-2-6">
                     <img src="http://placehold.it/32x32" class="float-left" alt=""/>
@@ -106,10 +119,14 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, itaque, suscipit natus molestiae amet tenetur eius culpa rem necessitatibus harum. Dicta, explicabo laboriosam voluptatem neque fuga porro similique esse molestiae.</p>
                 </div>
             </div>
+-->
         </div>
         <div class="messages-input grid form text-center">
+            <?= $this->form; ?>
+            <!--
             <input type="text" placeholder="Scrivi"/>
             <button class="button button-primary">Invia</button>
+            -->
         </div>
 
     </div>

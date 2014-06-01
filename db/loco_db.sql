@@ -98,7 +98,7 @@ CREATE TABLE `message` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sender` varchar(256) NOT NULL,
   `recipient` varchar(256) NOT NULL,
-  `send_date` datetime NOT NULL,
+  `send_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sender` (`sender`),

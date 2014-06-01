@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Message {
+class Application_Model_Message  {
 
     protected $_messageModel;
 
