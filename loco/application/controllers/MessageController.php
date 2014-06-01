@@ -47,6 +47,10 @@ class MessageController extends Zend_Controller_Action
 
         $interlocutor = $this->_request->getParam('interlocutor');
 
+        if(null === $interlocutor)
+            if(0 != count($data))
+                $interlocutor = $data[0]['username'];
+
         if(null != $interlocutor) {
             if(1 === count($this->_profileModel->getProfile($interlocutor))) {
 
