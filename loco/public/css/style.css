@@ -134,7 +134,7 @@ hr {
     height: 60px;
 }
 .submenu li {
-    padding: 0 60px;
+    padding: 0 50px;
     height: 100%;
 }
 .submenu li.active {
