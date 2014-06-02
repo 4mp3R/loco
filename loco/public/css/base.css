@@ -459,11 +459,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 }
 .list-inline>li{
     display:inline-block;
-    padding-left:10px;
-    padding-right:10px;
-}
-.list-inline>li:last-child{
-    padding-right:0px;
+    padding-right:17px;
 }
 .list-unstyled{
     padding-left:0;

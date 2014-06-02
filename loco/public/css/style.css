@@ -383,7 +383,7 @@ hr {
     color: red;
 }
 
-img.profile_img_32x32 {
-    height: 32px;
-    width: 32px;
+img.profilo_top {
+    position: relative;
+    top: 10px;
 }
