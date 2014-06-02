@@ -24,9 +24,9 @@ class AccomodationController extends Zend_Controller_Action
         if(null === $id || 0 == count($this->_accomodatioModel->getAccomodation($id)))
             $this->_helper->redirector("search", "accomodation");
 
-        $accomodation = $this->_accomodatioModel->getAccomodation($id);
-        $photos = $this->_accomodatioModel->getPhotosForAccomodation($id);
-        $characteristics = $this->_accomodatioModel->getAccomodationCharacteristics($id);
+        $this->view->accomodation = $this->_accomodatioModel->getAccomodation($id);
+        $this->view->photos = $this->_accomodatioModel->getPhotosForAccomodation($id);
+        $this->view->characteristics = $this->_accomodatioModel->getAccomodationFullInfo($id);
     }
 
     public function addAction() {

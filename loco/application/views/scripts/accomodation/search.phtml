@@ -70,7 +70,7 @@
             <div class="col-1-2">
                 <div class="panel">
                     <div class="panel-image">
-                        <img src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt=""/>
+                        <img class="accommodation_img_large" src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt=""/>
                     </div>
                     <div class="panel-heading">
                         <h2 class="panel-title"><?= $this->accomodations[$i]->title ?><span class="float-right prezzo"><?= $this->accomodations[$i]->fee ?> €/ mese</span></h2>
@@ -98,7 +98,13 @@
                             <?= $this->accomodations[$i]->description; ?>
                         </div>
                         <div class="col-1-1 text-center">
-                            <a class="button button-primary" href="#">Dettagli</a>
+                            <a class="button button-primary" href="
+                                <?= $this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'get',
+                                    'id' => $this->accomodations[$i]->id
+                            ), 'default', true); ?>
+                            ">Dettagli</a>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,13 @@
+<div class="container">
+    <b><?= $this->accomodation[0]->title ?></b> in zona <b><?= $this->accomodation[0]->zone ?></b> a soli <b><?= $this->accomodation[0]->fee ?> €/mese</b><br>
+    <p>
+        Situato in <b><?= $this->accomodation[0]->address ?></b>
+        <span class="float-right"><?= $this->accomodation[0]->views ?> visualizzazioni</span
+    </p>
+    <p><?= $this->accomodation[0]->description ?></p>
+    Disponibile da <b><?= $this->accomodation[0]->available_from ?></b> a <b><?= $this->accomodation[0]->available_untill ?></b>
+
+    <?php foreach($this->photos as $photo): ?>
+        <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
+    <?php endforeach; ?>
+</div>

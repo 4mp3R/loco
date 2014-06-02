@@ -396,10 +396,16 @@ hr {
     color: red;
 }
 
-img.accommodatio_img_400x200 {
+img.accommodation_img_400x200 {
     height: 200px;
     width: 400px;
 }
+
+img.accommodation_img_large {
+    height: 225px;
+    width: 375px;
+}
+
 img.profilo_top {
     position: relative;
     top: 10px;

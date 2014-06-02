@@ -24,32 +24,9 @@ class Application_Model_Accomodation {
         return $this->_photoModel->getPhotosForAccomodation($id);
     }
 
-    public function getAccomodationCharacteristics($id) {
-        $accomodation = $this->_accomodationModel->getAccomodation($id);
-
-        $featuresSet = $this->_accomodationFeatureModel->getAccomodationfeatures($accomodation[0]->type);
-        $dataSet = $this->_accomodationDataModel->getAccomodationdata($accomodation[0]->id);
-//
-        echo '<br>Features: ('.count($featuresSet).') = ';
-        foreach($featuresSet as $f) echo $f->name.' ';
-        echo '<br>Data: ('.count($dataSet).') = ';
-        foreach($dataSet as $d) echo $f->feature_value.' ';
-        echo '<br>';
-//
-        $featuresAndData = array();
-
-        foreach($featuresSet as $f)
-            $featuresAndData[$f->id]['feature'] = $f->name;
-
-        foreach($dataSet as $d)
-            $featuresAndData[$d->feature_id]['data'] = $d->feature_value;
-
-        print_r($featuresAndData);
+    public function getAccomodationFullInfo($id) {
+        return $this->_accomodationModel->getAccomodationFullInfo($id);
     }
-
-
-
-
 
 
 
