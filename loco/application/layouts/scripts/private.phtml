@@ -37,10 +37,10 @@
     <div class="submenu">
         <div class="container">
             <ul class="list-inline">
-                <?php if($this->whoIs()->role == 'lessee'): ?>
+                <?php if($this->whoIs()->role == 'lesser'): ?>
                     <li class="<?php $this->activeLink('accomodation', 'index');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'index'), 'default', true); ?>">I tuoi Locali</a></li>
                     <li class="<?php $this->activeLink('contract', 'index');?>"><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi contratti </a></li>
-                <?php elseif($this->whoIs()->role == 'lesser'): ?>
+                <?php elseif($this->whoIs()->role == 'lessee'): ?>
                     <li class="<?php $this->activeLink('accomodation', 'search');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'search'), 'default', true); ?>">Cerca Locali</a></li>
                     <li class="<?php $this->activeLink('contract', 'index');?>"><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi locali </a></li>
                 <?php elseif($this->whoIs()->role == 'admin'): ?>

@@ -111,8 +111,8 @@ class UserController extends Zend_Controller_Action
 
                     //Go to appropriate page
                     if($auth->getIdentity()->role == 'admin') $this->_helper->redirector("statistics", "loco");
-                    elseif($auth->getIdentity()->role == 'lessee') $this->_helper->redirector("index", "accomodation");
-                    elseif($auth->getIdentity()->role == 'lessor') $this->_helper->redirector("search", "accomodation");
+                    elseif($auth->getIdentity()->role == 'lessee') $this->_helper->redirector("search", "accomodation");
+                    elseif($auth->getIdentity()->role == 'lesser') $this->_helper->redirector("index", "accomodation");
 
                 } else {    //Authentication failed
 

@@ -19,21 +19,21 @@
             </h1>
 
             <ul class="list-inline float-right">
-                <li class="active">
+                <li class="<?php $this->activeLink('loco', 'index');?>">
                     <a class="link" href="<?= $this->url(array(
                         'controller' => 'loco',
                         'action' => 'index'
                     ), 'default', true); ?>">Home</a>
                 </li>
-                <li>
+                <li class="<?php $this->activeLink('loco', 'faq-view');?>">
                     <a class="link" href="<?= $this->url(array(
                         'controller' => 'loco',
                         'action' => 'faq-view'
                     ), 'default', true); ?>">FAQ</a>
                 </li>
-                <li
-                    ><a class="link" href="<?= $this->url(array(
-                        'controller' => 'user',
+                <li class="<?php $this->activeLink('loco', 'support-view');?>">
+                    <a class="link" href="<?= $this->url(array(
+                        'controller' => 'loco',
                         'action' => 'support-view'
                     ), 'default', true); ?>">Supporto</a>
                 </li>

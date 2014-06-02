@@ -13,6 +13,7 @@ class Application_Model_Acl extends Zend_Acl {
             ->addResource(new Zend_Acl_Resource("error_error"))
             ->addResource(new Zend_Acl_Resource("error_authorization-error"))
             ->addResource(new Zend_Acl_Resource("loco_index"))
+            ->addResource(new Zend_Acl_Resource("loco_support-view"))
             ->addResource(new Zend_Acl_Resource("loco_faq-view"))
             ->addResource(new Zend_Acl_Resource("user_register"))
             ->addResource(new Zend_Acl_Resource("user_login"))
