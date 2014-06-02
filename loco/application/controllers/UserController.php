@@ -109,8 +109,10 @@ class UserController extends Zend_Controller_Action
                     //Save authenticated user tuple into his session, so we can access username / role / email etc.
                     $auth->getStorage()->write($authAdapter->getResultRowObject());
 
-                    //Go to profile page
-                    $this->_helper->redirector("search", "accomodation");
+                    //Go to appropriate page
+                    if($auth->getIdentity()->role == 'admin') $this->_helper->redirector("statistics", "loco");
+                    elseif($auth->getIdentity()->role == 'lessee') $this->_helper->redirector("search", "accomodation");
+                    elseif($auth->getIdentity()->role == 'lesser') $this->_helper->redirector("index", "accomodation");
 
                 } else {    //Authentication failed
 

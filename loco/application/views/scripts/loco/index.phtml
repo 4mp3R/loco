@@ -4,12 +4,75 @@
     </div>
 </div>
 <div class="cta">
-    <div class="container text-center">
-        <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, omnis, deleniti tempore ea iste aut id eius laborum iusto beatae ex excepturi fuga delectus dolor sit magni magnam voluptas natus.</p>
+    <div class="container grid">
+        <div class="col-1-2">
+            <p><h3>Vuoi affittare una casa o un appartamento a studenti? </h3>Loco è la soluzione migliore. Non dovrai più stampare e appendere centinaia di volantini per tutta la città. Il nostro servizio è semplice ed intuitivo e ti metterà in contatto con tutti i locatari interessati. Basta mettere il tuo annuncio su Loco!</p>
+            <p class="text-center"><a class="button button-primary" href="<?= $this->url(array(
+                    'controller' => 'user',
+                    'action' => 'register'
+                ), 'default', true); ?>">Diventa un locatore</a></p>
+        </div>
+        <div class="col-1-2">
+            <p><h3>Sei uno studente in cerca di un alloggio? </h3>Questo è il posto migliore per trovarla. Loco ti offre centinaia di annunici, in grado di soddisfare ogni tua richiesta. Inoltre il nostro servizio ti consente di vedere e contattare il Locatore con un semplice click, senza dover girare tutta la città!</p>
+            <p class="text-center"><a class="button button-primary" href="<?= $this->url(array(
+                    'controller' => 'user',
+                    'action' => 'register'
+                ), 'default', true); ?>">Registrati e via!</a></p>
         </div>
     </div>
 </div>
-<div class="page">
-    <div class="container">//features</div>
+<div class="page features">
+    <div class="container page-content">
+
+        <h1 class="page-heading text-center">Scopri tutti i vantaggi di LOCO</h1>
+
+        <div class="grid ">
+
+            <div class="col-5-12">
+                <img src="http://placehold.it/380x290" alt=""/>
+            </div>
+            <div class="col-7-12">
+                <h3>Un vantaggio</h3>
+                <p>Lorem Ipsum</p>
+            </div>
+
+        </div>
+        <div class="grid text-right">
+            <div class="col-7-12">
+                <h3>Un vantaggio</h3>
+                <p>Lorem Ipsum</p>
+            </div>
+            <div class="col-5-12">
+                <img src="http://placehold.it/380x290" alt=""/>
+            </div>
+        </div>
+        <div class="grid ">
+
+            <div class="col-5-12">
+                <img src="http://placehold.it/380x290" alt=""/>
+            </div>
+            <div class="col-7-12">
+                <h3>Un vantaggio</h3>
+                <p>Lorem Ipsum</p>
+            </div>
+
+        </div>
+        <div class="grid text-right">
+            <div class="col-7-12">
+                <h3>Un vantaggio</h3>
+                <p>Lorem Ipsum</p>
+            </div>
+            <div class="col-5-12">
+                <img src="http://placehold.it/380x290" alt=""/>
+            </div>
+        </div>
+        <hr/>
+        <div class="grid text-center">
+            <h3>Cosa aspetti?</h3>
+            <a class="button button-primary" href="<?= $this->url(array(
+                'controller' => 'user',
+                'action' => 'register'
+            ), 'default', true); ?>">Registrati subito!</a>
+        </div>
+    </div>
 </div>

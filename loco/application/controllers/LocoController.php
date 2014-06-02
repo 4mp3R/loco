@@ -23,12 +23,12 @@ class LocoController extends Zend_Controller_Action
     public function supportViewAction() {
     }
 
-    public function faqEditAction() {
-
+    public function settingsAction() {
+        $this->_helper->layout->setLayout('private');
     }
 
     public function statisticsAction() {
-
+        $this->_helper->layout->setLayout('private');
     }
 
 }

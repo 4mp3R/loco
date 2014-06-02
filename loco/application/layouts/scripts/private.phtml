@@ -12,30 +12,15 @@
     <div class="menu">
         <div class="container">
             <h1 class="logo float-left"><a href="#">Loco</a></h1>
-
             <ul class="list-inline float-right">
+                <li><img src="data:image/jpeg;base64,<?php echo base64_encode($this->whoIs()->profile_image); ?>" class="profile profilo_top" /></li>
                 <li>
-                    <ul class="list-inline float-right">
-                        <li><img src="data:image/jpeg;base64,<?php echo base64_encode($this->whoIs()->profile_image); ?>" class="profile_img_32x32" /></li>
-                        <li>
-                            <b>Ciao, <?= $this->whoIs()->name; ?></b><a href="<?= $this->url(
-                                array(
-                                    'controller' => 'user',
-                                    'action' => 'profile-view'
-                                ), 'default', true
-                            ); ?>"> (Profilo)</a>
-                        </li>
-                        <li>Sei un
-                            <?php
-                                switch($this->whoIs()->role) {
-                                    case 'lessee': echo 'locatario'; break;
-                                    case 'lesser': echo 'locatore'; break;
-                                    case 'admin': echo 'amministratore'; break;
-                                    //default: echo 'utente non registratio';
-                                }
-                            ?>
-                        </li>
-                    </ul>
+                    <b>Ciao, <?= $this->whoIs()->name; ?></b><a href="<?= $this->url(
+                        array(
+                            'controller' => 'user',
+                            'action' => 'profile-view'
+                        ), 'default', true
+                    ); ?>"> (Profilo)</a>
                 </li>
                 <li>
                     <a href="<?= $this->url(
@@ -52,9 +37,19 @@
     <div class="submenu">
         <div class="container">
             <ul class="list-inline">
-                <li><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'search'), 'default', true); ?>">Cerca Locali</a></li>
-                <li><a href="<?= $this->url(array('controller' => 'message', 'action' => 'list'), 'default', true); ?>">Messaggi <span class="badge badge-active">42</span> </a></li>
-                <li><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi locali </a></li>
+                <?php if($this->whoIs()->role == 'lesser'): ?>
+                    <li class="<?php $this->activeLink('accomodation', 'index');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'index'), 'default', true); ?>">I tuoi Locali</a></li>
+                    <li class="<?php $this->activeLink('contract', 'index');?>"><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi contratti </a></li>
+                <?php elseif($this->whoIs()->role == 'lessee'): ?>
+                    <li class="<?php $this->activeLink('accomodation', 'search');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'search'), 'default', true); ?>">Cerca Locali</a></li>
+                    <li class="<?php $this->activeLink('contract', 'index');?>"><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi locali </a></li>
+                <?php elseif($this->whoIs()->role == 'admin'): ?>
+                    <li class="<?php $this->activeLink('loco', 'statistics');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'statistics'), 'default', true); ?>">Statistiche</a></li>
+                    <li class="<?php $this->activeLink('user', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'user', 'action' => 'view-all'), 'default', true); ?>">Utenti</a></li>
+                    <li class="<?php $this->activeLink('accomodation', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'index'), 'default', true); ?>">Locali</a></li>
+                    <li class="<?php $this->activeLink('loco', 'settings');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'settings'), 'default', true); ?>">Impostazioni</a></li>
+                <?php endif; ?>
+                    <li class="<?php $this->activeLink('message', 'list');?>"><a href="<?= $this->url(array('controller' => 'message', 'action' => 'list'), 'default', true); ?>">Messaggi <span class="badge badge-active">42</span> </a></li>
             </ul>
         </div>
     </div>

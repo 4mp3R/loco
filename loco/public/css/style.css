@@ -134,7 +134,7 @@ hr {
     height: 60px;
 }
 .submenu li {
-    padding: 0 60px;
+    padding: 0 50px;
     height: 100%;
 }
 .submenu li.active {
@@ -170,7 +170,7 @@ hr {
 
 .cta {
     position: absolute;
-    top: 571px;
+    top: 542px;
     width: 100%;
 }
 .cta .container {
@@ -182,6 +182,7 @@ hr {
     background: #fff;
     border-bottom: 1px solid #eee;
 }
+
 /*
     Page
  */
@@ -210,6 +211,18 @@ hr {
 .footer ul a {
     text-decoration: none;
 }
+/*
+    Features
+ */
+
+.features .page-heading{
+    padding: 50px 0;
+}
+
+.features .grid {
+    margin-top: 50px;
+}
+
 /*
     Sidebar
  */
@@ -383,12 +396,11 @@ hr {
     color: red;
 }
 
-img.profile_img_32x32 {
-    height: 32px;
-    width: 32px;
-}
-
 img.accommodatio_img_400x200 {
     height: 200px;
     width: 400px;
+}
+img.profilo_top {
+    position: relative;
+    top: 10px;
 }
