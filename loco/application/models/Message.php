@@ -8,6 +8,10 @@ class Application_Model_Message  {
         $this->_messageModel = new Application_Model_Resources_Message();
     }
 
+    public function getAllMessages() {
+        return $this->_messageModel->getAllMessage();
+    }
+
     public function getInterlocutors($user) {
         return $this->_messageModel->getInterlocutors($user);
     }

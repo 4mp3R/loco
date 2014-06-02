@@ -7,6 +7,7 @@ class Application_Model_Accomodation {
     protected $_accomodationDataModel;
     protected $_accomodationTypeModel;
     protected $_photoModel;
+    protected $_optionModel;
 
     public function __construct(){
         $this->_accomodationModel = new Application_Model_Resources_Accomodation();
@@ -14,6 +15,11 @@ class Application_Model_Accomodation {
         $this->_accomodationDataModel = new Application_Model_Resources_Accomodationdata();
         $this->_accomodationTypeModel = new Application_Model_Resources_Accomodationtype();
         $this->_photoModel = new Application_Model_Resources_Photo();
+        $this->_optionModel = new Application_Model_Resources_Option();
+    }
+
+    public function getAllAccomodations() {
+        return $this->_accomodationModel->getAllAccomodations();
     }
 
     public function getLatestAccomodations($n) {
@@ -28,9 +34,32 @@ class Application_Model_Accomodation {
         return $this->_accomodationModel->getAccomodationFullInfo($id);
     }
 
+    public function getAccomodationsByIntervalAndType($from, $to, $type_id) {
+        return $this->_accomodationModel->getAccomodationsByIntervalAndType($from, $to, $type_id);
+    }
 
+    public function getOptionsByIntervalAndType($from, $to, $type_id = null) {
+        $optionsByInterval = $this->_optionModel->getOptionsByInterval($from, $to);
 
+        $options = array();
 
+        foreach($optionsByInterval as $o) {
+            $accomodation = $this->_accomodationModel->getAccomodation($o->accomodation);
+
+            if((null == $type_id) || (null != $type_id && $type_id == $accomodation[0]->type))
+                $options[] = array('option' => $o, 'accomodation' => $this->_accomodationModel->getAccomodation($o->accomodation));
+        }
+
+        return $options;
+    }
+
+    public function getOption($username, $accomodation) {
+
+    }
+
+    public function setOption($username, $accomodation) {
+
+    }
 
     public function searchAccomodation() {
 

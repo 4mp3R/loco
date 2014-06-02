@@ -68,24 +68,6 @@ CREATE TABLE `accomodation_data` (
   CONSTRAINT `accomodation_data_ibfk_2` FOREIGN KEY (`feature_id`) REFERENCES `accomodation_feature` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `contract`;
-CREATE TABLE `contract` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lesser` varchar(256) NOT NULL,
-  `lessee` varchar(256) NOT NULL,
-  `iban` varchar(34) NOT NULL,
-  `fee` decimal(6,2) DEFAULT NULL,
-  `beginning` date DEFAULT NULL,
-  `ending` date DEFAULT NULL,
-  `address` varchar(256) NOT NULL,
-  `state` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `lesser` (`lesser`),
-  KEY `lessee` (`lessee`),
-  CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`lesser`) REFERENCES `profile` (`username`),
-  CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`lessee`) REFERENCES `profile` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -111,11 +93,21 @@ CREATE TABLE `photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-
 DROP TABLE IF EXISTS `faq`;
 CREATE TABLE `faq` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question` varchar(256) NOT NULL,
   `answer` text NOT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `option`;
+CREATE TABLE `option` (
+  `lessee` varchar(128) NOT NULL,
+  `accomodation` int(11) NOT NULL,
+  PRIMARY KEY (`lessee`, `accomodation`),
+  KEY `lessee` (`lessee`),
+  KEY `accomodation` (`accomodation`),
+  CONSTRAINT `option_ibfk_1` FOREIGN KEY (`lessee`) REFERENCES `profile` (`username`),
+  CONSTRAINT `option_ibfk_2` FOREIGN KEY (`accomodation`) REFERENCES `accomodation` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

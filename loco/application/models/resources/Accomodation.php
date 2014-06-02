@@ -5,6 +5,12 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     protected $_name = 'accomodation';
     protected $_primary = 'id';
 
+    public function getAllAccomodations() {
+        $query = $this->select();
+
+        return $this->fetchAll($query);
+    }
+
     public function getAccomodationByProfile($lessor) {
         $query = $this->select()
                       ->where("lessor = '$lessor'");
@@ -28,6 +34,27 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
             ->where("a.id = 'id'");
 
         return $this->fetchAll($query);
+    }
+
+    public function getAccomodationsByIntervalAndType($from, $to, $type_id) {
+        $query = $this->select();
+
+        if(null != $from && null != $to)
+            $query->where("created >= '$from' and created <= '$to'");
+
+        if(null != $type_id)
+            $query->where("type = '$type_id'");
+
+        return $this->fetchAll($query);
+    }
+
+    public function getAccomodationByType($type_id) {
+        $q = $this->select();
+
+        if(null != type)
+            $q->where("type = '$type_id'");
+
+        return $this->fetchAll($q);
     }
 
 

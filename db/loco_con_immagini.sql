@@ -1,36 +1,13 @@
--- phpMyAdmin SQL Dump
--- version 4.1.12
--- http://www.phpmyadmin.net
---
--- Хост: 127.0.0.1
--- Время создания: Июн 02 2014 г., 12:52
--- Версия сервера: 5.6.16
--- Версия PHP: 5.5.11
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- База данных: `loco`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `accomodation`
---
+drop database if exists loco;
+create database loco;
+use loco;
 
 CREATE TABLE IF NOT EXISTS `accomodation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `title` varchar(128) NOT NULL,
   `description` text NOT NULL,
+  `created` date NOT NULL,
   `lesser` varchar(256) NOT NULL,
   `available_from` date NOT NULL,
   `available_untill` date NOT NULL,
@@ -47,10 +24,10 @@ CREATE TABLE IF NOT EXISTS `accomodation` (
 -- Дамп данных таблицы `accomodation`
 --
 
-INSERT INTO `accomodation` (`id`, `type`, `title`, `description`, `lesser`, `available_from`, `available_untill`, `zone`, `address`, `fee`, `views`) VALUES
-(1, 1, 'Camera singla ampia e luminosa', 'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke. ', 'latario', '2014-06-03', '2014-08-29', 'Piazza cavour', 'via del pane 222', '190.00', 0),
-(2, 2, 'Doppia spaziosa', 'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke. ', 'maria', '2014-06-01', '2015-02-20', 'Piazza ugo bassi', 'via del pepe 23', '300.00', 0),
-(3, 3, 'Appartamento a piano terra', 'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke. ', 'maria', '2014-06-11', '2014-12-25', 'passetto', 'via della pizza 2', '1000.00', 10);
+INSERT INTO `accomodation` (`id`, `created`, `type`, `title`, `description`, `lesser`, `available_from`, `available_untill`, `zone`, `address`, `fee`, `views`) VALUES
+(1, '2014-6-1', 1, 'Camera singla ampia e luminosa', 'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke. ', 'latario', '2014-06-03', '2014-08-29', 'Piazza cavour', 'via del pane 222', '190.00', 0),
+(2, '2014-6-2', 2, 'Doppia spaziosa', 'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke. ', 'maria', '2014-06-01', '2015-02-20', 'Piazza ugo bassi', 'via del pepe 23', '300.00', 0),
+(3, '2014-6-2', 3, 'Appartamento a piano terra', 'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke. ', 'maria', '2014-06-11', '2014-12-25', 'passetto', 'via della pizza 2', '1000.00', 10);
 
 -- --------------------------------------------------------
 
@@ -123,33 +100,6 @@ INSERT INTO `accomodation_type` (`id`, `name`) VALUES
 (4, 'Villetta');
 
 -- --------------------------------------------------------
-
---
--- Структура таблицы `contract`
---
-
-CREATE TABLE IF NOT EXISTS `contract` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lesser` varchar(256) NOT NULL,
-  `lessee` varchar(256) NOT NULL,
-  `iban` varchar(34) NOT NULL,
-  `fee` decimal(6,2) DEFAULT NULL,
-  `beginning` date DEFAULT NULL,
-  `ending` date DEFAULT NULL,
-  `address` varchar(256) NOT NULL,
-  `state` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `lesser` (`lesser`),
-  KEY `lessee` (`lessee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Дамп данных таблицы `contract`
---
-
-INSERT INTO `contract` (`id`, `lesser`, `lessee`, `iban`, `fee`, `beginning`, `ending`, `address`, `state`) VALUES
-(1, 'latore', 'latario', '102039394848939290029384', '200.00', '2014-06-02', '2014-06-28', 'via del pane 1111', 0),
-(3, 'latario', 'maria', '020202020202020200202200202', '200.00', '2014-06-10', '2014-06-28', 'via del pozzo 22', 1);
 
 -- --------------------------------------------------------
 
@@ -291,13 +241,6 @@ ALTER TABLE `accomodation_feature`
   ADD CONSTRAINT `accomodation_feature_ibfk_1` FOREIGN KEY (`type`) REFERENCES `accomodation_type` (`id`);
 
 --
--- Ограничения внешнего ключа таблицы `contract`
---
-ALTER TABLE `contract`
-  ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`lesser`) REFERENCES `profile` (`username`),
-  ADD CONSTRAINT `contract_ibfk_2` FOREIGN KEY (`lessee`) REFERENCES `profile` (`username`);
-
---
 -- Ограничения внешнего ключа таблицы `message`
 --
 ALTER TABLE `message`
@@ -310,6 +253,16 @@ ALTER TABLE `message`
 ALTER TABLE `photo`
   ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`accomodation`) REFERENCES `accomodation` (`id`);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+DROP TABLE IF EXISTS `option`;
+CREATE TABLE `option` (
+  `lessee` varchar(128) NOT NULL,
+  `accomodation` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `state` varchar(16) NOT NULL,
+  PRIMARY KEY (`lessee`, `accomodation`),
+  KEY `lessee` (`lessee`),
+  KEY `accomodation` (`accomodation`),
+  CONSTRAINT `option_ibfk_1` FOREIGN KEY (`lessee`) REFERENCES `profile` (`username`),
+  CONSTRAINT `option_ibfk_2` FOREIGN KEY (`accomodation`) REFERENCES `accomodation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

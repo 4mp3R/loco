@@ -2,9 +2,43 @@
     <div class="container page-content">
 
         <h1 class="page-heading">Statistiche</h1>
-
+            <h3>Annunci inseriti:
+                <?php
+                    if(null != $this->from && null != $this->to) echo " dal ".$this->from." al ".$this->to;
+                    if(null != $this->typeName) echo " nella tipologia ".$this->typeName;
+                ?>
+                <?= "(".count($this->accomodations).")"; ?>
+            </h3>
+            <ul>
+                <?php foreach($this->accomodations as $a): ?>
+                    <li>
+                        <?= "[".$a->created."] ".$a->title ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <h3>Offerte fatte dai potenziali locatari:<?= "(".count($this->optioned).")"; ?></h3>
+        <ul>
+            <?php foreach($this->optioned as $o) {
+                echo "<li>";
+                echo $o['option']->date;
+                echo " <b>".$o['option']->lessee."</b>";
+                echo " => ".$o['accomodation'][0]->title;
+                echo " di <b>".$o['accomodation'][0]->lesser."</b>";
+                echo "</li>";
+            } ?>
+        </ul>
+        <h3>Alloggi locati (<?= count($this->located) ?>)</h3>
+        <ul>
+            <?php foreach($this->located as $l) {
+                echo "<li>";
+                echo $l['option']->date;
+                echo " <b>".$l['option']->lessee."</b>";
+                echo " => ".$l['accomodation'][0]->title;
+                echo " di <b>".$l['accomodation'][0]->lesser."</b>";
+                echo "</li>";
+            } ?>
+        </ul>
         <div class="grid">
-
         </div>
     </div>
 </div>

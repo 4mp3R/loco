@@ -29,11 +29,6 @@ INSERT INTO `accomodation_data` (`id`, `accomodation`, `feature_id`, `feature_va
 (2, 1, 2, 'asd');
 
 
-
-INSERT INTO `contract` (`id`, `lesser`, `lessee`, `iban`, `fee`, `beginning`, `ending`, `address`, `state`) VALUES
-(1, 'latore', 'latario', '102039394848939290029384', '200.00', '2014-06-02', '2014-06-28', 'via del pane 1111', 0),
-(3, 'latario', 'maria', '020202020202020200202200202', '200.00', '2014-06-10', '2014-06-28', 'via del pozzo 22', 1);
-
 INSERT INTO `faq` (`id`, `question`, `answer`) VALUES
 (1, 'Domanda Uno', 'Bacon ipsum dolor sit amet pig shankle pork chop corned beef sirloin, pancetta ham capicola pork rump boudin filet mignon fatback. Jerky salami meatball beef ribs shank fatback pastrami ribeye frankfurter venison bresaola sirloin ham hock bacon ground round. Meatball corned beef biltong pork loin. Tri-tip fatback doner chuck, meatloaf pig shankle boudin brisket shoulder short ribs tongue.'),
 (2, 'DOmanda Due', 'Bacon ipsum dolor sit amet pig shankle pork chop corned beef sirloin, pancetta ham capicola pork rump boudin filet mignon fatback. Jerky salami meatball beef ribs shank fatback pastrami ribeye frankfurter venison bresaola sirloin ham hock bacon ground round. Meatball corned beef biltong pork loin. Tri-tip fatback doner chuck, meatloaf pig shankle boudin brisket shoulder short ribs tongue.'),
