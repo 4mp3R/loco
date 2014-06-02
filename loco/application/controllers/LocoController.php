@@ -88,7 +88,7 @@ class LocoController extends Zend_Controller_Action
 
         $options = $accomodationModel->getOptionsByIntervalAndType($from, $to, $type_id);
 
-        $typeName = "none";
+        $typeName = null;
 
         if(null != $type_id) {
             $accomodationTypeModel = new Application_Model_Resources_Accomodationtype();
