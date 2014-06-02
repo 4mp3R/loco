@@ -21,6 +21,10 @@ class Application_Model_Resources_Photo  extends Zend_Db_Table_Abstract {
         $this->find($id);
     }
 
+    public function getPhotosForAccomodation($id) {
+        $query = $this->select()->where("accomodation = '$id'");
 
+        return $this->fetchAll($query);
+    }
 
 }

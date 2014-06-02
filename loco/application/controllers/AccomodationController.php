@@ -2,16 +2,20 @@
 
 class AccomodationController extends Zend_Controller_Action
 {
+    protected $_accomodatioModel;
+    protected $_profileModel;
 
     public function init()
     {
-        /* Initialize action controller here */
         $this->_helper->layout->setLayout('private');
+
+        $this->_accomodatioModel = new Application_Model_Accomodation();
+        $this->_profileModel = new Application_Model_Profile();
     }
 
     public function indexAction()
     {
-        // action body
+
     }
 
     public function getAction() {
@@ -36,6 +40,32 @@ class AccomodationController extends Zend_Controller_Action
 
     public function searchAction() {
         $searchForm = new Application_Form_Search();
+        $request = $this->_request;
+
+        $accomodations = array();
+        $lessers = array();
+        $types = array();
+        $photos = array();
+
+        //user entered some search params
+        if($request->isPost()) {
+            if($searchForm->isValid($request->getParams())) {
+                echo "<h1>RICERCA</h1>";
+            }
+        } else {    //no search params, show latest accomodations inserted
+            $accomodations = $this->_accomodatioModel->getLatestAccomodations(4);
+        }
+
+        for($i=0; $i<count($accomodations); $i++) {
+            $lessers[] = $this->_profileModel->getProfile($accomodations[$i]->lesser);
+            $photos[] = $this->_accomodatioModel->getPhotosForAccomodation($accomodations[$i]->id);
+            $types[] = $this->_accomodatioModel->getAccType($accomodations[$i]->id);
+        }
+
+        $this->view->accomodations = $accomodations;
+        $this->view->lessers = $lessers;
+        $this->view->accomodations_type = $types;
+        $this->view->photos = $photos;
         $this->view->form = $searchForm;
     }
 

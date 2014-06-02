@@ -5,13 +5,18 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     protected $_name = 'accomodation';
     protected $_primary = 'id';
 
-    public function getAccomodationsByProfile($lessor) {
+    public function getAccomodationByProfile($lessor) {
         $query = $this->select()
                       ->where("lessor = '$lessor'");
 
         return $this->fetchAll($query);
     }
 
+    public function getLatestAccomodations($n) {
+        $query = $this->select()->order('id DESC')->limit($n);
+
+        return $this->fetchAll($query);
+    }
 
     public function updateAccomodation($id , $datiaggiornati ) {
         $this->update($datiaggiornati, "id = '$id''");
@@ -21,8 +26,8 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
         return $this->find($id);
     }
 
-    public function addAccomodation($contratto) {
-        $this->insert($contratto);
+    public function addAccomodation($data) {
+        $this->insert($data);
     }
 
     public function deleteAccomodation($id) {
@@ -30,7 +35,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     }
 
     public function getAccomodationByFee($fee){
-        $dato = $this->select()
+        $dato=$this->select()
                       ->where("fee = '$fee'");
     }
 }

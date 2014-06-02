@@ -387,3 +387,8 @@ img.profile_img_32x32 {
     height: 32px;
     width: 32px;
 }
+
+img.accommodatio_img_400x200 {
+    height: 200px;
+    width: 400px;
+}
