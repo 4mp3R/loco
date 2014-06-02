@@ -15,12 +15,27 @@
 
             <ul class="list-inline float-right">
                 <li>
-                    <b>Ciao, <?= $this->whoIs()->name; ?></b><a href="<?= $this->url(
-                        array(
-                            'controller' => 'user',
-                            'action' => 'profile-view'
-                        ), 'default', true
-                    ); ?>"> (Profilo)</a>
+                    <ul class="list-inline float-right">
+                        <li><img src="data:image/jpeg;base64,<?php echo base64_encode($this->whoIs()->profile_image); ?>" class="profile_img_32x32" /></li>
+                        <li>
+                            <b>Ciao, <?= $this->whoIs()->name; ?></b><a href="<?= $this->url(
+                                array(
+                                    'controller' => 'user',
+                                    'action' => 'profile-view'
+                                ), 'default', true
+                            ); ?>"> (Profilo)</a>
+                        </li>
+                        <li>Sei un
+                            <?php
+                                switch($this->whoIs()->role) {
+                                    case 'lessee': echo 'locatario'; break;
+                                    case 'lesser': echo 'locatore'; break;
+                                    case 'admin': echo 'amministratore'; break;
+                                    //default: echo 'utente non registratio';
+                                }
+                            ?>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="<?= $this->url(
