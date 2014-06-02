@@ -9,9 +9,8 @@ class Application_Model_Resources_Accomodationfeature  extends Zend_Db_Table_Abs
 
     }
 
-
-    public function getAccomodationfeature($id) {
-        return $this->find($id);
+    public function getAccomodationfeatures($type) {
+        return $this->select()->where("type = '$type'");
     }
 
     public function addAccomodationfeature($dati) {

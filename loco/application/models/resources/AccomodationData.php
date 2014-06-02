@@ -10,9 +10,11 @@ class Application_Model_Resources_Accomodationdata  extends Zend_Db_Table_Abstra
     }
 
 
-    public function getAccomodationdata($id) {
-        return $this->find($id);
+    public function getAccomodationdata($accomodation_id) {
+        return $this->select()->where("accomodation = '$accomodation_id'");
     }
+
+
 
     public function addAccomodationdata($dati) {
         $this->insert($dati);
