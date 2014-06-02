@@ -34,6 +34,13 @@ class AccomodationController extends Zend_Controller_Action
 
     }
 
+    public function viewAllAction()
+    {
+
+        $this->_accomodationsModel = new Application_Model_Accomodation();
+        $this->view->allAccomodations = $this->_accomodationsModel->getAllAccomodations();
+    }
+
     public function searchAction() {
         $searchForm = new Application_Form_Search();
         $this->view->form = $searchForm;
