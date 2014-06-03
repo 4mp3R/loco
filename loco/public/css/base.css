@@ -1,24 +1,4 @@
 /*
-  Alert
-*/
-
-.alert {
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid transparent;
-}
-.alert-info {
-    background-color: #d9edf7;
-    border-color: #bce8f1;
-    color: #31708f;
-}
-.alert-error {
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    color: #a94442;
-}
-
-/*
   Simple Grid
   Learn More - http://dallasbass.com/simple-grid-a-lightweight-responsive-css-grid/
   Project Page - http://thisisdallas.github.com/Simple-Grid/
@@ -555,3 +535,23 @@ since IE8 won't execute CSS that contains a CSS3 selector.
  .table-bordered tbody > tr:last-child td {
      border-bottom-width: 0;
  }
+
+/*
+ Alert
+*/
+
+.alert {
+    padding: 15px;
+    margin: 0 0 15px 0;
+    border: 1px solid transparent;
+}
+.alert-info {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #31708f;
+}
+.alert-error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
