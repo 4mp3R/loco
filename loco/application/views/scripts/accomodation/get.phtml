@@ -10,4 +10,6 @@
     <?php foreach($this->photos as $photo): ?>
         <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
     <?php endforeach; ?>
+
+    <?= var_dump($this->characteristics) ?>
 </div>

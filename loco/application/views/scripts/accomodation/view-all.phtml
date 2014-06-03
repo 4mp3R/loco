@@ -8,13 +8,28 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>Titolo</th>
+                        <th>Zona</th>
+                        <th>Locatario</th>
+                        <th>Periodo Disp.</th>
+                        <th>Canone</th>
+                        <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                    </tr>
+                    <?php foreach($this->allAccomodations as $a): ?>
+                        <tr>
+                            <td><?php echo $a->title;?></td>
+                            <td><?php echo $a->zone;?></td>
+                            <td><?php echo $a->lesser;?></td>
+                            <td><?php echo $a->available_from . ' - ' . $a->available_untill;?></td>
+                            <td><?php echo $a->fee;?></td>
+                            <td>
+                                <a class="button" href="#">Modifica</a>
+                                <a class="button button-danger" href="#">Cancella</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
 
