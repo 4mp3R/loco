@@ -1,46 +1,83 @@
 <div class="page">
     <div class="container page-content">
 
+        <div class="grid">
+            <div class="col-1-4">
+                <h1 class="page-heading">Statistiche</h1>
+            </div>
+            <div class="col-1-4 text-right">
+                <h3 class="stat">
+                    0
+                    <small>Utenti</small>
+                </h3>
+            </div>
+            <div class="col-1-4 text-right">
+                <h3 class="stat">
+                    0
+                    <small>Annunci</small>
+                </h3>
+            </div>
+            <div class="col-1-4 text-right">
+                <h3 class="stat">
+                    0
+                    <small>Contratti conclusi</small>
+                </h3>
+            </div>
+        </div>
+        <hr/>
+        <div class="grid">
+            <div class="col-1-1">
+                <p class="alert alert-info">Da questa pagina è possibile visualizzare le statistiche su annunci inseriti, offerte fatte dai potenziali locatori e gli alloggi locati in un certo periodo.</p>
+            </div>
+        </div>
+
         <?= $this->form; ?>
 
-        <h1 class="page-heading">Statistiche</h1>
-            <h3>Annunci inseriti:
-                <?php
+        <div class="grid">
+            <div class="col-1-3">
+                <h3>Annunci inseriti:
+                    <?php
                     if(null != $this->from && null != $this->to) echo " dal ".$this->from." al ".$this->to;
                     if(null != $this->typeName) echo " nella tipologia ".$this->typeName;
-                ?>
-                <?= "(".count($this->accomodations).")"; ?>
-            </h3>
-            <ul>
-                <?php foreach($this->accomodations as $a): ?>
-                    <li>
-                        <?= "[".$a->created."] ".$a->title ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <h3>Offerte fatte dai potenziali locatari:<?= "(".count($this->optioned).")"; ?></h3>
-        <ul>
-            <?php foreach($this->optioned as $o) {
-                echo "<li>";
-                echo $o['option']->date;
-                echo " <b>".$o['option']->lessee."</b>";
-                echo " => ".$o['accomodation'][0]->title;
-                echo " di <b>".$o['accomodation'][0]->lesser."</b>";
-                echo "</li>";
-            } ?>
-        </ul>
-        <h3>Alloggi locati (<?= count($this->located) ?>)</h3>
-        <ul>
-            <?php foreach($this->located as $l) {
-                echo "<li>";
-                echo $l['option']->date;
-                echo " <b>".$l['option']->lessee."</b>";
-                echo " => ".$l['accomodation'][0]->title;
-                echo " di <b>".$l['accomodation'][0]->lesser."</b>";
-                echo "</li>";
-            } ?>
-        </ul>
-        <div class="grid">
+                    ?>
+                    <?= "(".count($this->accomodations).")"; ?>
+                </h3>
+                <ul class="list-unstyled">
+                    <?php foreach($this->accomodations as $a): ?>
+                        <li>
+                            <?= "<b>[".$a->created."]</b> ".$a->title ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="col-1-3">
+                <h3>Offerte fatte dai locatari:<?= "(".count($this->optioned).")"; ?></h3>
+                <ul class="list-unstyled">
+                    <?php foreach($this->optioned as $o) {
+                        echo "<li>";
+                        echo "<b>".$o['option']->date."</b>";
+                        echo " <b>".$o['option']->lessee."</b>";
+                        echo " => ".$o['accomodation'][0]->title;
+                        echo " di <b>".$o['accomodation'][0]->lesser."</b>";
+                        echo "</li>";
+                    } ?>
+                </ul>
+
+            </div>
+            <div class="col-1-3">
+                <h3>Alloggi locati (<?= count($this->located) ?>)</h3>
+                <ul class="list-unstyled">
+                    <?php foreach($this->located as $l) {
+                        echo "<li>";
+                        echo $l['option']->date;
+                        echo " <b>".$l['option']->lessee."</b>";
+                        echo " => ".$l['accomodation'][0]->title;
+                        echo " di <b>".$l['accomodation'][0]->lesser."</b>";
+                        echo "</li>";
+                    } ?>
+                </ul>
+            </div>
         </div>
+
     </div>
 </div>

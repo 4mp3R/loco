@@ -354,8 +354,6 @@ hr {
     margin: 10px auto;
 }
 
-
-
 /*
     Panel
  */
@@ -391,6 +389,22 @@ hr {
     background-color: #fff;
     border-top: 1px solid #ddd;
 }
+
+/*
+    Statistiche
+ */
+
+.stat {
+    color: #0398CA;
+}
+.stat small {
+    display: block;
+    color: #777;
+}
+
+/*
+    Varie
+ */
 
 .login_error {
     color: red;
