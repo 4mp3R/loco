@@ -10,10 +10,20 @@ class Application_Model_Statics {
 
     protected $_faqModel;
 
-    public function getFaq() {
+    public function __construct() {
         $this->_faqModel = new Application_Model_Resources_Faq();
+    }
 
+    public function getFaq() {
         return $this->_faqModel->getFaq();
+    }
+
+    public function getFaqItem($id) {
+        return $this->_faqModel->getFaqItem($id);
+    }
+
+    public function deleteFaq($id) {
+        return $this->_faqModel->deleteFaq($id);
     }
 
     public function getSlogan() {

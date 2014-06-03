@@ -19,6 +19,52 @@ class LocoController extends Zend_Controller_Action
         $this->view->faq = $this->_staticsModel->getFaq();
     }
 
+    public function faqEditAction() {
+        $request = $this->_request;
+        $this->_helper->layout->setLayout("private");
+        $id = $request->getParam('id');
+        $question = $request->getParam('question');
+        $answer = $request->getParam('answer');
+
+        if(null != $id) {
+            if(null != $question && null != $answer) {
+
+            } else {
+                if(null == $id)
+                    $this->_helper->redirector("faq-edit", "loco");
+
+                $faqItem = $this->_staticsModel->getFaqItem($id);
+
+                $form = new Application_Form_Faq();
+
+                $form->getElement('question')->setValue($faqItem[0]->question);
+                $form->getElement('answer')->setValue($faqItem[0]->answer);
+                $form->getElement('id')->setValue($faqItem[0]->id);
+
+                $this->view->form = $form;
+            }
+        } else {
+            $faq = $this->_staticsModel->getFaq();
+
+            $this->view->faq = $faq;
+        }
+    }
+
+    public function faqModifyAction() {
+        $id = $this->_request->getParam('id');
+
+
+    }
+
+    public function faqDeleteAction() {
+        $id = $this->_request->getParam('id');
+
+        if(null != $id)
+            $this->_staticsModel->deleteFaq($id);
+
+        $this->_helper->redirector("faq-edit", "loco");
+    }
+
     public function supportViewAction() {
     }
 
@@ -76,6 +122,8 @@ class LocoController extends Zend_Controller_Action
 */
 
     public function statisticsAction() {
+        $this->_helper->layout->setLayout("private");
+
         $form = new Application_Form_Statistics();
         $request = $this->_request;
 

@@ -9,10 +9,13 @@ class Application_Model_Resources_Faq extends Zend_Db_Table_Abstract {
     protected $_name = "faq";
     protected $_primary = "id";
 
-//Restituisce tutte le Faq
     public function getFaq() {
         $query = $this->select(); //$query = "select * from faq";
         return $this->fetchAll($query); //q -->DB-->[tuple]
+    }
+
+    public function getFaqItem($id) {
+       return $q = $this->find($id);
     }
 
     public function addFaq($item) {
@@ -24,7 +27,7 @@ class Application_Model_Resources_Faq extends Zend_Db_Table_Abstract {
     }
 
     public function deleteFaq($id) {
-        $this->delete("id = $id");
+        $this->delete("id = '$id'");
     }
 
 }

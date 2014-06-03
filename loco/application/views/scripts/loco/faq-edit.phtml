@@ -1,0 +1,48 @@
+<div class="page">
+    <div class="container page-content">
+
+        <h1 class="page-heading">Impostazioni</h1>
+
+        <div class="grid">
+            <?php
+                if(isset($this->form)) echo $this->form;
+            ?>
+            <?php if(!isset($this->form)): ?>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Domanda</th>
+                        <th>Risposta</th>
+                        <th>Azioni</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->faq as $f): ?>
+                        <tr>
+                            <td><?= $f->id ?></td>
+                            <td><?= $f->question ?></td>
+                            <td><?= $f->answer ?></td>
+                            <td>
+                                <a class="button" href="<?= $this->url(array(
+                                    'controller' => 'loco',
+                                    'action' => 'faq-edit',
+                                    'id' => $f->id
+                                ), 'default', true); ?>">Edita</a>
+                                <a class="button button-danger" href="
+                                    <?= $this->url(array(
+                                    'controller' => 'loco',
+                                    'action' => 'faq-delete',
+                                    'id' => $f->id
+                                ), 'default', true); ?>
+                                ">Cancella</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+
+        </div>
+    </div>
+</div>

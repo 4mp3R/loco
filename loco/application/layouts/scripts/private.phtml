@@ -46,10 +46,10 @@
                 <?php elseif($this->whoIs()->role == 'admin'): ?>
                     <li class="<?php $this->activeLink('loco', 'statistics');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'statistics'), 'default', true); ?>">Statistiche</a></li>
                     <li class="<?php $this->activeLink('user', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'user', 'action' => 'view-all'), 'default', true); ?>">Utenti</a></li>
-                    <li class="<?php $this->activeLink('accomodation', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'index'), 'default', true); ?>">Locali</a></li>
-                    <li class="<?php $this->activeLink('loco', 'settings');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'settings'), 'default', true); ?>">Impostazioni</a></li>
+                    <li class="<?php $this->activeLink('accomodation', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'view-all'), 'default', true); ?>">Locali</a></li>
+                    <li class="<?php $this->activeLink('loco', 'faq-edit');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'faq-edit'), 'default', true); ?>">Impostazioni</a></li>
                 <?php endif; ?>
-                    <li class="<?php $this->activeLink('message', 'list');?>"><a href="<?= $this->url(array('controller' => 'message', 'action' => 'list'), 'default', true); ?>">Messaggi <span class="badge badge-active">42</span> </a></li>
+                    <li class="<?php $this->activeLink('message', 'list');?>"><a href="<?= $this->url(array('controller' => 'message', 'action' => 'list'), 'default', true); ?>">Messaggi </a></li>
             </ul>
         </div>
     </div>
