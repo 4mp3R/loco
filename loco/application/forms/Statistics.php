@@ -9,7 +9,7 @@ class Application_Form_Statistics extends Zend_Form {
         $this->setMethod("post");
         $this->setName("statistics_form");
         $this->setAction("");
-        $this->setAttrib('class', 'form');
+        $this->setAttrib('class', 'form grid text-center');
 
         $this->addElement("text", "from", array(
             'filter' => array('StringTrim'),
@@ -38,7 +38,31 @@ class Application_Form_Statistics extends Zend_Form {
             'label' => 'Tipologia'
         ));
 
-        $this->addElement("submit", "Visualizza");
+        $this->addElement('submit', 'submit', array(
+            'label'    => 'Visualizza',
+            'class'    => 'button button-primary button-margin'
+        ))->removeDecorator('label');
+
+        $this->addDisplayGroup(array('from'), 'gfrom', array(
+            'class'   => 'col-1-4'
+        ));
+        $this->addDisplayGroup(array('to'), 'gto', array(
+            'class'   => 'col-1-4'
+        ));
+        $this->addDisplayGroup(array('type_id'), 'gtype_id', array(
+            'class'   => 'col-1-4'
+        ));
+        $this->addDisplayGroup(array('submit'), 'gsubmit', array(
+            'class'   => 'col-1-4'
+        ));
+        $g = $this->getDisplayGroup("gfrom");
+        $g->removeDecorator('DtDdWrapper');
+        $g = $this->getDisplayGroup("gto");
+        $g->removeDecorator('DtDdWrapper');
+        $g = $this->getDisplayGroup("gtype_id");
+        $g->removeDecorator('DtDdWrapper');
+        $g = $this->getDisplayGroup("gsubmit");
+        $g->removeDecorator('DtDdWrapper');
     }
 
 

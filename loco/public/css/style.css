@@ -403,8 +403,16 @@ hr {
 }
 
 /*
+    Form inline
+ */
+
+/*
     Varie
  */
+
+.button-margin {
+    margin-top: 13px;
+}
 
 .login_error {
     color: red;
