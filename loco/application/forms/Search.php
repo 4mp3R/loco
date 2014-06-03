@@ -12,12 +12,12 @@ class Application_Form_Search extends Zend_Form {
         $this->setAttrib('class', 'form');
 
         foreach($accomodationTypeModel->getTypes() as $t)
-            $options[$t->name] = $t->name;
+            $options[$t->id] = $t->name;
 
         $this->addElement("select", "type", array(
             'multiOptions' => $options,
             'filters' => array('StringTrim'),
-            'validators' => array('Alpha'),
+            'validators' => array('Alnum'),
             'required' => false,
             'label' => 'Tipologia'
         ));

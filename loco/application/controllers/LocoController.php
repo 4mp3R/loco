@@ -76,11 +76,20 @@ class LocoController extends Zend_Controller_Action
 */
 
     public function statisticsAction() {
+        $form = new Application_Form_Statistics();
         $request = $this->_request;
 
         $from = $request->getParam('from');
         $to = $request->getParam('to');
         $type_id = $request->getParam('type_id');
+
+        if(!$form->isValid($request->getParams())) {
+            $from = null;
+            $to = null;
+            $type_id = null;
+        }
+
+        if($type_id == 'none') $type_id = null;
 
         $accomodationModel = new Application_Model_Accomodation();
 
@@ -111,5 +120,7 @@ class LocoController extends Zend_Controller_Action
         $this->view->accomodations = $accomodations;
         $this->view->optioned = $optioned;
         $this->view->located = $located;
+
+        $this->view->form = $form;
     }
 }
