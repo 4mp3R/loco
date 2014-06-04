@@ -14,7 +14,7 @@ class Application_Form_Faq extends Zend_Form {
             'label' => 'Domanda'
         ));
 
-        $this->addElement("text", "answer", array(
+        $this->addElement("textarea", "answer", array(
             'filter' => array('StringTrim'),
             'required' => true,
             'label' => 'RIsposta'

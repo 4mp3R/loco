@@ -26,6 +26,14 @@ class Application_Model_Statics {
         return $this->_faqModel->deleteFaq($id);
     }
 
+    public function updateFaq($data) {
+        $this->_faqModel->updateFaq($data['id'], $data);
+    }
+
+    public function addFaq($data) {
+        $this->_faqModel->addFaq($data);
+    }
+
     public function getSlogan() {
 
     }

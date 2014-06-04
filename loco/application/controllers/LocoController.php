@@ -4,11 +4,13 @@ class LocoController extends Zend_Controller_Action
 {
 
     protected $_staticsModel;
+    protected $_faqForm;
 
     public function init() {
         $this->_helper->layout->setLayout("public");
 
         $this->_staticsModel = new Application_Model_Statics();
+        $this->_faqForm = new Application_Form_Faq();
     }
 
     public function indexAction() {
@@ -22,26 +24,31 @@ class LocoController extends Zend_Controller_Action
     public function faqEditAction() {
         $request = $this->_request;
         $this->_helper->layout->setLayout("private");
-        $id = $request->getParam('id');
-        $question = $request->getParam('question');
-        $answer = $request->getParam('answer');
 
-        if(null != $id) {
-            if(null != $question && null != $answer) {
+        $formParams = array(
+            'id' => $request->getParam('id'),
+            'question' => $request->getParam('question'),
+            'answer' => $request->getParam('answer')
+        );
 
+
+        if(null != $formParams['id']) {
+            if(null != $formParams['question'] && null != $formParams['answer']) {
+                if($this->_faqForm->isValid($formParams))
+                    $this->_staticsModel->updateFaq($formParams);
+
+                $this->_helper->redirector('faq-edit', 'loco');
             } else {
-                if(null == $id)
+                if(null == $formParams['id'])
                     $this->_helper->redirector("faq-edit", "loco");
 
-                $faqItem = $this->_staticsModel->getFaqItem($id);
+                $faqItem = $this->_staticsModel->getFaqItem($formParams['id']);
 
-                $form = new Application_Form_Faq();
+                $this->_faqForm->getElement('question')->setValue($faqItem[0]->question);
+                $this->_faqForm->getElement('answer')->setValue($faqItem[0]->answer);
+                $this->_faqForm->getElement('id')->setValue($faqItem[0]->id);
 
-                $form->getElement('question')->setValue($faqItem[0]->question);
-                $form->getElement('answer')->setValue($faqItem[0]->answer);
-                $form->getElement('id')->setValue($faqItem[0]->id);
-
-                $this->view->form = $form;
+                $this->view->form = $this->_faqForm;
             }
         } else {
             $faq = $this->_staticsModel->getFaq();
@@ -50,10 +57,24 @@ class LocoController extends Zend_Controller_Action
         }
     }
 
-    public function faqModifyAction() {
-        $id = $this->_request->getParam('id');
+    public function faqAddAction() {
+        $this->_helper->layout->setLayout("private");
 
+        $request = $this->_request;
 
+        $formParams = array(
+            'question' => $request->getParam('question'),
+            'answer' => $request->getParam('answer')
+        );
+
+        if(null != $formParams['question'] && null != $formParams['answer']) {
+            if($this->_faqForm->isValid($formParams))
+                $this->_staticsModel->addFaq($formParams);
+
+                $this->_helper->redirector('faq-edit', 'loco');
+        } else {
+            $this->view->form = $this->_faqForm;
+        }
     }
 
     public function faqDeleteAction() {

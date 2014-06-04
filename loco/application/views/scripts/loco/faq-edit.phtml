@@ -1,7 +1,14 @@
 <div class="page">
     <div class="container page-content">
 
-        <h1 class="page-heading">Impostazioni</h1>
+        <h1 class="page-heading float-left">Impostazioni</h1>
+        <a class=" button float-right" href="
+            <?= $this->url(array(
+            'controller' => 'loco',
+            'action' => 'faq-add'
+        ), 'default', true);
+            ?>
+        ">Aggiungi</a>
 
         <div class="grid">
             <?php
