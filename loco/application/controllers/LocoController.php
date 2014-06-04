@@ -182,6 +182,21 @@ class LocoController extends Zend_Controller_Action
             else $located[] = $o;
         }
 
+        $profileModel = new Application_Model_Profile();
+        $users = $profileModel->getAllProfiles();
+        $this->view->user_count = count($users);
+
+        $accomodations = $accomodationModel->getAllAccomodations();
+        $this->view->accomodation_count = count($accomodations);
+
+        $located_accomodation_count = 0;
+        $optionModel = new Application_Model_Resources_Option();
+        $options = $optionModel->getOptionsByInterval(null, null, null);
+        foreach($options as $o)
+            if($o->state == 'located')
+                $located_accomodation_count++;
+        $this->view->located_accomodation_count = $located_accomodation_count;
+
         $this->view->from = $from;
         $this->view->to = $to;
         $this->view->typeName = $typeName;
