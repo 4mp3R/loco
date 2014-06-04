@@ -14,6 +14,8 @@ class LocoController extends Zend_Controller_Action
     }
 
     public function indexAction() {
+        if(Zend_Auth::getInstance()->hasIdentity())
+            $this->_helper->layout->setLayout("private");
         // action body
     }
 
