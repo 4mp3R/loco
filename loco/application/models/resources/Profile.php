@@ -22,7 +22,7 @@ class Application_Model_Resources_Profile  extends Zend_Db_Table_Abstract {
         $this->insert($data);
     }
 
-    public function updateProfile($username , $data) {
+    public function updateProfile($data , $username) {
         $this->update($data, "username = '$username'");
     }
 

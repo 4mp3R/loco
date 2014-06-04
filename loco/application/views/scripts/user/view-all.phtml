@@ -41,8 +41,20 @@
                             <td><?= $profile->role; ?></td>
                             <td><?= $profile->phone; ?></td>
                             <td>
-                                <a class="button" href="#">Edita</a>
-                                <a class="button button-danger" href="#">Cancella</a>
+                                <a class="button" href="
+                                    <?= $this->url(array(
+                                    'controller' => 'user',
+                                    'action' => 'profile-edit',
+                                    'username' => $profile->username
+                                ), 'default', true); ?>
+                                ">Edita</a>
+                                <a class="button button-danger" href="
+                                <?= $this->url(array(
+                                    'controller' => 'user',
+                                    'action' => 'delete',
+                                    'username' => $profile->username
+                                ), 'default', true); ?>
+                                ">Cancella</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

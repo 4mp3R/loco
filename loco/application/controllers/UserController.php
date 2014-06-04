@@ -27,13 +27,6 @@ class UserController extends Zend_Controller_Action
 
         if($request->isPost()) {
             if($registrationForm->isValid($request->getParams())) {
-
-                /*
-                echo "keys to be preserved => " . print_r($keys);
-                echo "request array => " . print_r($request->getParams());
-                echo "stuff that goes to db => " . print_r(array_intersect_key($request->getParams(), array_flip($keys)));
-                */
-
                 if(0 === $this->_profileModel->getProfile($request->getParam('username'))->count()) {
                     $upload = new Zend_File_Transfer_Adapter_Http();
                     $image_file = null;
@@ -49,7 +42,7 @@ class UserController extends Zend_Controller_Action
 
                     $this->_profileModel->addProfile($profile_data);
 
-                    $this->view->message = 'La registrazione è andata a buon fine';
+                    $this->_helper->redirector('login', 'user');
                 } else {
                     $this->view->message = 'Utente ' . $request->getParam('username') . ' già esiste. Riprova';
                 }
@@ -160,40 +153,58 @@ class UserController extends Zend_Controller_Action
         $request = $this->_request;
         $profileData = null;
         $upload = null;
+        $profileDataArray = array();
 
         $keys = array("name", "surname", "email", "birth", "sex", "cf", "phone");
 
         $upload = new Zend_File_Transfer_Adapter_Http();
         $profileEditForm = new Application_Form_ProfileEdit();
         $this->_profileModel = new Application_Model_Profile();
-        $profileData = $this->_profileModel->getProfile(Zend_Auth::getInstance()->getIdentity()->username);
-        $this->view->profile_info = $profileData[0];
-        $profileData = $profileData[0]->toArray();
 
-        if($request->isPost()) {
-            if($profileEditForm->isValid($request->getParams())) {
-                foreach($keys as $k)
-                    $profileData[$k] = $request->getParam($k);
+            $username = $request->getParam('username');
 
-                if(null != $request->getParam("password"))
-                    $profileData['password'] = $request->getParam('password');
+            if(null != $username && 1 == count($this->_profileModel->getProfile($username))) {
 
-                if($upload->isValid('profile_image')) {
-                    $upload->receive('profile_image');
-                    $profileData['profile_image'] = file_get_contents($upload->getFileName('profile_image'));
+                if($username == Zend_Auth::getInstance()->getIdentity()->username || 'admin' == Zend_Auth::getInstance()->getIdentity()->role) {
+
+                    $profileData = $this->_profileModel->getProfile($username);
+
+                    if(null != $request->getParam('name') && $profileEditForm->isValid($request->getParams())) {
+                        $profileDataArray['username'] = $profileData[0]->username;
+                        echo "<h1>TEST</h1>";
+                        foreach($keys as $k)
+                            $profileDataArray[$k] = $request->getParam($k);
+
+                        if(null != $request->getParam("password"))
+                            $profileDataArray['password'] = $request->getParam('password');
+
+                        if($upload->isValid('profile_image')) {
+                            $upload->receive('profile_image');
+                            $profileDataArray['profile_image'] = file_get_contents($upload->getFileName('profile_image'));
+                        }
+
+                        $this->_profileModel->updateProfile($profileDataArray, $profileDataArray['username']);
+
+                        if('admin' == Zend_Auth::getInstance()->getIdentity()->role)
+                            $this->_helper->redirector('view-all', 'user');
+                        else
+                            $this->_helper->redirector('profile-view', 'user');
+
+                    }
                 }
+                else {
+                    $profileData = $this->_profileModel->getProfile(Zend_Auth::getInstance()->getIdentity()->username);
+                }
+            } else {
+                $profileData = $this->_profileModel->getProfile(Zend_Auth::getInstance()->getIdentity()->username);
+            }
 
-                $this->_profileModel->updateProfile($profileData['username'], $profileData);
 
-                $this->view->message = "L'aggiornamento del profilo è andato a buon file";
-            } else $this->view->message = "I dati inseriti non sono corretti. Riprova";
-        } else {
-            $this->view->message = "Modifica del profilo utente";
-        }
 
-        $profileEditForm->populate($profileData);
+        $profileEditForm->populate($profileData[0]->toArray());
 
         $this->view->form = $profileEditForm;
+        $this->view->profile_info = $profileData[0];
     }
 
     public function viewAllAction() {
@@ -205,20 +216,17 @@ class UserController extends Zend_Controller_Action
     }
 
     public function deleteAction() {
-        $request = $this->_request;
-        $username = $request->getParam('username');
-        $confirm = $request->getParam('confirm');
+        $username = $this->_request->getParam('username');
 
         $this->_profileModel = new Application_Model_Profile();
 
         if(isset($username) && count($this->_profileModel->getProfile($username)) == 1) {
-            if(isset($confirm) && $confirm == 'yes') {
-                $this->_profileModel->deleteProfile($username);
-                $this->view->message = "Profilo eliminato";
-            } else $this->view->message = "Devi confermare l'eliminazione profilo utente";
+            $this->_profileModel->deleteProfile($username);
+
+            $this->_helper->redirector('view-all', 'user');
         }
          else
-            $this->view->message = "Devi specificare l'utente da eliminare";
+            $this->_helper->redirector('view-all', 'user');
 
     }
 }

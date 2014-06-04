@@ -20,8 +20,8 @@ class Application_Model_Profile {
         return $this->_profileModel->addProfile($data);
     }
 
-    public function updateProfile($username, $data) {
-        return $this->_profileModel->updateProfile($username, $data);
+    public function updateProfile($data, $username) {
+        return $this->_profileModel->updateProfile($data, $username);
     }
 
     public function deleteProfile($username) {
