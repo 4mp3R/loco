@@ -27,6 +27,8 @@ class AccomodationController extends Zend_Controller_Action
         $this->view->accomodation = $this->_accomodatioModel->getAccomodation($id);
         $this->view->photos = $this->_accomodatioModel->getPhotosForAccomodation($id);
         $this->view->characteristics = $this->_accomodatioModel->getAccomodationFullInfo($id);
+        $this->view->username = Zend_Auth::getInstance()->getIdentity()->username;
+        $this->view->option = $this->_accomodatioModel->getOption(Zend_Auth::getInstance()->getIdentity()->username, $id);
     }
 
     public function addAction() {
@@ -38,7 +40,19 @@ class AccomodationController extends Zend_Controller_Action
     }
 
     public function optionAction() {
+        $request = $this->_request;
 
+        $username = $request->getParam('username');
+        $accomodation = $request->getParam('accomodation');
+
+        if(null != $username && null != $accomodation && $username == Zend_Auth::getInstance()->getIdentity()->username) {
+            if(1 == count($this->_profileModel->getProfile($username)) && 1 == count($this->_accomodatioModel->getAccomodation($accomodation))
+                && 0 == count($this->_accomodatioModel->getOption($username, $accomodation))) {
+                $this->_accomodatioModel->setOption($username, $accomodation);
+            }
+        }
+
+        $this->_helper->redirector('get', 'accomodation', null, array('id' => $accomodation));
     }
 
     public function lesseeSelectAction() {

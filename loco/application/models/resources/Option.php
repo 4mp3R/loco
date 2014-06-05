@@ -15,10 +15,20 @@ class Application_Model_Resources_Option extends Zend_Db_Table_Abstract {
     }
 
     public function getOption($username, $accomodation) {
+        $q = $this->select()->where("lessee = '$username' and accomodation='$accomodation'");
 
+        return $this->fetchAll($q);
     }
 
     public function setOption($username, $accomodation) {
+        $this->insert(array(
+            'lessee' => $username,
+            'accomodation' => $accomodation,
+            'state' => 'optioned'
+        ));
+    }
+
+    public function setLocated($username, $accomodation) {
 
     }
 

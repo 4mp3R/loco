@@ -54,11 +54,11 @@ class Application_Model_Accomodation {
     }
 
     public function getOption($username, $accomodation) {
-
+        return $this->_optionModel->getOption($username, $accomodation);
     }
 
     public function setOption($username, $accomodation) {
-
+        $this->_optionModel->setOption($username, $accomodation);
     }
 
     public function searchAccomodation() {

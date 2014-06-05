@@ -22,4 +22,17 @@
             <?php endforeach; ?>
     </table>
 
+    <?php if(0 == count($this->option)): ?>
+        <a class="button button-selected float-right" href="<?=$this->url(array(
+            'controller' => 'accomodation',
+            'action' => 'option',
+            'username' => $this->username,
+            'accomodation' => $this->accomodation[0]->id
+        ), 'default', true) ?>">OPZIONA</a>
+    <?php elseif($this->option[0]->state == 'optioned'): ?>
+        <a class="button button-disabled">Alloggio opzionato</a>
+    <?php else: ?>
+        <a class="button button-disabled">Alloggio Le e' stato assegnato con successo!</a>
+    <?php endif ?>
+
 </div>
