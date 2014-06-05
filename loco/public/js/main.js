@@ -11,6 +11,10 @@ $(document).ready(function() {
 
     }
 
+    $('.button-goback').click(function() {
+        window.history.back();
+    });
+
     function countUp(element, from, to, duration) {
         //calculate frames
         var length = to - from;
