@@ -6,6 +6,8 @@
     <?= $this->headMeta() ?>
     <?= $this->headLink() ?>
     <?= $this->headTitle() ?>
+    <meta name="path" value="<?= Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>/<?= Zend_Controller_Front::getInstance()->getRequest()->getActionName(); ?>"/>
+
 </head>
 <body>
 
@@ -93,6 +95,8 @@
             </div>
         </div>
     </div>
+
+    <?= $this->headScript() ?>
 
 </body>
 </html>
