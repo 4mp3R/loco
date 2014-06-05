@@ -20,8 +20,6 @@ $(document).ready(function() {
         var length = to - from;
         var frame = duration / length;
         if(from == to) return;
-        console.log(element, from, to, duration);
-
         var i = setInterval(function() {
             element.text(from++);
             if(from == to) clearInterval(i);
