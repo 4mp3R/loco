@@ -23,9 +23,43 @@ class MessageController extends Zend_Controller_Action
         $this->_profileModel = new Application_Model_Profile();
     }
 
-    public function indexAction()
+    public function getnewAction()
     {
-        // action body
+        $int1 = $this->_request->getParam('int1');
+        $int2 = $this->_request->getParam('int2');
+        $timestamp = $this->_request->getParam('timestamp');
+
+        $this->getHelper('Layout')
+            ->disableLayout();
+
+        $this->getHelper('ViewRenderer')
+            ->setNoRender();
+
+        $this->getResponse()
+            ->setHeader('Content-Type', 'application/json');
+
+        $msgs = $this->_messageModel->getNewMessages($int1, $int2, $timestamp);
+
+        $profiles = array();
+        $profiles[$int1] = $this->_profileModel->getProfile($int1);
+        $profiles[$int2] = $this->_profileModel->getProfile($int2);
+
+        $messages = array();
+
+        if($msgs) {
+            foreach($msgs as $m) {
+                $messages[] = array(
+                    'author' => $m->sender,
+                    'recipient' => $m->recipient,
+                    'author_profile_image' => $profiles[$m->sender][0]->profile_image,
+                    'timestamp' => $m->send_date,
+                    'content' => $m->content
+                );
+            }
+        }
+
+        echo $this->_helper->json($messages);
+        return;
     }
 
     public function listAction() {
@@ -63,6 +97,7 @@ class MessageController extends Zend_Controller_Action
 
                     $messages[] = array(
                       'author' => $m->sender,
+                      'recipient' => $m->recipient,
                       'author_profile_image' => $sender[0]->profile_image,
                       'timestamp' => $m->send_date,
                       'content' => $m->content

@@ -29,14 +29,14 @@ class Application_Model_Resources_Message  extends Zend_Db_Table_Abstract {
     public function getMessagesFromInterlocutor($interlocutor1, $interlocutor2) {
         $query = $this->select()->where(
             "(sender = '$interlocutor1' and recipient = '$interlocutor2') or (sender = '$interlocutor2' and recipient = '$interlocutor1')"
-        );
+        )->order(array('send_date ASC'));
         return $this->fetchAll($query);
     }
 
     public function getNewMessagesFromInterlocutors($interlocutor1, $interlocutor2, $timestamp) {
         $query = $this->select()->where(
             "((sender = '$interlocutor1' and recipient = '$interlocutor2') or (sender = '$interlocutor2' and recipient = '$interlocutor1')) and '$timestamp' < send_date"
-        );
+        )->order(array('send_date ASC'));
         return $this->fetchAll($query);
     }
 

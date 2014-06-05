@@ -7,6 +7,7 @@
     <?= $this->headLink() ?>
     <?= $this->headTitle() ?>
     <meta name="path" value="<?= Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>/<?= Zend_Controller_Front::getInstance()->getRequest()->getActionName(); ?>"/>
+    <meta name="base" value="<?= $this->baseUrl(); ?>"/>
 </head>
 <body>
 

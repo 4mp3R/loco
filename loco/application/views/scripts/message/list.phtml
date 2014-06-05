@@ -21,38 +21,7 @@
                         </a>
                     </li>
                 <?php endforeach; ?>
-<!--
-                <li class="active">
-                    <a href="#">
-                        <img src="http://placehold.it/32x32" class="float-left" alt=""/>
-                        <b>Alexei Liulin</b>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="http://placehold.it/32x32" class="float-left" alt=""/>
-                        <b>Alexei Liulin</b>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="http://placehold.it/32x32" class="float-left" alt=""/>
-                        <b>Alexei Liulin</b>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="http://placehold.it/32x32" class="float-left" alt=""/>
-                        <b>Alexei Liulin</b>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="http://placehold.it/32x32" class="float-left" alt=""/>
-                        <b>Alexei Liulin</b>
-                    </a>
-                </li>
--->
+
             </ul>
 
         </div>
@@ -60,13 +29,14 @@
     </div>
     <div class="content grid">
 
-        <div class="messages-content">
+        <div class="messages-content" data-timestamp="<?= end($this->messages)['timestamp']; ?>" data-int1="<?= end($this->messages)['author']; ?>" data-int2="<?= end($this->messages)['recipient']; ?>">
 
             <?php foreach($this->messages as $m): ?>
                 <div class="message grid">
                     <div class="col-3-12">
                         <img src="data:image/jpeg;base64,<?php echo base64_encode($m['author_profile_image']); ?>" class="float-left profile" alt=""/>
                         <b><?= $m['author']; ?></b>
+                        <p><?= $m['timestamp']; ?></p>
                     </div>
                     <div class="col-9-12">
                         <p><?= $m['content']; ?></p>
