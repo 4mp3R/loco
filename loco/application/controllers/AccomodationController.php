@@ -102,7 +102,8 @@ class AccomodationController extends Zend_Controller_Action
                 $this->_accomodationForm->getElement('submit')->setLabel('Aggiorna');
                 $this->view->form = $this->_accomodationForm;
             } else {    //salvare le modifiche
-                if($this->_accomodationForm->isValid($request->getParams())) {
+                $acc = $this->_accomodationModel->getAccomodation($accomodation_id);
+                if(($acc[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username|| 'admin' == Zend_Auth::getInstance()->getIdentity()->role) && $this->_accomodationForm->isValid($request->getParams())) {
                     $keys = array('type', 'title', 'description', 'lesser', 'available_from', 'available_untill', 'zone', 'address', 'fee');
                     $generalParams = array_intersect_key($request->getParams(), array_flip($keys));
                     $generalParams['lesser'] = Zend_Auth::getInstance()->getIdentity()->username;
