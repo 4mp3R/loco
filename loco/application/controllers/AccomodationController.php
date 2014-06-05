@@ -15,22 +15,31 @@ class AccomodationController extends Zend_Controller_Action
         $this->_accomodationForm = new Application_Form_Accomodation();
     }
 
-    public function indexAction()
-    {
+    public function indexAction() {
+        $accomodations = $this->_accomodationModel->getAccomodationByProfile(
+            Zend_Auth::getInstance()->getIdentity()->username
+        );
 
+        $data = array();
+
+        foreach($accomodations as $acc) {
+            $data[] = array('accomodation' => $acc, 'options' => $this->_accomodationModel->getOptionsByAccomodation($acc->id));
+        }
+
+        $this->view->data = $data;
     }
 
     public function getAction() {
         $id = $this->_request->getParam('id');
 
-        if(null === $id || 0 == count($this->_accomodatioModel->getAccomodation($id)))
+        if(null === $id || 0 == count($this->_accomodationModel->getAccomodation($id)))
             $this->_helper->redirector("search", "accomodation");
 
-        $this->view->accomodation = $this->_accomodatioModel->getAccomodation($id);
-        $this->view->photos = $this->_accomodatioModel->getPhotosForAccomodation($id);
-        $this->view->characteristics = $this->_accomodatioModel->getAccomodationFullInfo($id);
+        $this->view->accomodation = $this->_accomodationModel->getAccomodation($id);
+        $this->view->photos = $this->_accomodationModel->getPhotosForAccomodation($id);
+        $this->view->characteristics = $this->_accomodationModel->getAccomodationFullInfo($id);
         $this->view->username = Zend_Auth::getInstance()->getIdentity()->username;
-        $this->view->option = $this->_accomodatioModel->getOption(Zend_Auth::getInstance()->getIdentity()->username, $id);
+        $this->view->option = $this->_accomodationModel->getOption(Zend_Auth::getInstance()->getIdentity()->username, $id);
     }
 
     public function addAction() {
@@ -81,9 +90,9 @@ class AccomodationController extends Zend_Controller_Action
         $accomodation = $request->getParam('accomodation');
 
         if(null != $username && null != $accomodation && $username == Zend_Auth::getInstance()->getIdentity()->username) {
-            if(1 == count($this->_profileModel->getProfile($username)) && 1 == count($this->_accomodatioModel->getAccomodation($accomodation))
-                && 0 == count($this->_accomodatioModel->getOption($username, $accomodation))) {
-                $this->_accomodatioModel->setOption($username, $accomodation);
+            if(1 == count($this->_profileModel->getProfile($username)) && 1 == count($this->_accomodationModel->getAccomodation($accomodation))
+                && 0 == count($this->_accomodationModel->getOption($username, $accomodation))) {
+                $this->_accomodationModel->setOption($username, $accomodation);
             }
         }
 
@@ -97,9 +106,9 @@ class AccomodationController extends Zend_Controller_Action
         $accomodation = $request->getParam('accomodation');
 
         if(null != $username && null != $accomodation && $username == Zend_Auth::getInstance()->getIdentity()->username) {
-            if(1 == count($this->_profileModel->getProfile($username)) && 1 == count($this->_accomodatioModel->getAccomodation($accomodation))
-                && 1 == count($this->_accomodatioModel->getOption($username, $accomodation))) {
-                $this->_accomodatioModel->unsetOption($username, $accomodation);
+            if(1 == count($this->_profileModel->getProfile($username)) && 1 == count($this->_accomodationModel->getAccomodation($accomodation))
+                && 1 == count($this->_accomodationModel->getOption($username, $accomodation))) {
+                $this->_accomodationModel->unsetOption($username, $accomodation);
             }
         }
 
@@ -132,13 +141,13 @@ class AccomodationController extends Zend_Controller_Action
                 echo "<h1>RICERCA</h1>";
             }
         } else {    //no search params, show latest accomodations inserted
-            $accomodations = $this->_accomodatioModel->getLatestAccomodations(4);
+            $accomodations = $this->_accomodationModel->getLatestAccomodations(4);
         }
 
         for($i=0; $i<count($accomodations); $i++) {
             $lessers[] = $this->_profileModel->getProfile($accomodations[$i]->lesser);
-            $photos[] = $this->_accomodatioModel->getPhotosForAccomodation($accomodations[$i]->id);
-            $types[] = $this->_accomodatioModel->getAccType($accomodations[$i]->id);
+            $photos[] = $this->_accomodationModel->getPhotosForAccomodation($accomodations[$i]->id);
+            $types[] = $this->_accomodationModel->getAccType($accomodations[$i]->id);
         }
 
         $this->view->accomodations = $accomodations;

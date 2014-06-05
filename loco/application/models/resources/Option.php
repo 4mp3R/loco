@@ -14,6 +14,12 @@ class Application_Model_Resources_Option extends Zend_Db_Table_Abstract {
         return $this->fetchAll($q);
     }
 
+    public function getOptionsByAccomodation($accomodation) {
+        $q = $this->select()->where("accomodation = '$accomodation'");
+
+        return $this->fetchAll($q);
+    }
+
     public function getOption($username, $accomodation) {
         $q = $this->select()->where("lessee = '$username' and accomodation='$accomodation'");
 

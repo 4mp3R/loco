@@ -57,6 +57,10 @@ class Application_Model_Accomodation {
         return $this->_optionModel->getOption($username, $accomodation);
     }
 
+    public function getOptionsByAccomodation($accomodation) {
+        return $this->_optionModel->getOptionsByAccomodation($accomodation);
+    }
+
     public function setOption($username, $accomodation) {
         $this->_optionModel->setOption($username, $accomodation);
     }
@@ -80,6 +84,13 @@ class Application_Model_Accomodation {
     public function accomodationLastInsertId() {
         return $this->_accomodationModel->lastInserId();
     }
+
+    public function getAccomodationByProfile($lesser){
+        return $this->_accomodationModel->getAccomodationByProfile($lesser);
+    }
+
+
+
 
 
 
@@ -131,9 +142,7 @@ class Application_Model_Accomodation {
         return $this->_accomodationeModel->getAccomodationByFee($fee);
     }
 
-    public function getAccomodationByProfile(){
-        return $this->_accomodationeModel->getAccomodationByProfile($lessor);
-    }
+
 
     public function getAccomodationdata() {
         return $this->_accomodationdataModel->getAccomodationdata($id);

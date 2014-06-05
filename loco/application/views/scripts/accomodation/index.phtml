@@ -14,13 +14,21 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>Titolo</th>
+                        <th>Data inserimento</th>
+                        <th>Indirizzo</th>
+                        <th>Numero interessati</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach($this->data as $d): ?>
                     <tr>
-                        <td></td>
+                        <td><?= $d['accomodation']->title; ?></td>
+                        <td><?= $d['accomodation']->created; ?></td>
+                        <td><?= $d['accomodation']->address; ?></td>
+                        <td><?= count($d['options']); ?></td>
                     </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
 

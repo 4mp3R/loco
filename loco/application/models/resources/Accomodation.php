@@ -11,9 +11,9 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
         return $this->fetchAll($query);
     }
 
-    public function getAccomodationByProfile($lessor) {
+    public function getAccomodationByProfile($lesser) {
         $query = $this->select()
-                      ->where("lessor = '$lessor'");
+                      ->where("lesser = '$lesser'");
 
         return $this->fetchAll($query);
     }
