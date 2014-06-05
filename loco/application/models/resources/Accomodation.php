@@ -50,10 +50,8 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
         return $this->fetchAll($q);
     }
 
-
-
     public function updateAccomodation($id , $datiaggiornati ) {
-        $this->update($datiaggiornati, "id = '$id''");
+        $this->update($datiaggiornati, "id = '$id'");
     }
 
     public function getAccomodation($id) {

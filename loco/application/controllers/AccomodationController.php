@@ -80,7 +80,62 @@ class AccomodationController extends Zend_Controller_Action
 
 
     public function editAction() {
+        $request = $this->_request;
 
+        $accomodation_id = $request->getParam('accomodation');
+
+        if(null != $accomodation_id && 1 == count($this->_accomodationModel->getAccomodation($accomodation_id))) {
+            if(null == $request->getParam('title')) {   //visualizzare la form riempita
+                $accomodationGenericInfo = $this->_accomodationModel->getAccomodation($accomodation_id);
+                $accomodationData = $this->_accomodationModel->getAccomodationdata($accomodation_id);
+                $type = $this->_accomodationModel->getAccomodationType($accomodationGenericInfo[0]->type);
+
+                $data = $accomodationGenericInfo[0]->toArray();
+                $data['fee'] = str_replace('.', ',', $data['fee']);
+
+                foreach($accomodationData as $ad) {
+                    $feature = $this->_accomodationModel->getAccomodationfeature($ad->feature_id);
+                    $data[str_replace(' ', '_', $type[0]->name.'_'.$feature[0]->name)] = $ad->feature_value;
+                }
+
+                $this->_accomodationForm->populate($data);
+                $this->_accomodationForm->getElement('submit')->setLabel('Aggiorna');
+                $this->view->form = $this->_accomodationForm;
+            } else {    //salvare le modifiche
+                if($this->_accomodationForm->isValid($request->getParams())) {
+                    $keys = array('type', 'title', 'description', 'lesser', 'available_from', 'available_untill', 'zone', 'address', 'fee');
+                    $generalParams = array_intersect_key($request->getParams(), array_flip($keys));
+                    $generalParams['lesser'] = Zend_Auth::getInstance()->getIdentity()->username;
+
+                    $features = $this->_accomodationModel->getFeaturesByType($generalParams['type']);
+                    $specificParams = array();
+
+                    $type = $this->_accomodationModel-> getAccomodationType($generalParams['type']);
+
+                    foreach($features as $f) {
+                        $specificParams[] = array('id' => $f->id, 'form_name' => str_replace(' ', '_', $type[0]->name.'_'.$f->name));
+                    }
+
+                    $this->_accomodationModel->updateAccomodation($accomodation_id ,$generalParams);
+
+                    foreach($specificParams as $sp) {
+                        $this->_accomodationModel->updateAccomodationdata(
+                            $accomodation_id, $sp['id'], array(
+                            'accomodation' => $accomodation_id,
+                            'feature_id' => $sp['id'],
+                            'feature_value' => $request->getParam($sp['form_name'])
+                        ));
+
+                    }
+
+                    $this->_helper->redirector('get', 'accomodation', null, array('id' => $accomodation_id));
+                } else {
+                    $this->view->form = $this->_accomodationForm;
+                }
+            }
+        } else {
+            $this->_helper->redirector('index', 'accomodation');
+        }
     }
 
     public function optionAction() {

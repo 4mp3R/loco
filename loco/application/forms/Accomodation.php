@@ -73,7 +73,7 @@ class Application_Form_Accomodation extends Zend_Form
             'filters'    => array('StringTrim'),
             'validators' => array(
                 array('StringLength', true, array(4, 128)),
-                array('Float'),
+                array('Float', 'locale' => 'it'),
             ),
             'required'   => true,
             'label'      => 'Canone'
@@ -110,7 +110,7 @@ class Application_Form_Accomodation extends Zend_Form
 
 
 
-        $this->addElement('submit', 'registration', array(
+        $this->addElement('submit', 'submit', array(
             'label'    => 'Inserisci',
         ));
 

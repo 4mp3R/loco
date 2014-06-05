@@ -89,6 +89,18 @@ class Application_Model_Accomodation {
         return $this->_accomodationModel->getAccomodationByProfile($lesser);
     }
 
+    public function getAccomodationfeature($id) {
+        return $this->_accomodationFeatureModel->getAccomodationfeature($id);
+    }
+
+    public function updateAccomodationdata($accomodation, $feature_id, $data) {
+        return $this->_accomodationDataModel->updateAccomodationdata($accomodation, $feature_id ,$data);
+    }
+
+
+
+
+
 
 
 
@@ -144,25 +156,21 @@ class Application_Model_Accomodation {
 
 
 
-    public function getAccomodationdata() {
-        return $this->_accomodationdataModel->getAccomodationdata($id);
+    public function getAccomodationdata($accomodation_id) {
+        return $this->_accomodationDataModel->getAccomodationdata($accomodation_id);
     }
 
 
 
 
-    public function updateAccomodationdata() {
-        return $this->_accomodationdataModel->updateAccomodationdata($id ,$datiaggiornati);
-    }
+
 
     public function deleteAccomodationdata() {
         return $this->_accomodationdataModel->deleteAccomodationdata($id);
     }
 
 
-    public function getAccomodationfeature() {
-        return $this->_accomodationfeatureModel->getAccomodationfeature($id);
-    }
+
 
 
     public function addAccomodationfeature() {
@@ -177,9 +185,7 @@ class Application_Model_Accomodation {
         return $this->_accomodationfeatureModel->deleteAccomodationfeature($id);
     }
 
-    public function addAccomodationtype() {
-        return $this->_accomodationtypeModel->addAccomodationtype($dati);
-    }
+
 
     public function updateAccomodationtype() {
         return $this->_accomodationtypeModel->updateAccomodationtype($id ,$datiaggiornati);

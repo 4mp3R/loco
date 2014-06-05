@@ -14,23 +14,31 @@
                     </div>
                     <div class="col-1-2">
                         <div>
-                            <?php if(0 == count($this->option)): ?>
+                            <?php if($this->accomodation[0]->lesser != Zend_Auth::getInstance()->getIdentity()->username): ?>
+                                <?php if(0 == count($this->option)): ?>
+                                    <a class="button button-primary float-right" href="<?=$this->url(array(
+                                        'controller' => 'accomodation',
+                                        'action' => 'option',
+                                        'username' => $this->username,
+                                        'accomodation' => $this->accomodation[0]->id
+                                    ), 'default', true) ?>">Opziona</a>
+                                <?php elseif($this->option[0]->state == 'optioned'): ?>
+                                    <a class="button button-danger float-right" href="<?=$this->url(array(
+                                        'controller' => 'accomodation',
+                                        'action' => 'deoption',
+                                        'username' => $this->username,
+                                        'accomodation' => $this->accomodation[0]->id
+                                    ), 'default', true) ?>">Deopziona</a>
+                                <?php else: ?>
+                                    <a class="button button-disabled float-right">Alloggio Le e' stato assegnato con successo!</a>
+                                <?php endif ?>
+                            <?php elseif($this->accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username): ?>
                                 <a class="button button-primary float-right" href="<?=$this->url(array(
                                     'controller' => 'accomodation',
-                                    'action' => 'option',
-                                    'username' => $this->username,
+                                    'action' => 'edit',
                                     'accomodation' => $this->accomodation[0]->id
-                                ), 'default', true) ?>">Opziona</a>
-                            <?php elseif($this->option[0]->state == 'optioned'): ?>
-                                <a class="button button-danger float-right" href="<?=$this->url(array(
-                                    'controller' => 'accomodation',
-                                    'action' => 'deoption',
-                                    'username' => $this->username,
-                                    'accomodation' => $this->accomodation[0]->id
-                                ), 'default', true) ?>">Deopziona</a>
-                            <?php else: ?>
-                                <a class="button button-disabled float-right">Alloggio Le e' stato assegnato con successo!</a>
-                            <?php endif ?>
+                                ), 'default', true) ?>">Modifica</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -48,7 +56,14 @@
                             <?php foreach($this->characteristics as $c): ?>
                                 <tr>
                                     <td><?= $c['name'] ?></td>
-                                    <td><?= $c['feature_value'] ?></td>
+                                    <td><?php
+                                        if('bool' == $c['data_type']) {
+                                            if('0' == $c['feature_value'])
+                                                echo 'No';
+                                            else
+                                                echo 'Si';
+                                        } else echo $c['feature_value'];
+                                        ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </table>
