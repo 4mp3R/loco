@@ -11,5 +11,15 @@
         <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
     <?php endforeach; ?>
 
-    <?= var_dump($this->characteristics) ?>
+    <h3>Caratteristiche alloggio</h3>
+
+    <table class="table table-bordered table-striped table-40percent-w">
+        <?php foreach($this->characteristics as $c): ?>
+            <tr>
+                <td><?= $c['name'] ?></td>
+                <td><?= $c['feature_value'] ?></td>
+            </tr>
+            <?php endforeach; ?>
+    </table>
+
 </div>

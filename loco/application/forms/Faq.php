@@ -4,7 +4,7 @@ class Application_Form_Faq extends Zend_Form {
 
     public function init() {
         $this->setMethod("post");
-        $this->setName("statistics_form");
+        $this->setName("faq_form");
         $this->setAction("");
         $this->setAttrib('class', 'form');
 
