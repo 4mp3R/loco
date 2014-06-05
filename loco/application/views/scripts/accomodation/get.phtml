@@ -1,38 +1,70 @@
-<div class="container">
-    <b><?= $this->accomodation[0]->title ?></b> in zona <b><?= $this->accomodation[0]->zone ?></b> a soli <b><?= $this->accomodation[0]->fee ?> €/mese</b><br>
-    <p>
-        Situato in <b><?= $this->accomodation[0]->address ?></b>
-        <span class="float-right"><?= $this->accomodation[0]->views ?> visualizzazioni</span
-    </p>
-    <p><?= $this->accomodation[0]->description ?></p>
-    Disponibile da <b><?= $this->accomodation[0]->available_from ?></b> a <b><?= $this->accomodation[0]->available_untill ?></b>
+<div class="page">
+    <div class="container page-content">
+        <div class="grid">
 
-    <?php foreach($this->photos as $photo): ?>
-        <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
-    <?php endforeach; ?>
+            <div class="col-8-12">
+                <h2><?= $this->accomodation[0]->title ?></h2>
 
-    <h3>Caratteristiche alloggio</h3>
+                <div class="grid">
+                    <div class="col-1-2">
+                        Zona: <b><?= $this->accomodation[0]->zone ?></b><br>
+                        Indirizzo: <b><?= $this->accomodation[0]->address ?></b><br>
+                        Prezzo: <b class="prezzo"><?= $this->accomodation[0]->fee ?> €/mese</b><br>
+                        Disponibilità: <b><?= $this->accomodation[0]->available_from ?></b> - <b><?= $this->accomodation[0]->available_untill ?></b>
+                    </div>
+                    <div class="col-1-2">
+                        <div>
+                            <?php if(0 == count($this->option)): ?>
+                                <a class="button button-primary float-right" href="<?=$this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'option',
+                                    'username' => $this->username,
+                                    'accomodation' => $this->accomodation[0]->id
+                                ), 'default', true) ?>">Opziona</a>
+                            <?php elseif($this->option[0]->state == 'optioned'): ?>
+                                <a class="button button-danger float-right" href="<?=$this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'option',
+                                    'username' => $this->username,
+                                    'accomodation' => $this->accomodation[0]->id
+                                ), 'default', true) ?>">Deopziona</a>
+                            <?php else: ?>
+                                <a class="button button-disabled float-right">Alloggio Le e' stato assegnato con successo!</a>
+                            <?php endif ?>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
 
-    <table class="table table-bordered table-striped table-40percent-w">
-        <?php foreach($this->characteristics as $c): ?>
-            <tr>
-                <td><?= $c['name'] ?></td>
-                <td><?= $c['feature_value'] ?></td>
-            </tr>
-            <?php endforeach; ?>
-    </table>
+                <div>
+                    <div class="col-1-1">
+                        <h3>Descrizione</h3>
 
-    <?php if(0 == count($this->option)): ?>
-        <a class="button button-selected float-right" href="<?=$this->url(array(
-            'controller' => 'accomodation',
-            'action' => 'option',
-            'username' => $this->username,
-            'accomodation' => $this->accomodation[0]->id
-        ), 'default', true) ?>">OPZIONA</a>
-    <?php elseif($this->option[0]->state == 'optioned'): ?>
-        <a class="button button-disabled">Alloggio opzionato</a>
-    <?php else: ?>
-        <a class="button button-disabled">Alloggio Le e' stato assegnato con successo!</a>
-    <?php endif ?>
+                        <p class="text-justified"><?= $this->accomodation[0]->description ?></p>
 
+                        <h3>Caratteristiche alloggio</h3>
+
+                        <table class="table table-bordered table-striped table-40percent-w">
+                            <?php foreach($this->characteristics as $c): ?>
+                                <tr>
+                                    <td><?= $c['name'] ?></td>
+                                    <td><?= $c['feature_value'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-4-12">
+                <div class="gallery">
+                    <?php foreach($this->photos as $photo): ?>
+                        <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

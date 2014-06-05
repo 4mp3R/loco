@@ -308,7 +308,7 @@ hr {
 /*
     Search
  */
-.search .prezzo {
+.prezzo {
     color: #b94a48;
 }
 
@@ -431,8 +431,4 @@ img.accommodation_img_large {
 img.profilo_top {
     position: relative;
     top: 10px;
-}
-
-table.table-40percent-w {
-    width: 40%;
 }

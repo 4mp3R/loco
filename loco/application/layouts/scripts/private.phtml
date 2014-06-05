@@ -42,7 +42,7 @@
                     <li class="<?php $this->activeLink('contract', 'index');?>"><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi contratti </a></li>
                 <?php elseif($this->whoIs()->role == 'lessee'): ?>
                     <li class="<?php $this->activeLink('accomodation', 'search');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'search'), 'default', true); ?>">Cerca Annunci</a></li>
-                    <li class="<?php $this->activeLink('contract', 'index');?>"><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">I tuoi Annunci </a></li>
+                    <li class="<?php $this->activeLink('contract', 'index');?>"><a href="<?= $this->url(array('controller' => 'contract', 'action' => 'index'), 'default', true); ?>">Le tuo opzioni </a></li>
                 <?php elseif($this->whoIs()->role == 'admin'): ?>
                     <li class="<?php $this->activeLink('loco', 'statistics');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'statistics'), 'default', true); ?>">Statistiche</a></li>
                     <li class="<?php $this->activeLink('user', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'user', 'action' => 'view-all'), 'default', true); ?>">Utenti</a></li>

@@ -15,8 +15,8 @@
                     <div class="panel-image">
                         <img class="accommodation_img_large" src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt=""/>
                     </div>
-                    <div class="panel-heading">
-                        <h2 class="panel-title"><?= $this->accomodations[$i]->title ?><span class="float-right prezzo"><?= $this->accomodations[$i]->fee ?> €/ mese</span></h2>
+                    <div class="panel-heading text-center">
+                        <h2 class="panel-title"><?= $this->accomodations[$i]->title ?><br><span class="prezzo"><?= $this->accomodations[$i]->fee ?> €/ mese</span></h2>
                     </div>
                     <div class="panel-body grid">
                         <div class="col-1-2">
@@ -38,7 +38,7 @@
                             </ul>
                         </div>
                         <div class="col-1-1 text-justified">
-                            <?= $this->accomodations[$i]->description; ?>
+                            <?= strlen($this->accomodations[$i]->description) > 203 ? substr($this->accomodations[$i]->description,0,200).'...' : $this->accomodations[$i]->description; ?>
                         </div>
                         <div class="col-1-1 text-center">
                             <a class="button button-primary" href="
