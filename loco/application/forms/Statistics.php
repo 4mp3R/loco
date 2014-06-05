@@ -43,6 +43,7 @@ class Application_Form_Statistics extends Zend_Form {
             'class'    => 'button button-primary button-margin'
         ))->removeDecorator('label');
 
+//nuovo elemento gfrom nomi elementi nell'array
         $this->addDisplayGroup(array('from'), 'gfrom', array(
             'class'   => 'col-1-4'
         ));

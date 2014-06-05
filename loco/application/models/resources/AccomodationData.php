@@ -17,7 +17,7 @@ class Application_Model_Resources_Accomodationdata  extends Zend_Db_Table_Abstra
 
 
     public function addAccomodationdata($dati) {
-        $this->insert($dati);
+        return $this->insert($dati);
     }
 
     public function updateAccomodationdata($id , $datiaggiornati ) {

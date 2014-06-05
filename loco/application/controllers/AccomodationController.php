@@ -2,15 +2,17 @@
 
 class AccomodationController extends Zend_Controller_Action
 {
-    protected $_accomodatioModel;
+    protected $_accomodationModel;
     protected $_profileModel;
+    protected $_accomodationForm;
 
     public function init()
     {
         $this->_helper->layout->setLayout('private');
 
-        $this->_accomodatioModel = new Application_Model_Accomodation();
+        $this->_accomodationModel = new Application_Model_Accomodation();
         $this->_profileModel = new Application_Model_Profile();
+        $this->_accomodationForm = new Application_Form_Accomodation();
     }
 
     public function indexAction()
@@ -32,8 +34,41 @@ class AccomodationController extends Zend_Controller_Action
     }
 
     public function addAction() {
+        $request = $this->_request;
 
+        $generalAccomodationParams = array('type', 'title', 'description', 'lesser', 'available_from', 'available_untill', 'zone', 'address', 'fee');
+
+        if(null == $request->getParam('title')) {
+            $this->view->form = $this->_accomodationForm;
+        } else if($this->_accomodationForm->isValid($request->getParams())) {
+            $type = $request->getParam('type');
+            $features = $this->_accomodationModel->getFeaturesByType($type);
+
+            $specificAccomodationParams = array();
+            foreach($features as $f) {
+                $t = $this->_accomodationModel->getAccomodationType($type);
+                $specificAccomodationParams[] = array('id' => $f->id, 'form_name' => str_replace(' ', '_', $t[0]->name.'_'.$f->name));
+            }
+
+            $request->setParam('lesser', Zend_Auth::getInstance()->getIdentity()->username);
+
+            $this->_accomodationModel->addAccomodation(array_intersect_key($request->getParams(), array_flip($generalAccomodationParams)));
+            $id = $this->_accomodationModel->accomodationLastInsertId();
+
+            foreach($specificAccomodationParams as $sp) {
+                $this->_accomodationModel->addAccomodationdata(array(
+                    'accomodation' => $id,
+                    'feature_id' => $sp['id'],
+                    'feature_value' => $request->getParam($sp['form_name'])
+            ));
+            }
+
+            $this->_helper->redirector('index', 'accomodation');
+        } else {
+            $this->view->form = $this->_accomodationForm;
+        }
     }
+
 
     public function editAction() {
 

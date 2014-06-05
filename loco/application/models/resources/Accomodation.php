@@ -64,6 +64,10 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
         $this->insert($data);
     }
 
+    public function lastInserId() {
+        return $this->getAdapter()->lastInsertId('accomodation');
+    }
+
     public function deleteAccomodation($id) {
         $this->delete("id = '$id''");
     }

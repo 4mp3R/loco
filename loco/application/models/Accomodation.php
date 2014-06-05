@@ -65,6 +65,25 @@ class Application_Model_Accomodation {
         $this->_optionModel->unsetOption($username, $accomodation);
     }
 
+    public function addAccomodation($data) {
+        return $this->_accomodationModel->addAccomodation($data);
+    }
+
+    public function getAccomodationType($type_id) {
+        return $this->_accomodationTypeModel->getAccomodationType($type_id);
+    }
+
+    public function addAccomodationdata($data) {
+        return $this->_accomodationDataModel->addAccomodationdata($data);
+    }
+
+    public function accomodationLastInsertId() {
+        return $this->_accomodationModel->lastInserId();
+    }
+
+
+
+
     public function searchAccomodation() {
 
     }
@@ -81,9 +100,7 @@ class Application_Model_Accomodation {
         return $this->_accomodationTypeModel->getAllAccomodationType();
     }
 
-    public function addAccomodation($data) {
-        return $this->_accomodationModel->addAccomodation($data);
-    }
+
 
     public function updateAccomodation($id ,$datiaggiornati) {
         return $this->_accomodationModel->updateAccomodation($id ,$datiaggiornati);
@@ -92,6 +109,15 @@ class Application_Model_Accomodation {
     public function deleteAccomodation($id) {
         return $this->_accomodationModel->deleteAccomodation($id);
     }
+
+    public function getFeaturesByType($type_id) {
+        return $this->_accomodationFeatureModel->getAccomodationeatures($type_id);
+    }
+
+    public function addFeature($data) {
+        return $this->_accomodationFeatureModel->addAccomodationfeature($data);
+    }
+
 
     public function getInterestedLessees() {
 
@@ -114,9 +140,7 @@ class Application_Model_Accomodation {
     }
 
 
-    public function addAccomodationdata() {
-        return $this->_accomodationdataModel->addAccomodationdata($dati);
-    }
+
 
     public function updateAccomodationdata() {
         return $this->_accomodationdataModel->updateAccomodationdata($id ,$datiaggiornati);
@@ -143,11 +167,6 @@ class Application_Model_Accomodation {
     public function deleteAccomodationfeature() {
         return $this->_accomodationfeatureModel->deleteAccomodationfeature($id);
     }
-
-    public function getAccomodationtype() {
-        return $this->_accomodationtypeModel->getAccomodationtype($id);
-    }
-
 
     public function addAccomodationtype() {
         return $this->_accomodationtypeModel->addAccomodationtype($dati);
