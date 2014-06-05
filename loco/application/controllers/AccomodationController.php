@@ -55,6 +55,22 @@ class AccomodationController extends Zend_Controller_Action
         $this->_helper->redirector('get', 'accomodation', null, array('id' => $accomodation));
     }
 
+    public function deoptionAction() {
+        $request = $this->_request;
+
+        $username = $request->getParam('username');
+        $accomodation = $request->getParam('accomodation');
+
+        if(null != $username && null != $accomodation && $username == Zend_Auth::getInstance()->getIdentity()->username) {
+            if(1 == count($this->_profileModel->getProfile($username)) && 1 == count($this->_accomodatioModel->getAccomodation($accomodation))
+                && 1 == count($this->_accomodatioModel->getOption($username, $accomodation))) {
+                $this->_accomodatioModel->unsetOption($username, $accomodation);
+            }
+        }
+
+        $this->_helper->redirector('get', 'accomodation', null, array('id' => $accomodation));
+    }
+
     public function lesseeSelectAction() {
 
     }

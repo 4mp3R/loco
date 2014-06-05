@@ -61,6 +61,10 @@ class Application_Model_Accomodation {
         $this->_optionModel->setOption($username, $accomodation);
     }
 
+    public function unsetOption($username, $accomodation) {
+        $this->_optionModel->unsetOption($username, $accomodation);
+    }
+
     public function searchAccomodation() {
 
     }
