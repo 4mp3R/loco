@@ -330,7 +330,7 @@ class AccomodationController extends Zend_Controller_Action
 
         $message = null;
 
-        if(null == $request->getParam('name') || null == $request->getParam('feature_count')) {
+        if(null == $request->getParam('name') || null == $request->getParam('feature_count')) { //form creazione nuova tipologia
             $message = "Inserisci il nome della nuova tipologia: ";
 
             $form->addElement('text', 'name', array(
@@ -352,7 +352,7 @@ class AccomodationController extends Zend_Controller_Action
                 'required' => true,
                 'label' => 'Numero di proprietà'
             ));
-        } else if(null == $request->getParam('complete')) {
+        } else if(null == $request->getParam('complete')) { //form creazione nuove feature
             if($form->isValid($request->getParams())) {
                 $name = $request->getParam('name');
                 $feature_count = $this->getParam('feature_count');
@@ -403,7 +403,7 @@ class AccomodationController extends Zend_Controller_Action
                     ));
                 }
             }
-        } else {
+        } else {    //inserimento nuova tupologia e features nel db
             $name = $request->getParam('name');
             $feature_count = $this->getParam('feature_count');
 
@@ -440,7 +440,12 @@ class AccomodationController extends Zend_Controller_Action
                     'label' => 'Nome proprieta '.($i+1)
                 ));
 
-                $form->addElement('text', 'data_type'.$i, array(
+                $form->addElement('select', 'data_type'.$i, array(
+                    'multiOptions' => array(
+                        'bool' => 'Booleano',
+                        'string' => 'Stringa',
+                        'int' => 'Numero intero'
+                    ),
                     'filter' => array('StringTrim'),
                     'validators' => array(array('StringLength', true, array(4,64))),
                     'required' => true,
@@ -462,6 +467,8 @@ class AccomodationController extends Zend_Controller_Action
                         'data_type' => $request->getParam('data_type'.$i)
                     ));
                 }
+
+                $this->_helper->redirector('type-list', 'accomodation');
             }
         }
 
@@ -472,7 +479,60 @@ class AccomodationController extends Zend_Controller_Action
     }
 
     public function typeEditAction() {
+        $request = $this->_request;
+        $type = $request->getParam('type');
 
+        $form = new Zend_Form();
+        $form->setName('type_form');
+        $form->setMethod('post');
+        $form->setAttrib('class', 'form');
+
+        if(null != $type && 1 == count($this->_accomodationModel->getAccomodationType($type))) {
+            $features = $this->_accomodationModel->getFeaturesByType($type);
+
+            for($i=0; $i<count($features); $i++) {
+                $form->addElement('text', 'feature'.$i, array(
+                    'filter' => array('StringTrim'),
+                    'validators' => array(array('StringLength', true, array(4,64))),
+                    'required' => true,
+                    'label' => 'Nome proprieta '.($i+1),
+                    'value' => $features[$i]->name
+                ));
+
+                $form->addElement('select', 'data_type'.$i, array(
+                    'multiOptions' => array(
+                        'bool' => 'Booleano',
+                        'string' => 'Stringa',
+                        'int' => 'Numero intero'
+                    ),
+                    'filter' => array('StringTrim'),
+                    'validators' => array(array('StringLength', true, array(4,64))),
+                    'required' => true,
+                    'label' => 'Tipo di dato '.($i+1),
+                    'value' => $features[$i]->data_type
+                ));
+            }
+
+            $form->addElement('hidden', 'complete', array(
+                'required' => true,
+                'value' => 'yes'
+            ));
+            $form->addElement('submit', 'Salva');
+
+            if('yes' == $request->getParam('complete')) {
+                for($i=0; $i<count($features); $i++) {
+                    $this->_accomodationModel->updateFeature(array(
+                        /*
+                        'type' => $id,
+                        'name' => $request->getParam('feature'.$i),
+                        'data_type' => $request->getParam('data_type'.$i)
+                        */
+                    ));
+                }
+            }
+
+            $this->view->form = $form;
+        } else $this->_helper->redirector('type-list', 'accomodation');
     }
 
     public function typeDeleteAction() {
