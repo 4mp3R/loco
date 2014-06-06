@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Gestione delle tipologie degli annunci</h2>
+    <a class="button button-selected float-right" href="<?= $this->url(array(
+        'controller' => 'accomodation',
+        'action' => 'type-add'
+    ), 'default', true) ?>">Nuova tipologia</a>
+
+    <?php foreach($this->data as $d): ?>
+        <h3>Tipologia: <?= $d['type']->name ?></h3>
+
+        <a class="button button-primary float-left" href="#">Modifica</a>
+        <a class="button button-danger float-left" href="#">Elimina</a>
+
+        <table class='table table-bordered table-striped'>
+            <thead>
+            <th>Caratteristica</th>
+            <th>Tipo di dato</th>
+            </thead>
+            <tbody>
+            <?php foreach($d['features'] as $f): ?>
+                <tr>
+                    <td><?= $f->name ?></td>
+                    <td><?= $f->data_type ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    <?php endforeach; ?>
+</div>

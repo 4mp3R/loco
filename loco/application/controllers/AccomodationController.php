@@ -305,7 +305,177 @@ class AccomodationController extends Zend_Controller_Action
         $this->view->form = $searchForm;
     }
 
-    public function typeManageAction() {
+    public function typeListAction() {
+        $request = $this->_request;
+
+        $types = $this->_accomodationModel->getTypes();
+
+        $data = array();
+
+        foreach($types as $t) {
+            $features = $this->_accomodationModel->getFeaturesByType($t->id);
+            $data[] = array('type' => $t, 'features' => $features);
+        }
+
+        $this->view->data = $data;
+    }
+
+    public function typeAddAction() {
+        $request = $this->_request;
+
+        $form = new Zend_Form();
+        $form->setName('type_form');
+        $form->setMethod('post');
+        $form->setAttrib('class', 'form');
+
+        $message = null;
+
+        if(null == $request->getParam('name') || null == $request->getParam('feature_count')) {
+            $message = "Inserisci il nome della nuova tipologia: ";
+
+            $form->addElement('text', 'name', array(
+                'filters' => array('StringTrim'),
+                'validators' => array(
+                    'Alpha',
+                    array('StringLength', true, array(2, 128))
+                ),
+                'required' => true,
+                'label' => 'Nome della tipologia'
+            ));
+
+            $form->addElement('text', 'feature_count', array(
+                'filter' => array('StringTrim'),
+                'validators' => array(
+                    'Digits',
+                    array('StringLength', true, array(1,2))
+                ),
+                'required' => true,
+                'label' => 'Numero di proprietà'
+            ));
+        } else if(null == $request->getParam('complete')) {
+            if($form->isValid($request->getParams())) {
+                $name = $request->getParam('name');
+                $feature_count = $this->getParam('feature_count');
+
+                $form->addElement('hidden', 'complete', array(
+                    'required' => true,
+                    'value' => 'yes'
+                ));
+
+                $form->addElement('hidden', 'name', array(
+                    'filters' => array('StringTrim'),
+                    'validators' => array(
+                        'Alpha',
+                        array('StringLength', true, array(2, 128))
+                    ),
+                    'required' => true,
+                    'value' => $name
+                ));
+
+                $form->addElement('hidden', 'feature_count', array(
+                    'filter' => array('StringTrim'),
+                    'validators' => array(
+                        'Digits',
+                        array('StringLength', true, array(1,2))
+                    ),
+                    'required' => true,
+                    'value' => $feature_count
+                ));
+
+                for($i=0; $i<$feature_count; $i++) {
+                    $form->addElement('text', 'feature'.$i, array(
+                        'filter' => array('StringTrim'),
+                        'validators' => array(array('StringLength', true, array(4,64))),
+                        'required' => true,
+                        'label' => 'Nome proprieta '.($i+1)
+                    ));
+
+                    $form->addElement('select', 'data_type'.$i, array(
+                        'multiOptions' => array(
+                            'bool' => 'Booleano',
+                            'string' => 'Stringa',
+                            'int' => 'Numero intero'
+                        ),
+                        'filter' => array('StringTrim'),
+                        'validators' => array(array('StringLength', true, array(4,64))),
+                        'required' => true,
+                        'label' => 'Tipo di dato '.($i+1)
+                    ));
+                }
+            }
+        } else {
+            $name = $request->getParam('name');
+            $feature_count = $this->getParam('feature_count');
+
+            $form->addElement('hidden', 'complete', array(
+                'required' => true,
+                'value' => 'yes'
+            ));
+
+            $form->addElement('hidden', 'name', array(
+                'filters' => array('StringTrim'),
+                'validators' => array(
+                    'Alpha',
+                    array('StringLength', true, array(2, 128))
+                ),
+                'required' => true,
+                'value' => $name
+            ));
+
+            $form->addElement('hidden', 'feature_count', array(
+                'filter' => array('StringTrim'),
+                'validators' => array(
+                    'Digits',
+                    array('StringLength', true, array(1,2))
+                ),
+                'required' => true,
+                'value' => $feature_count
+            ));
+
+            for($i=0; $i<$feature_count; $i++) {
+                $form->addElement('text', 'feature'.$i, array(
+                    'filter' => array('StringTrim'),
+                    'validators' => array(array('StringLength', true, array(4,64))),
+                    'required' => true,
+                    'label' => 'Nome proprieta '.($i+1)
+                ));
+
+                $form->addElement('text', 'data_type'.$i, array(
+                    'filter' => array('StringTrim'),
+                    'validators' => array(array('StringLength', true, array(4,64))),
+                    'required' => true,
+                    'label' => 'Tipo di dato '.($i+1)
+                ));
+            }
+
+            if($form->isValid($request->getParams())) {
+                $this->_accomodationModel->addAccomodationType(
+                    array('name' => $name)
+                );
+
+                $id = $this->_accomodationModel->accomodationTypeLastInsertedId();
+
+                for($i=0; $i<$feature_count; $i++) {
+                    $this->_accomodationModel->addFeature(array(
+                        'type' => $id,
+                        'name' => $request->getParam('feature'.$i),
+                        'data_type' => $request->getParam('data_type'.$i)
+                    ));
+                }
+            }
+        }
+
+        $form->addElement('submit', 'Vai');
+
+        $this->view->form = $form;
+        $this->view->message = $message;
+    }
+
+    public function typeEditAction() {
+
+    }
+
+    public function typeDeleteAction() {
 
     }
 }

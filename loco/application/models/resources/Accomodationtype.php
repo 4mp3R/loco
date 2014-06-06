@@ -18,8 +18,12 @@ class Application_Model_Resources_Accomodationtype  extends Zend_Db_Table_Abstra
         return $this->find($id);
     }
 
-    public function addAccomodationType($dati) {
-        $this->insert($dati);
+    public function lastInsertedId() {
+        return $this->getAdapter()->lastInsertId('accomodation_type');
+    }
+
+    public function addAccomodationType($data) {
+        return $this->insert($data);
     }
 
     public function updateAccomodationType($id , $datiaggiornati ) {

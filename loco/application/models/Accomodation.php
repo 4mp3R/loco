@@ -123,6 +123,10 @@ class Application_Model_Accomodation {
         return $this->_photoModel->deletePhotos($accomodaion_id);
     }
 
+    public function accomodationTypeLastInsertedId() {
+        return $this->_accomodationTypeModel->lastInsertedId();
+    }
+
 
 
 
@@ -146,6 +150,10 @@ class Application_Model_Accomodation {
 
     public function getTypes() {
         return $this->_accomodationTypeModel->getAllAccomodationType();
+    }
+
+    public function addAccomodationType($data) {
+        return $this->_accomodationTypeModel->addAccomodationType($data);
     }
 
 
