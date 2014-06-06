@@ -30,6 +30,12 @@ class Application_Model_Accomodation {
         return $this->_photoModel->getPhotosForAccomodation($id);
     }
 
+    public function addPhotoForAccomodation($accomodation, $photo) {
+
+        $data = array('accomodation' => $accomodation, 'photo' => $photo);
+        return $this->_photoModel->addPhoto($data);
+    }
+
     public function getAccomodationFullInfo($id) {
         return $this->_accomodationModel->getAccomodationFullInfo($id);
     }

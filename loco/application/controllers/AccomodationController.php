@@ -61,15 +61,34 @@ class AccomodationController extends Zend_Controller_Action
 
             $request->setParam('lesser', Zend_Auth::getInstance()->getIdentity()->username);
 
+            //add generic accomodation data
             $this->_accomodationModel->addAccomodation(array_intersect_key($request->getParams(), array_flip($generalAccomodationParams)));
             $id = $this->_accomodationModel->accomodationLastInsertId();
 
+            //add specific accomodation data
             foreach($specificAccomodationParams as $sp) {
                 $this->_accomodationModel->addAccomodationdata(array(
                     'accomodation' => $id,
                     'feature_id' => $sp['id'],
                     'feature_value' => $request->getParam($sp['form_name'])
             ));
+            }
+
+            //add accomodation photos
+            $upload = new Zend_File_Transfer_Adapter_Http();
+            $files = $upload->getFileInfo();
+
+
+            foreach($files as $file=>$fileinfo) {
+                if($upload->isUploaded($file)){
+                    if($upload->isValid($file)) {
+                        if($upload->receive($file)) {
+                            $info = $upload->getFileInfo($file);
+                            $tmp = $info[$file]['tmp_name'];
+                            $this->_accomodationModel->addPhotoForAccomodation($id, file_get_contents($tmp));
+                        }
+                    }
+                }
             }
 
             $this->_helper->redirector('index', 'accomodation');
@@ -97,6 +116,9 @@ class AccomodationController extends Zend_Controller_Action
                     $feature = $this->_accomodationModel->getAccomodationfeature($ad->feature_id);
                     $data[str_replace(' ', '_', $type[0]->name.'_'.$feature[0]->name)] = $ad->feature_value;
                 }
+
+                //carica le foto
+                //$photos = $this->_accomodationModel-> getPhotosForAccomodation($accomodation_id);
 
                 $this->_accomodationForm->populate($data);
                 $this->_accomodationForm->getElement('submit')->setLabel('Aggiorna');

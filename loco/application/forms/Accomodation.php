@@ -43,6 +43,16 @@ class Application_Form_Accomodation extends Zend_Form
             'label'      => 'Indirizzo'
         ));
 
+        $this->addElement('file', 'photo', array(
+            'validators' => array(
+                array('Count', false, 3),
+                array('Size', false, 5335040),
+                array('Extension', false, array('jpg'))
+            ),
+            'required' => false,
+            'label' => 'Foto',
+            'multiFile' => 3
+        ));
 
         $this->addElement('textarea', 'description', array(
             'label' => 'Descrizione',
