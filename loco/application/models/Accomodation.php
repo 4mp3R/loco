@@ -30,6 +30,10 @@ class Application_Model_Accomodation {
         return $this->_photoModel->getPhotosForAccomodation($id);
     }
 
+    public function getPhoto($id) {
+        return $this->_photoModel->getPhoto($id);
+    }
+
     public function addPhotoForAccomodation($accomodation, $photo) {
 
         $data = array('accomodation' => $accomodation, 'photo' => $photo);
@@ -103,7 +107,9 @@ class Application_Model_Accomodation {
         return $this->_accomodationDataModel->updateAccomodationdata($accomodation, $feature_id ,$data);
     }
 
-
+    public function deleteAccomodationPhoto($photo_id) {
+        return $this->_photoModel->deletePhoto($photo_id);
+    }
 
 
 

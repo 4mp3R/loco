@@ -10,15 +10,15 @@ class Application_Model_Resources_Photo  extends Zend_Db_Table_Abstract {
     }
 
     public function deletePhoto($id){
-    $this->delete("id = $id");
+        return $this->delete("id = $id");
     }
 
     public function addPhoto($data) {
-        $this->insert($data);
+        return $this->insert($data);
     }
 
     public function getPhoto($id) {
-        $this->find($id);
+        return $this->find($id);
     }
 
     public function getPhotosForAccomodation($id) {

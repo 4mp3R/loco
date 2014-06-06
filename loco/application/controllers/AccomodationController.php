@@ -117,12 +117,14 @@ class AccomodationController extends Zend_Controller_Action
                     $data[str_replace(' ', '_', $type[0]->name.'_'.$feature[0]->name)] = $ad->feature_value;
                 }
 
-                //carica le foto
-                //$photos = $this->_accomodationModel-> getPhotosForAccomodation($accomodation_id);
+                //load accomodation's photos
+                $photos = $this->_accomodationModel-> getPhotosForAccomodation($accomodation_id);
 
                 $this->_accomodationForm->populate($data);
                 $this->_accomodationForm->getElement('submit')->setLabel('Aggiorna');
+
                 $this->view->form = $this->_accomodationForm;
+                $this->view->photos = $photos;
             } else {    //salvare le modifiche
                 $acc = $this->_accomodationModel->getAccomodation($accomodation_id);
                 if(($acc[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username|| 'admin' == Zend_Auth::getInstance()->getIdentity()->role) && $this->_accomodationForm->isValid($request->getParams())) {
@@ -151,6 +153,22 @@ class AccomodationController extends Zend_Controller_Action
 
                     }
 
+                    $upload = new Zend_File_Transfer_Adapter_Http();
+                    $files = $upload->getFileInfo();
+
+
+                    foreach($files as $file=>$fileinfo) {
+                        if($upload->isUploaded($file)){
+                            if($upload->isValid($file)) {
+                                if($upload->receive($file)) {
+                                    $info = $upload->getFileInfo($file);
+                                    $tmp = $info[$file]['tmp_name'];
+                                    $this->_accomodationModel->addPhotoForAccomodation($accomodation_id, file_get_contents($tmp));
+                                }
+                            }
+                        }
+                    }
+
                     $this->_helper->redirector('get', 'accomodation', null, array('id' => $accomodation_id));
                 } else {
                     $this->view->form = $this->_accomodationForm;
@@ -159,6 +177,22 @@ class AccomodationController extends Zend_Controller_Action
         } else {
             $this->_helper->redirector('index', 'accomodation');
         }
+    }
+
+    public function deletePhotoAction() {
+        $id = $this->_request->getParam('id');
+
+        if(null != $id && 1 == count($this->_accomodationModel->getPhoto($id))) {
+            $photo = $this->_accomodationModel->getPhoto($id);
+            $accomodation = $this->_accomodationModel->getAccomodation($photo[0]->accomodation);
+
+            if($accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username || 'admin' == Zend_Auth::getInstance()->getIdentity()->role) {
+                $this->_accomodationModel->deleteAccomodationPhoto($id);
+            }
+
+            $this->_helper->redirector('edit', 'accomodation', array('accomodation' => $accomodation[0]->id));
+        } else $this->_helper->redirector('index', 'error');
+
     }
 
     public function optionAction() {
