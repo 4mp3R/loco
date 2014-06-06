@@ -14,7 +14,8 @@
                     </div>
                     <div class="col-1-2">
                         <div>
-                            <?php if($this->accomodation[0]->lesser != Zend_Auth::getInstance()->getIdentity()->username): ?>
+                            <?php if($this->accomodation[0]->lesser != Zend_Auth::getInstance()->getIdentity()->username
+                                    && 'admin' != Zend_Auth::getInstance()->getIdentity()->role): ?>
                                 <?php if(0 == count($this->option)): ?>
                                     <a class="button button-primary float-right" href="<?=$this->url(array(
                                         'controller' => 'accomodation',
@@ -32,12 +33,17 @@
                                 <?php else: ?>
                                     <a class="button button-disabled float-right">Alloggio Le e' stato assegnato con successo!</a>
                                 <?php endif ?>
-                            <?php elseif($this->accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username): ?>
+                            <?php else: ?>
                                 <a class="button button-primary float-right" href="<?=$this->url(array(
                                     'controller' => 'accomodation',
                                     'action' => 'edit',
                                     'accomodation' => $this->accomodation[0]->id
                                 ), 'default', true) ?>">Modifica</a>
+                                <a class="button button-danger float-right" href="<?= $this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'delete',
+                                    'id' => $this->accomodation[0]->id
+                                ), 'default', true) ?>">Elimina</a>
                             <?php endif; ?>
                         </div>
                     </div>

@@ -25,14 +25,28 @@
                 <tbody>
                     <?php foreach($this->allAccomodations as $a): ?>
                         <tr>
-                            <td><?php echo $a->title;?></td>
+                            <td><a href="
+                            <?= $this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'get',
+                                    'id' => $a->id
+                                ), 'default', true) ?>"><?php echo $a->title;?></a></td>
                             <td><?php echo $a->zone;?></td>
                             <td><?php echo $a->lesser;?></td>
                             <td><?php echo $a->available_from . ' - ' . $a->available_untill;?></td>
                             <td><?php echo $a->fee;?></td>
                             <td>
-                                <a class="button" href="#">Modifica</a>
-                                <a class="button button-danger" href="#">Cancella</a>
+                                <a class="button" href="
+                                <?= $this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'edit',
+                                    'accomodation' => $a->id
+                                ), 'default', true) ?>">Modifica</a>
+                                <a class="button button-danger" href="<?= $this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'delete',
+                                    'id' => $a->id
+                                ), 'default', true) ?>">Cancella</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -23,8 +23,8 @@ class Application_Model_Resources_Accomodationdata  extends Zend_Db_Table_Abstra
         $this->update($data, "accomodation = '$accomodation' and feature_id = '$feature_id'");
     }
 
-    public function deleteAccomodationdata($id) {
-        $this->delete("id = '$id");
+    public function deleteAccomodationdata($accomodation_id) {
+        $this->delete("accomodation = '$accomodation_id'");
     }
 
 

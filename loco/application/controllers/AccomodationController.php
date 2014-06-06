@@ -189,6 +189,32 @@ class AccomodationController extends Zend_Controller_Action
         }
     }
 
+    public function deleteAction() {
+        $id = $this->_request->getParam('id');
+
+        if(null != $id) {
+            $accomodation = $this->_accomodationModel->getAccomodation($id);
+
+            if(1 == count($accomodation)) {
+                $lesser = $accomodation[0]->lesser;
+
+                if($lesser == Zend_Auth::getInstance()->getIdentity()->username
+                || 'admin' == Zend_Auth::getInstance()->getIdentity()->role) {
+                    $this->_accomodationModel->deleteAccomodationData($id);
+                    $this->_accomodationModel->deleteAccomodationPhotos($id);
+                    $this->_accomodationModel->deleteAccomodation($id);
+                }
+            }
+
+        }
+
+        if('admin' == Zend_Auth::getInstance()->getIdentity()->role)
+            $this->_helper->redirector('view-all', 'accomodation');
+        else
+            $this->_helper->redirector('index', 'accomodation');
+
+    }
+
     public function deletePhotoAction() {
         $id = $this->_request->getParam('id');
 

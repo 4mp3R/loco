@@ -115,6 +115,15 @@ class Application_Model_Accomodation {
         return $this->_photoModel->deletePhoto($photo_id);
     }
 
+    public function deleteAccomodationdata($id) {
+        return $this->_accomodationDataModel->deleteAccomodationdata($id);
+    }
+
+    public function deleteAccomodationPhotos($accomodaion_id) {
+        return $this->_photoModel->deletePhotos($accomodaion_id);
+    }
+
+
 
 
 
@@ -138,6 +147,7 @@ class Application_Model_Accomodation {
     public function getTypes() {
         return $this->_accomodationTypeModel->getAllAccomodationType();
     }
+
 
 
 
@@ -181,9 +191,7 @@ class Application_Model_Accomodation {
 
 
 
-    public function deleteAccomodationdata() {
-        return $this->_accomodationdataModel->deleteAccomodationdata($id);
-    }
+
 
 
 

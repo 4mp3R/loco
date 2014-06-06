@@ -67,7 +67,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     }
 
     public function deleteAccomodation($id) {
-        $this->delete("id = '$id''");
+        $this->delete("id = '$id'");
     }
 
     public function getAccomodationByFee($fee){
