@@ -96,7 +96,12 @@
                             <tbody>
                                 <?php foreach($this->interestedLessees as $i): ?>
                                     <tr>
-                                        <td><?= $i->name ?></td>
+                                        <td><a href="<?= $this->url(array(
+                                                    'controller' => 'user',
+                                                    'action' => 'profile-view',
+                                                    'username' => $i->username
+                                                ),
+                                            'default', true) ?>"><?= $i->name ?></a></td>
                                         <td><?= $i->surname ?></td>
                                         <td><?= $i->email ?></td>
                                         <td><?= $i->sex ?></td>
