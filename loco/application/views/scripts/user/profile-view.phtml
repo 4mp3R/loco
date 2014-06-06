@@ -23,7 +23,11 @@
                     <li><b>Data di nascita: </b> <?= $this->profile_info->birth; ?></li>
                     <li><b>Sesso: </b> <?= $this->profile_info->sex; ?></li>
                     <li><b>Codice fiscale: </b> <?= $this->profile_info->cf; ?></li>
-                    <li><b>Ruolo: </b> <?= $this->profile_info->role; ?></li>
+                    <li><b>Ruolo: </b> <?php
+                            if($this->profile_info->role == 'lessee') echo 'Locatario';
+                            else if($this->profile_info->role == 'lesser') echo 'Locatore';
+                            else echo 'Amministratore'
+                        ?></li>
                     <li><b>Telefono: </b> <?= $this->profile_info->phone; ?></li>
                     <li><a class="button button-primary" href="
                         <?= $this->url(array(

@@ -2,10 +2,12 @@
 
 class ContractController extends Zend_Controller_Action
 {
+    protected $_accomodationModel;
 
     public function init()
     {
-        /* Initialize action controller here */
+        $this->_accomodationModel = new Application_Model_Accomodation();
+
         $this->_helper->layout->setLayout('private');
     }
 
@@ -15,7 +17,17 @@ class ContractController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $options = $this->_accomodationModel->getOptionsByUsername(
+            Zend_Auth::getInstance()->getIdentity()->username
+        );
+
+        $accomodations = array();
+
+        foreach($options as $o) {
+            $acc = $this->_accomodationModel->getAccomodation($o->accomodation);
+            $accomodations[] = $acc[0];
+        }
+        $this->view->accomodations = $accomodations;
     }
 
     public function viewAction() {

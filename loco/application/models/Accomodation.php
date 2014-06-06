@@ -71,6 +71,10 @@ class Application_Model_Accomodation {
         return $this->_optionModel->getOptionsByAccomodation($accomodation);
     }
 
+    public function getOptionsByUsername($username) {
+        return $this->_optionModel->getOptionsByUsername($username);
+    }
+
     public function setOption($username, $accomodation) {
         $this->_optionModel->setOption($username, $accomodation);
     }

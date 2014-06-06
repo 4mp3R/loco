@@ -1,20 +1,34 @@
 <div class="page">
     <div class="container page-content">
 
-        <h1 class="page-heading">Contratti</h1>
+        <h1 class="page-heading">Gli alloggi opzionati da te</h1>
 
         <div class="grid">
 
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>Titolo</th>
+                    <th>Locatore</th>
+                    <th>Indirizzo</th>
+                    <th>Periodo disponibilità</th>
+                    <th>Canone, €/mese</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td></td>
-                </tr>
+                    <?php foreach($this->accomodations as $a): ?>
+                        <tr>
+                            <td><a href="<?= $this->url(array(
+                                    'controller' => 'accomodation',
+                                    'action' => 'get',
+                                    'id' => $a->id
+                                ), 'default', true) ?>"><?= $a->title ?></a></td>
+                            <td><?= $a->lesser ?></td>
+                            <td><?= $a->address ?></td>
+                            <td><?= $a->available_from.' / '.$a->available_untill ?></td>
+                            <td><?= $a->fee ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
 
