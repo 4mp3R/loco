@@ -53,24 +53,69 @@
                         <h3>Caratteristiche alloggio</h3>
 
                         <table class="table table-bordered table-striped table-40percent-w">
-                            <?php foreach($this->characteristics as $c): ?>
-                                <tr>
-                                    <td><?= $c['name'] ?></td>
-                                    <td><?php
-                                        if('bool' == $c['data_type']) {
-                                            if('0' == $c['feature_value'])
-                                                echo 'No';
-                                            else
-                                                echo 'Si';
-                                        } else echo $c['feature_value'];
-                                        ?></td>
-                                </tr>
-                            <?php endforeach; ?>
+                            <thead>
+                                <th>Caratteristica</th>
+                                <th>Valore</tg>
+                            </thead>
+                            <tbody>
+                                <?php foreach($this->characteristics as $c): ?>
+                                    <tr>
+                                        <td><?= $c['name'] ?></td>
+                                        <td><?php
+                                            if('bool' == $c['data_type']) {
+                                                if('0' == $c['feature_value'])
+                                                    echo 'No';
+                                                else
+                                                    echo 'Si';
+                                            } else echo $c['feature_value'];
+                                            ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
 
             </div>
+
+            <?php if($this->accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username || 'admin' == Zend_Auth::getInstance()->getIdentity()->role): ?>
+                <?php if(null != $this->interestedLessees): ?>
+                    <div class="col-1-1">
+                        <p><h3>I locatari che hanno mostrato l'interesse nell'annuncio</h3></p>
+
+                        <table class="table table-bordered table-stripped table-40percent-w">
+                            <thead>
+                                <th>Nome</th>
+                                <th>Cognome</th>
+                                <th>Email</th>
+                                <th>Sesso</th>
+                                <th>Data di nasita</th>
+                                <th>Codice fiscale</th>
+                                <th>Telefono</th>
+                            </thead>
+                            <tbody>
+                                <?php foreach($this->interestedLessees as $i): ?>
+                                    <tr>
+                                        <td><?= $i->name ?></td>
+                                        <td><?= $i->surname ?></td>
+                                        <td><?= $i->email ?></td>
+                                        <td><?= $i->sex ?></td>
+                                        <td><?= $i->birth ?></td>
+                                        <td><?= $i->cf ?></td>
+                                        <td><?= $i->phone ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php else: ?>
+                    <div class="col-1-1">
+                        <p>
+                            <h3>Nessun locatario interessato</h3>
+                        </p>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
 
             <div class="col-4-12">
                 <div class="gallery">

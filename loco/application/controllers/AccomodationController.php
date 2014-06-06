@@ -40,6 +40,16 @@ class AccomodationController extends Zend_Controller_Action
         $this->view->characteristics = $this->_accomodationModel->getAccomodationFullInfo($id);
         $this->view->username = Zend_Auth::getInstance()->getIdentity()->username;
         $this->view->option = $this->_accomodationModel->getOption(Zend_Auth::getInstance()->getIdentity()->username, $id);
+
+        $options = $this->_accomodationModel->getOptionsByAccomodation($id);
+        $interestedLessees = array();
+
+        foreach($options as $o) {
+            $lessee = $this->_profileModel->getProfile($o->lessee);
+            $interestedLessees[] = $lessee[0];
+        }
+
+        $this->view->interestedLessees = $interestedLessees;
     }
 
     public function addAction() {
