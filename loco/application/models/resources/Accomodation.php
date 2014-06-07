@@ -25,7 +25,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     }
 
     public function getAccomodationFullInfo($id) {
-        $stmt = $this->getDefaultAdapter()->query("select * from accomodation a join accomodation_type t on a.type=t.id join accomodation_feature f on t.id=f.type join accomodation_data d on f.id=feature_id where a.id='$id'");
+        $stmt = $this->getDefaultAdapter()->query("select * from accomodation a join accomodation_type t on a.type=t.id join accomodation_feature f on t.id=f.type join accomodation_data d on (f.id=d.feature_id and a.id=d.accomodation) where a.id='$id'");
         return $stmt->fetchAll();
     }
 
