@@ -175,6 +175,11 @@ class Application_Model_Accomodation {
         return $this->_accomodationFeatureModel->addAccomodationfeature($data);
     }
 
+    public function updateFeature($data) {
+        return $this->_accomodationFeatureModel->updateAccomodationfeature($data);
+    }
+
+
 
     public function getInterestedLessees() {
 

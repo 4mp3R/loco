@@ -23,8 +23,10 @@ class Application_Model_Resources_Accomodationfeature  extends Zend_Db_Table_Abs
         return $this->insert($data);
     }
 
-    public function updateAccomodationfeature($id , $data ) {
-        $this->update($data, "id = '$id'");
+    public function updateAccomodationfeature($data) {
+        $id = $data['id'];
+
+        return $this->update($data, "id = '$id'");
     }
 
     public function deleteAccomodationfeature($id) {

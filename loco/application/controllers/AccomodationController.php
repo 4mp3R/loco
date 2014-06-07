@@ -491,7 +491,7 @@ class AccomodationController extends Zend_Controller_Action
             $features = $this->_accomodationModel->getFeaturesByType($type);
 
             for($i=0; $i<count($features); $i++) {
-                $form->addElement('text', 'feature'.$i, array(
+                $form->addElement('text', 'feature_'.$features[$i]->id, array(
                     'filter' => array('StringTrim'),
                     'validators' => array(array('StringLength', true, array(4,64))),
                     'required' => true,
@@ -499,7 +499,7 @@ class AccomodationController extends Zend_Controller_Action
                     'value' => $features[$i]->name
                 ));
 
-                $form->addElement('select', 'data_type'.$i, array(
+                $form->addElement('select', 'data_type_'.$features[$i]->id, array(
                     'multiOptions' => array(
                         'bool' => 'Booleano',
                         'string' => 'Stringa',
@@ -521,16 +521,19 @@ class AccomodationController extends Zend_Controller_Action
 
             if('yes' == $request->getParam('complete')) {
                 for($i=0; $i<count($features); $i++) {
+
                     $this->_accomodationModel->updateFeature(array(
-                        /*
-                        'type' => $id,
-                        'name' => $request->getParam('feature'.$i),
-                        'data_type' => $request->getParam('data_type'.$i)
-                        */
+                        'id' =>  $features[$i]->id,
+                        'type' => $type,
+                        'name' => $request->getParam('feature_'.$features[$i]->id),
+                        'data_type' => $request->getParam('data_type_'.$features[$i]->id)
                     ));
+
+                    $this->_helper->redirector('type-list', 'accomodation');
                 }
             }
 
+            $this->view->type = $this->_accomodationModel->getAccomodationType($type);
             $this->view->form = $form;
         } else $this->_helper->redirector('type-list', 'accomodation');
     }
