@@ -120,6 +120,13 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
             $q->where("fee < '$to'");
         }
 
+        if($data['type'] != null && $data['type'] != 'None') {
+            $type = $data['type'];
+            $q->where("type = '$type'");
+        }
+
+        $q->order('created');
+
         return $this->fetchAll($q);
     }
 }

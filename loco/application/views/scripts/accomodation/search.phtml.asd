@@ -1,0 +1,1 @@
+<?= count($this->accomodations_type[0]); ?>

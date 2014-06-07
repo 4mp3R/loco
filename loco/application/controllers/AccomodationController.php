@@ -291,10 +291,34 @@ class AccomodationController extends Zend_Controller_Action
         //user entered some search params
         if($request->isPost()) {
             if($searchForm->isValid($request->getParams())) {
-                if($request->getParam('type') == 'None') {
+                if($request->getParam('type') != 'None' && 1 == count($this->_accomodationModel->getAccType($request->getParam('type')))) {
                     $accomodations = $this->_accomodationModel->searchGenericAccomodation($request->getParams());
-                } else {
+                    $type = $this->_accomodationModel->getAccType($request->getParam('type'));
+                    $features = $this->_accomodationModel->getFeaturesByType($request->getParam('type'));
+                    $filteredAccomodations = array();
 
+                   foreach($accomodations as $a) {
+                       $filterOK = true;
+
+                        foreach($features as $f) {
+                            $formFeatureName =  str_replace(' ', '_', $type[0]->name.'_'.$f->name) . "<br>";
+
+                            if($request->getParam($formFeatureName) != null) {
+                                $data = $this->_accomodationModel->getDataByAccomodationAndFeature($a->id, $f->id);
+                                $data = $data[0];
+
+                                if($data->feature_value != $request->getParam($formFeatureName)) $filterOK = false;
+                            }
+                        }
+
+                       if($filterOK)
+                           $filteredAccomodations[] = $a;
+                   }
+
+                    $accomodations = $filteredAccomodations;
+
+                } else {
+                    $accomodations = $this->_accomodationModel->searchGenericAccomodation($request->getParams());
                 }
             }
         } else {    //no search params, show latest accomodations inserted
@@ -302,9 +326,9 @@ class AccomodationController extends Zend_Controller_Action
         }
 
         for($i=0; $i<count($accomodations); $i++) {
-            $lessers[] = $this->_profileModel->getProfile($accomodations[$i]->lesser);
-            $photos[] = $this->_accomodationModel->getPhotosForAccomodation($accomodations[$i]->id);
-            $types[] = $this->_accomodationModel->getAccType($accomodations[$i]->id);
+            $lessers[$i] = $this->_profileModel->getProfile($accomodations[$i]->lesser);
+            $photos[$i] = $this->_accomodationModel->getPhotosForAccomodation($accomodations[$i]->id);
+            $types[$i] = $this->_accomodationModel->getAccType($accomodations[$i]->type);
         }
 
         $this->view->accomodations = $accomodations;

@@ -131,6 +131,10 @@ class Application_Model_Accomodation {
         return $this->_accomodationModel->searchGenericAccomodation($data);
     }
 
+    public function getDataByAccomodationAndFeature($accomodation_id, $accomodation_feature) {
+        return $this->_accomodationDataModel->getDataByAccomodationAndFeature($accomodation_id, $accomodation_feature);
+    }
+
 
 
 
