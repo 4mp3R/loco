@@ -228,8 +228,42 @@ class Application_Model_Accomodation {
         return $this->_accomodationtypeModel->updateAccomodationtype($id ,$datiaggiornati);
     }
 
-    public function deleteAccomodationtype() {
-        return $this->_accomodationtypeModel->deleteAccomodationtype($id);
+    public function deleteAccomodationtype($id) {
+        $features = $this->_accomodationFeatureModel->getAccomodationeatures($id);
+        $accomodations = $this->_accomodationModel->getAccomodationByType($id);
+
+        $data = array();
+        foreach($features as $f){
+            $data[] = $this->_accomodationDataModel->getDataByFeature($f->id);
+        }
+
+
+        $photos = array();
+        foreach($accomodations as $a)
+            $photos[] = $this->_photoModel->getPhotosForAccomodation($a->id);
+
+        //delete data
+        foreach($data as $d) {}
+            foreach($d as $data)
+                $this->_accomodationDataModel->deleteData($data->id);
+
+        //delate features
+        foreach($features as $f)
+            $this->_accomodationFeatureModel->deleteAccomodationfeature($f->id);
+
+        //delete photos
+        foreach($photos as $p)
+            foreach($p as $photo)
+                $this->_photoModel->deletePhoto($photo->id);
+
+        //delete type
+        $this->_accomodationTypeModel->deleteAccomodationtype($id);
+
+        //delete accomodations
+        foreach($accomodations as $a)
+            $this->_accomodationModel->deleteAccomodation($a->id);
+
+        return;
     }
 
 }

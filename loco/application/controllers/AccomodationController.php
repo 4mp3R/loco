@@ -124,7 +124,12 @@ class AccomodationController extends Zend_Controller_Action
 
                 foreach($accomodationData as $ad) {
                     $feature = $this->_accomodationModel->getAccomodationfeature($ad->feature_id);
-                    $data[str_replace(' ', '_', $type[0]->name.'_'.$feature[0]->name)] = $ad->feature_value;
+
+                    $value = $ad->feature_value;
+                    if($feature[0]->data_type == 'bool' && $value != '0')
+                        $value = '1';
+
+                    $data[str_replace(' ', '_', $type[0]->name.'_'.$feature[0]->name)] = $value;
                 }
 
                 //load accomodation's photos
@@ -539,6 +544,11 @@ class AccomodationController extends Zend_Controller_Action
     }
 
     public function typeDeleteAction() {
+        $type = $this->_request->getParam('type');
 
+        if(null != $type && 1 == count($this->_accomodationModel->getAccomodationType($type)))
+            $this->_accomodationModel->deleteAccomodationType($type);
+
+        $this->_helper->redirector('type-list', 'accomodation');
     }
 }

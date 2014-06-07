@@ -44,7 +44,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     public function getAccomodationByType($type_id) {
         $q = $this->select();
 
-        if(null != type)
+        if(null != $type_id)
             $q->where("type = '$type_id'");
 
         return $this->fetchAll($q);

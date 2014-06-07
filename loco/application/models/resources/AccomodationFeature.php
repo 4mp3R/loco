@@ -30,7 +30,7 @@ class Application_Model_Resources_Accomodationfeature  extends Zend_Db_Table_Abs
     }
 
     public function deleteAccomodationfeature($id) {
-        $this->delete("id = '$id");
+        $this->delete("id = '$id'");
     }
 
 

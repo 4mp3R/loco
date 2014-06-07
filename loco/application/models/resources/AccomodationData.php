@@ -15,17 +15,26 @@ class Application_Model_Resources_Accomodationdata  extends Zend_Db_Table_Abstra
         return $this->fetchAll($q);
     }
 
+    public function getDataByFeature($feature_id) {
+        $q = $this->select()->where("feature_id = '$feature_id'");
+
+        return $this->fetchAll($q);
+    }
+
     public function addAccomodationdata($dati) {
         return $this->insert($dati);
     }
 
     public function updateAccomodationdata($accomodation, $feature_id, $data) {
-        $this->update($data, "accomodation = '$accomodation' and feature_id = '$feature_id'");
+        return $this->update($data, "accomodation = '$accomodation' and feature_id = '$feature_id'");
     }
 
     public function deleteAccomodationdata($accomodation_id) {
-        $this->delete("accomodation = '$accomodation_id'");
+        return $this->delete("accomodation = '$accomodation_id'");
     }
 
+    public function deleteData($id) {
+        return $this->delete("id = '$id'");
+    }
 
 }
