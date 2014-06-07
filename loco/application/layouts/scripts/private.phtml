@@ -50,7 +50,8 @@
                     <li class="<?php $this->activeLink('loco', 'statistics');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'statistics'), 'default', true); ?>">Statistiche</a></li>
                     <li class="<?php $this->activeLink('user', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'user', 'action' => 'view-all'), 'default', true); ?>">Utenti</a></li>
                     <li class="<?php $this->activeLink('accomodation', 'view-all');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'view-all'), 'default', true); ?>">Annunci</a></li>
-                    <li class="<?php $this->activeLink('loco', 'faq-edit');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'faq-edit'), 'default', true); ?>">Impostazioni</a></li>
+                    <li class="<?php $this->activeLink('loco', 'faq-edit');?>"><a href="<?= $this->url(array('controller' => 'loco', 'action' => 'faq-edit'), 'default', true); ?>">F.A.Q.</a></li>
+                    <li class="<?php $this->activeLink('accomodation', 'type-list');?>"><a href="<?= $this->url(array('controller' => 'accomodation', 'action' => 'type-list'), 'default', true); ?>">Tipologie</a></li>
                 <?php endif; ?>
                     <li class="<?php $this->activeLink('message', 'list');?>"><a href="<?= $this->url(array('controller' => 'message', 'action' => 'list'), 'default', true); ?>">Messaggi </a></li>
             </ul>
