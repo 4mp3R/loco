@@ -28,6 +28,7 @@ class Application_Model_Acl extends Zend_Acl {
             ->addResource(new Zend_Acl_Resource("accomodation_option"))
             ->addResource(new Zend_Acl_Resource("accomodation_deoption"))
             ->addResource(new Zend_Acl_Resource("accomodation_search"))
+            ->addResource(new Zend_Acl_Resource("accomodation_view-options"))
             ->addResource(new Zend_Acl_Resource("contract_index"))
             ->addResource(new Zend_Acl_Resource("contract_view"))
             ->addResource(new Zend_Acl_Resource("contract_info-add"))
@@ -41,7 +42,7 @@ class Application_Model_Acl extends Zend_Acl {
             ->addResource(new Zend_Acl_Resource("user_profile-view"))
             ->addResource(new Zend_Acl_Resource("user_profile-edit"))
             ->allow("lessee", array(
-                "accomodation_get", "accomodation_deoption", "accomodation_option", "accomodation_search", "contract_index", "contract_view",
+                "accomodation_get", "accomodation_deoption", "accomodation_option", "accomodation_search", "accomodation_view-options", "contract_index", "contract_view",
                 "contract_info-add", "message_getnew", "message_list", "message_add", "message_view", "message_delete",
                 "user_index", "user_logout", "user_profile-view", "user_profile-edit"
             ));

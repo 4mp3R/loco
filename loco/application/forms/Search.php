@@ -6,7 +6,9 @@ class Application_Form_Search extends Zend_Form {
 
     public function init() {
         $accomodationTypeModel = new Application_Model_Accomodation();
-        $options = array();
+        $options = array(
+            'None' => 'Nessuna preferenza'
+        );
 
         $this->setMethod("post");
         $this->setName("search_form");
@@ -15,6 +17,11 @@ class Application_Form_Search extends Zend_Form {
 
         foreach($accomodationTypeModel->getTypes() as $t)
             $options[$t->id] = $t->name;
+
+        $this->addElement('hidden', 'complete', array(
+            'required' => false,
+            'value' => 'yes'
+        ));
 
         $this->addElement("select", "type", array(
             'multiOptions' => $options,
@@ -66,14 +73,12 @@ class Application_Form_Search extends Zend_Form {
 
         $this->addElement("text", "fee_from", array(
             'filters' => array('StringTrim'),
-            'validators' => array('Digits'),
             'required' => false,
             'label' => 'Canone da'
         ));
 
         $this->addElement("text", "fee_to", array(
             'filters' => array('StringTrim'),
-            'validators' => array('Digits'),
             'required' => false,
             'label' => 'Canone fino a'
         ));

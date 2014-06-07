@@ -291,7 +291,11 @@ class AccomodationController extends Zend_Controller_Action
         //user entered some search params
         if($request->isPost()) {
             if($searchForm->isValid($request->getParams())) {
-                echo "<h1>RICERCA</h1>";
+                if($request->getParam('type') == 'None') {
+                    $accomodations = $this->_accomodationModel->searchGenericAccomodation($request->getParams());
+                } else {
+
+                }
             }
         } else {    //no search params, show latest accomodations inserted
             $accomodations = $this->_accomodationModel->getLatestAccomodations(4);
@@ -550,5 +554,23 @@ class AccomodationController extends Zend_Controller_Action
             $this->_accomodationModel->deleteAccomodationType($type);
 
         $this->_helper->redirector('type-list', 'accomodation');
+    }
+
+    public function viewOptionsAction() {
+        $username = Zend_Auth::getInstance()->getIdentity()->username;
+
+        $message = null;
+
+            $message = "Gli alloggi opzionati da te";
+
+            $options = $this->_accomodationModel->getOptionsByUsername($username);
+
+            $accomodations = array();
+
+            foreach($options as $o) {
+                $acc = $this->_accomodationModel->getAccomodation($o->accomodation);
+                $accomodations[] = $acc[0];
+            }
+            $this->view->accomodations = $accomodations;
     }
 }

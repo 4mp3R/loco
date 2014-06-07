@@ -74,4 +74,52 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
         $dato=$this->select()
                       ->where("fee = '$fee'");
     }
+
+    public function searchGenericAccomodation($data) {
+        $q = $this->select();
+
+        if($data['keywords'] != null) {
+            $words = explode(' ', $data['keywords']);
+
+            foreach($words as $w)
+                $q->where("title like '%$w%'");
+        }
+
+        if($data['lesser'] != null) {
+            $lesser = $data['lesser'];
+            $q->where("lesser = '$lesser'");
+        }
+
+        if($data['available_from'] != null) {
+            $from = $data['available_from'];
+            $q->where("available_from >= '$from'");
+        }
+
+        if($data['available_untill'] != null) {
+            $untill = $data['available_untill'];
+            $q->where("available_untill <= '$untill'");
+        }
+
+        if($data['zone'] != null) {
+            $zone = $data['zone'];
+            $q->where("zone like '%$zone%'");
+        }
+
+        if($data['address'] != null) {
+            $address = $data['address'];
+            $q->where("address like '%$address%'");
+        }
+
+        if($data['fee_from'] != null) {
+            $from = $data['fee_from'];
+            $q->where("fee > '$from'");
+        }
+
+        if($data['fee_to'] != null) {
+            $to = $data['fee_to'];
+            $q->where("fee < '$to'");
+        }
+
+        return $this->fetchAll($q);
+    }
 }

@@ -127,18 +127,20 @@ class Application_Model_Accomodation {
         return $this->_accomodationTypeModel->lastInsertedId();
     }
 
-
-
-
-
-
-
-
-
-
-    public function searchAccomodation() {
-
+    public function searchGenericAccomodation($data) {
+        return $this->_accomodationModel->searchGenericAccomodation($data);
     }
+
+
+
+
+
+
+
+
+
+
+
 
     public function getAccomodation($id) {
         return $this->_accomodationModel->getAccomodation($id);
