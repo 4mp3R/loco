@@ -122,9 +122,13 @@ class Application_Form_Accomodation extends Zend_Form
 
         $this->addElement('submit', 'submit', array(
             'label'    => 'Inserisci',
+            'class'    => 'button button-primary'
         ));
 
-
+        $this->addElement('reset', 'reset', array(
+            'label'    => 'Reimposta',
+            'class'    => 'button button-danger'
+        ));
     }
 
     private function getType(){

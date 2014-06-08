@@ -129,5 +129,10 @@ class Application_Form_Registration extends Zend_Form
             'class'    => 'button button-primary'
         ))->removeDecorator('label');
 
+        $this->addElement('reset', 'reset', array(
+            'label'    => 'Ricomincia daccapo',
+            'class'    => 'button button-primary'
+        ))->removeDecorator('label');
+
     }
 }

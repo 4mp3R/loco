@@ -1,5 +1,17 @@
 <div class="container">
     <h3>Modifica dell'annuncio</h3>
+    <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?php
+        $target = array();
+        if(Zend_Auth::getInstance()->getIdentity()->role == 'admin') {
+            $target['controller'] = 'accomodation';
+            $target['action'] = 'view-all';
+        } else {
+            $target['controller'] = 'accomodation';
+            $target['action'] = 'index';
+        }
+
+        echo $this->url($target, 'default', true
+        ); ?>">Annulla</a></h1>
     <?php if(null != $this->photos): ?>
         <table class="table table-bordered table-striped">
             <?php foreach($this->photos as $photo): ?>

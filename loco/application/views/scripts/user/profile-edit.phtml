@@ -1,12 +1,22 @@
 <div class="page">
     <div class="container page-content">
 
-        <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
+        <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?php
+            $target = array();
+            if(Zend_Auth::getInstance()->getIdentity()->role == 'admin') {
+                $target['controller'] = 'user';
+                $target['action'] = 'view-all';
+            } else {
+                $target['controller'] = 'user';
+                $target['action'] = 'profile-view';
+            }
+
+            echo $this->url(
                 array(
                     'controller' => 'user',
                     'action' => 'profile-view'
                 ), 'default', true
-            ); ?>">Anulla</a></h1>
+            ); ?>">Annulla</a></h1>
 
         <div class="grid">
             <div class="col-1-4">

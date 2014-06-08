@@ -505,7 +505,15 @@ class AccomodationController extends Zend_Controller_Action
             }
         }
 
-        $form->addElement('submit', 'Vai');
+        $form->addElement('submit', 'submit', array(
+            'label'    => 'Aggiungi',
+            'class'    => 'button button-primary'
+        ));
+
+        $form->addElement('reset', 'reset', array(
+            'label'    => 'Reimposta',
+            'class'    => 'button button-danger'
+        ));
 
         $this->view->form = $form;
         $this->view->message = $message;
@@ -550,7 +558,16 @@ class AccomodationController extends Zend_Controller_Action
                 'required' => true,
                 'value' => 'yes'
             ));
-            $form->addElement('submit', 'Salva');
+
+            $form->addElement('submit', 'submit', array(
+                'label'    => 'Salva',
+                'class'    => 'button button-primary'
+            ));
+
+            $form->addElement('reset', 'reset', array(
+                'label'    => 'Reimposta',
+                'class'    => 'button button-danger'
+            ));
 
             if('yes' == $request->getParam('complete')) {
                 for($i=0; $i<count($features); $i++) {

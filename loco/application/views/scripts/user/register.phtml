@@ -1,7 +1,12 @@
 <div class="page registrazione">
     <div class="container">
         <div class="page-content">
-            <h1 class="page-heading"><?= $this->message; ?></h1>
+                <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
+                    array(
+                        'controller' => 'loco',
+                        'action' => 'index'
+                    ), 'default', true
+                ); ?>">Annulla</a></h1>
             <?= $this->registrationForm; ?>
         </div>
     </div>

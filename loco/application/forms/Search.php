@@ -108,7 +108,15 @@ class Application_Form_Search extends Zend_Form {
             }
         }
 
-        $this->addElement("submit", "submit");
+        $this->addElement("submit", "submit", array(
+            'label' => 'Vai!',
+            'class'    => 'button button-primary'
+        ));
+
+        $this->addElement("reset", "reset", array(
+            'label' => 'Annulla',
+            'class'    => 'button button-danger'
+        ));
     }
 
 }

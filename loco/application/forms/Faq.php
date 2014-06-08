@@ -26,7 +26,15 @@ class Application_Form_Faq extends Zend_Form {
             'required' => false
         ));
 
-        $this->addElement("submit", "Vai!");
+        $this->addElement("submit", "Vai!", array(
+            'label' =>  'Salva',
+            'class'    => 'button button-primary'
+        ));
+
+        $this->addElement("reset", "reset", array(
+            'label' =>  'Reimposta',
+            'class'    => 'button button-danger'
+        ));
     }
 
 }

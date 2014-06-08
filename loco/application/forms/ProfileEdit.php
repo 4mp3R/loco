@@ -100,7 +100,13 @@ class Application_Form_ProfileEdit extends Zend_Form
         ));
 
         $this->addElement('submit', 'edit', array(
-            'label'    => 'Aggiorna profilo'
+            'label'    => 'Aggiorna profilo',
+            'class'    => 'button button-primary'
+        ));
+
+        $this->addElement('reset', 'reset', array(
+            'label'    => 'Annulla modifiche',
+            'class'    => 'button button-primary'
         ));
 
     }
