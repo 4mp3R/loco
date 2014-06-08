@@ -71,8 +71,22 @@ class MessageController extends Zend_Controller_Action
             Zend_Auth::getInstance()->getIdentity()->username
         );
 
-        foreach($interlocutors as $i)
+        foreach($interlocutors as $i) {
             $data[] = array("username" => $i);
+        }
+
+        if(null != $this->_request->getParam('interlocutor')
+            && 1 == count($this->_profileModel->getProfile($this->_request->getParam('interlocutor'))))
+        {
+            $conversationExists = false;
+
+            foreach($data as $d)
+                foreach($d as $k=>$v)
+                    if($this->_request->getParam('interlocutor') == $v)
+                        $conversationExists = true;
+
+            if(!$conversationExists) $data[] = array('username' => $this->_request->getParam('interlocutor'));
+        }
 
         for($i=0; $i<count($data); $i++) {
             $profile = $this->_profileModel->getProfile($data[$i]['username']);
