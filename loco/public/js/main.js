@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+//    setTimeout(function() {
+  //      $('#loader').fadeOut();
+    //}, 500);
+
     var path = $('meta[name="path"]').attr('value');
     var base = $('meta[name="base"]').attr('value');
 
