@@ -4,12 +4,14 @@ class LocoController extends Zend_Controller_Action
 {
 
     protected $_staticsModel;
+    protected $_accomodationModel;
     protected $_faqForm;
 
     public function init() {
         $this->_helper->layout->setLayout("public");
 
         $this->_staticsModel = new Application_Model_Statics();
+        $this->_accomodationModel = new Application_Model_Accomodation();
         $this->_faqForm = new Application_Form_Faq();
     }
 
@@ -91,7 +93,52 @@ class LocoController extends Zend_Controller_Action
     }
 
     public function settingsAction() {
-        $this->_helper->layout->setLayout('private');
+        $request = $this->_request;
+        $this->_helper->layout->setLayout("private");
+
+        //faq
+        $formParams = array(
+            'id' => $request->getParam('id'),
+            'question' => $request->getParam('question'),
+            'answer' => $request->getParam('answer')
+        );
+
+
+        if(null != $formParams['id']) {
+            if(null != $formParams['question'] && null != $formParams['answer']) {
+                if($this->_faqForm->isValid($formParams) && 1 == count($this->_staticsModel->getFaqItem($formParams['id'])))
+                    $this->_staticsModel->updateFaq($formParams);
+
+                $this->_helper->redirector('faq-edit', 'loco');
+            } else {
+                if(null == $formParams['id'])
+                    $this->_helper->redirector("faq-edit", "loco");
+
+                $faqItem = $this->_staticsModel->getFaqItem($formParams['id']);
+
+                $this->_faqForm->getElement('question')->setValue($faqItem[0]->question);
+                $this->_faqForm->getElement('answer')->setValue($faqItem[0]->answer);
+                $this->_faqForm->getElement('id')->setValue($faqItem[0]->id);
+
+                $this->view->form = $this->_faqForm;
+            }
+        } else {
+            $faq = $this->_staticsModel->getFaq();
+
+            $this->view->faq = $faq;
+        }
+
+        //Types
+        $types = $this->_accomodationModel->getTypes();
+
+        $data = array();
+
+        foreach($types as $t) {
+            $features = $this->_accomodationModel->getFeaturesByType($t->id);
+            $data[] = array('type' => $t, 'features' => $features);
+        }
+
+        $this->view->data = $data;
     }
 
     public function statisticsAction() {

@@ -1,10 +1,101 @@
 <div class="page">
     <div class="container page-content">
 
-        <h1 class="page-heading">Impostazioni</h1>
+        <h1 class="page-heading float-left">Gestione F.A.Q.</h1>
+
+        <?php if(null == $this->faq): ?>
+            <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
+                    array(
+                        'controller' => 'loco',
+                        'action' => 'faq-edit'
+                    ), 'default', true
+                ); ?>">Annulla</a></h1>
+        <?php endif; ?>
+
+        <a class=" button button-primary float-right" href="
+            <?= $this->url(array(
+            'controller' => 'loco',
+            'action' => 'faq-add'
+        ), 'default', true);
+        ?>
+        ">Aggiungi</a>
 
         <div class="grid">
+            <?php
+            if(isset($this->form)) echo $this->form;
+            ?>
+            <?php if(!isset($this->form)): ?>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Domanda</th>
+                        <th>Risposta</th>
+                        <th>Azioni</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->faq as $f): ?>
+                        <tr>
+                            <td><?= $f->id ?></td>
+                            <td><?= $f->question ?></td>
+                            <td><?= $f->answer ?></td>
+                            <td>
+                                <a class="button" href="<?= $this->url(array(
+                                    'controller' => 'loco',
+                                    'action' => 'faq-edit',
+                                    'id' => $f->id
+                                ), 'default', true); ?>">Edita</a>
+                                <a class="button button-danger" href="
+                                    <?= $this->url(array(
+                                    'controller' => 'loco',
+                                    'action' => 'faq-delete',
+                                    'id' => $f->id
+                                ), 'default', true); ?>
+                                ">Cancella</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
 
         </div>
+        <h2>Gestione delle tipologie degli annunci</h2>
+        <a class="button button-selected float-right" href="<?= $this->url(array(
+            'controller' => 'accomodation',
+            'action' => 'type-add'
+        ), 'default', true) ?>">Nuova tipologia</a>
+
+        <?php foreach($this->data as $d): ?>
+            <h3>Tipologia: <?= $d['type']->name ?></h3>
+
+            <a class="button button-primary float-left" href="<?= $this->url(array(
+                'controller' => 'accomodation',
+                'action' => 'type-edit',
+                'type' => $d['type']->id
+            ), 'default', true) ?>">Modifica</a>
+            <a class="button button-danger float-left" href="<?= $this->url(array(
+                'controller' => 'accomodation',
+                'action' => 'type-delete',
+                'type' => $d['type']->id
+            ), 'default', true) ?>">Elimina</a>
+
+            <table class='table table-bordered table-striped'>
+                <thead>
+                <th>Caratteristica</th>
+                <th>Tipo di dato</th>
+                </thead>
+                <tbody>
+                <?php foreach($d['features'] as $f): ?>
+                    <tr>
+                        <td><?= $f->name ?></td>
+                        <td><?= $f->data_type ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+
+        <?php endforeach; ?>
     </div>
 </div>
