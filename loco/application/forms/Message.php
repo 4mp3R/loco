@@ -4,7 +4,7 @@ class Application_Form_Message extends Zend_Form {
 
     public function init() {
         $this->setMethod("post");
-        $this->setName("login_form");
+        $this->setName("message_form");
         $this->setAction("");
         $this->setAttrib('class', 'form');
 

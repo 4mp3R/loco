@@ -12,15 +12,37 @@ $(document).ready(function() {
 
     } else if (path == 'message/list') {
 
-        setInterval(function() {
-            $.get(base+'/message/getnew/int1/' + $('.messages-content').attr('data-int1') + '/int2/' + $('.messages-content').attr('data-int2') + '/timestamp/' + $('.messages-content').attr('data-timestamp'), function(data) {
-                if(data.length > 0) {
-                    for(var i = 0; i < data.length; i++) {
+        setInterval(updateMessages, 5 * 1000);
 
-                        var m = data[i];
+        var form =  $('#message_form');
+        form.submit(function() {
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    updateMessages();
+                }
+            });
+            $('#message_form input[name="content"]').val('');
 
-                        $('.messages-content').append(
-                            '<div class="message grid">'+
+            return false;
+        });
+
+        $('.messages-content').animate({scrollTop: $('.messages-content')[0].scrollHeight});
+
+    }
+
+    function updateMessages() {
+        $.get(base+'/message/getnew/int1/' + $('.messages-content').attr('data-int1') + '/int2/' + $('.messages-content').attr('data-int2') + '/timestamp/' + $('.messages-content').attr('data-timestamp'), function(data) {
+            if(data.length > 0) {
+                for(var i = 0; i < data.length; i++) {
+
+                    var m = data[i];
+
+                    $('.messages-content').append(
+                        '<div class="message grid">'+
                             '    <div class="col-3-12">'+
                             '        <img src="data:image/jpeg;base64,'+base64_encode(m['author_profile_image']) +'" class="float-left profile" alt=""/>'+
                             '        <b>' + m['author'] +'</b>'+
@@ -30,16 +52,18 @@ $(document).ready(function() {
                             '        <p>'+ m['content'] +'</p>'+
                             '    </div>'+
                             '</div>'
-                        );
+                    );
 
-                    }
-                    $('.messages-content').attr('data-int1', data[data.length-1]['author']);
-                    $('.messages-content').attr('data-int2', data[data.length-1]['recipient']);
-                    $('.messages-content').attr('data-timestamp', data[data.length-1]['timestamp']);
                 }
-            });
-        }, 5 * 1000);
+                $('.messages-content').attr('data-int1', data[data.length-1]['author']);
+                $('.messages-content').attr('data-int2', data[data.length-1]['recipient']);
+                $('.messages-content').attr('data-timestamp', data[data.length-1]['timestamp']);
 
+                setTimeout(function() {
+                    $('.messages-content').animate({scrollTop: $('.messages-content')[0].scrollHeight});
+                }, 50);
+            }
+        });
     }
 
     $('.button-goback').click(function() {
