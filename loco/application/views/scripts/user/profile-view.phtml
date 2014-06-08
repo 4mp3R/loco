@@ -1,13 +1,16 @@
 <div class="page">
     <div class="container page-content">
 
-        <h1 class="page-heading">Informazioni sul profilo dell'utente <a class="button button-primary float-right" href="<?= $this->url(
-                array(
-                    'controller' => 'user',
-                    'action' => 'profile-edit',
-                    'username' => $this->profile_info->username
-                ), 'default', true
-            ); ?>">Edita Profilo</a></h1>
+        <?php if($this->profile_info->username == Zend_Auth::getInstance()->getIdentity()->username
+                    || 'admin' == Zend_Auth::getInstance()->getIdentity()->role): ?>
+            <h1 class="page-heading">Informazioni sul profilo dell'utente <a class="button button-primary float-right" href="<?= $this->url(
+                    array(
+                        'controller' => 'user',
+                        'action' => 'profile-edit',
+                        'username' => $this->profile_info->username
+                    ), 'default', true
+                ); ?>">Edita Profilo</a></h1>
+        <?php endif; ?>
 
         <div class="grid">
 

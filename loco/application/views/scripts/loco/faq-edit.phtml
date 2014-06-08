@@ -4,12 +4,9 @@
         <h1 class="page-heading float-left">Impostazioni</h1>
 
         <?php if(null == $this->faq): ?>
-        <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
-                array(
-                    'controller' => 'loco',
-                    'action' => 'faq-edit'
-                ), 'default', true
-            ); ?>">Annulla</a></h1>
+        <h1 class="page-heading"><?= $this->message; ?>
+            <a class="button button-danger float-right button-goback" href="#">Annulla</a>
+        </h1>
         <?php endif; ?>
 
         <a class=" button float-right" href="
