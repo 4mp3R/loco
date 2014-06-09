@@ -72,7 +72,9 @@ class AccomodationController extends Zend_Controller_Action
             $request->setParam('lesser', Zend_Auth::getInstance()->getIdentity()->username);
 
             //add generic accomodation data
-            $this->_accomodationModel->addAccomodation(array_intersect_key($request->getParams(), array_flip($generalAccomodationParams)));
+            $data = array_intersect_key($request->getParams(), array_flip($generalAccomodationParams));
+            $data['created'] = date('Y-m-d');
+            $this->_accomodationModel->addAccomodation($data);
             $id = $this->_accomodationModel->accomodationLastInsertId();
 
             //add specific accomodation data
