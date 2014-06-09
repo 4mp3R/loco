@@ -18,8 +18,8 @@ class Application_Model_Accomodation {
         $this->_optionModel = new Application_Model_Resources_Option();
     }
 
-    public function getAllAccomodations() {
-        return $this->_accomodationModel->getAllAccomodations();
+    public function getAllAccomodations($page = null) {
+        return $this->_accomodationModel->getAllAccomodations($page);
     }
 
     public function getLatestAccomodations($n) {

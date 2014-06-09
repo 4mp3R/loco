@@ -5,10 +5,17 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     protected $_name = 'accomodation';
     protected $_primary = 'id';
 
-    public function getAllAccomodations() {
+    public function getAllAccomodations($page = null) {
         $query = $this->select();
 
-        return $this->fetchAll($query);
+        if(null != $page) {
+            $adapter = new Zend_Paginator_Adapter_DbTableSelect($query);
+            $paginator = new Zend_Paginator($adapter);
+            $paginator->setItemCountPerPage(2);
+            $paginator->setCurrentPageNumber($page);
+
+            return $paginator;
+        } else return $this->fetchAll($query);
     }
 
     public function getAccomodationByProfile($lesser) {

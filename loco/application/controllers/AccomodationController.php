@@ -274,9 +274,11 @@ class AccomodationController extends Zend_Controller_Action
 
     public function viewAllAction()
     {
+        $page = $this->_request->getParam('page');
+        if(!is_numeric($page)) $page = 1;
 
         $this->_accomodationsModel = new Application_Model_Accomodation();
-        $this->view->allAccomodations = $this->_accomodationsModel->getAllAccomodations();
+        $this->view->allAccomodations = $this->_accomodationsModel->getAllAccomodations($page);
     }
 
     public function searchAction() {
