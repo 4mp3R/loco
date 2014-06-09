@@ -44,5 +44,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initAclHookPlugin() {
         Zend_Controller_Front::getInstance()->registerPlugin(new App_Controller_Plugin_Acl());
     }
+
+    protected function _initPaginationControls() {
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial('paginationNav.phtml');
+    }
 }
 

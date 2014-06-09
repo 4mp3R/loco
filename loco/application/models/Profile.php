@@ -8,8 +8,8 @@ class Application_Model_Profile {
         $this->_profileModel = new Application_Model_Resources_Profile();
     }
 
-    public function getAllProfiles() {
-        return $this->_profileModel->getAllProfiles();
+    public function getAllProfiles($page) {
+        return $this->_profileModel->getAllProfiles($page);
     }
 
     public function getProfile($username) {

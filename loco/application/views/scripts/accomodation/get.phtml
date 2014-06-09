@@ -11,6 +11,11 @@
                         Indirizzo: <b><?= $this->accomodation[0]->address ?></b><br>
                         Prezzo: <b class="prezzo"><?= $this->accomodation[0]->fee ?> €/mese</b><br>
                         Disponibilità: <b><?= $this->accomodation[0]->available_from ?></b> - <b><?= $this->accomodation[0]->available_untill ?></b>
+                        Locatore: <b><a href="<?= $this->url(array(
+                                'controller' => 'user',
+                                'action' => 'profile-view',
+                                'username' => $this->accomodation[0]->lesser
+                            ), 'default', true) ?>"><?= $this->accomodation[0]->lesser ?></a></b><br>
                     </div>
                     <div class="col-1-2">
                         <div>

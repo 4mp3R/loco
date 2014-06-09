@@ -210,9 +210,12 @@ class UserController extends Zend_Controller_Action
     public function viewAllAction() {
         $this->_helper->layout->setLayout("private");
 
+        $page = $this->_request->getParam('page');
+        if(!is_numeric($page)) $page = null;
+
         $this->_profileModel = new Application_Model_Profile();
 
-        $this->view->allProfiles = $this->_profileModel->getAllProfiles();
+        $this->view->allProfiles = $this->_profileModel->getAllProfiles($page);
     }
 
     public function deleteAction() {

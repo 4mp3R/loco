@@ -1,0 +1,12 @@
+<!--
+    pageCount
+    previous
+    first
+    next
+    last
+-->
+
+<a href="<?= $this->url(array('page' => $this->first)) ?>">Prima pagina</a>
+<a href="<?= $this->url(array('page' => $this->previous)) ?>">Pagina precedente</a>
+<a href="<?= $this->url(array('page' => $this->next)) ?>">Pagina successiva</a>
+<a href="<?= $this->url(array('page' => $this->last)) ?>">Ultima pagina</a>

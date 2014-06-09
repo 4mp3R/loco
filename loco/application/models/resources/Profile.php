@@ -9,9 +9,19 @@ class Application_Model_Resources_Profile  extends Zend_Db_Table_Abstract {
 
     }
 
-    public function getAllProfiles() {
+    public function getAllProfiles($page) {
         $query = $this->select('*');
-        return $this->fetchAll($query);
+
+        if(null === $page) $page = 1;
+
+        $adapter = new Zend_Paginator_Adapter_DbTableSelect($query);
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage(2);
+        $paginator->setCurrentPageNumber($page);
+
+        return $paginator;
+
+        //return $this->fetchAll($query);
     }
 
     public function getProfile($username) {
