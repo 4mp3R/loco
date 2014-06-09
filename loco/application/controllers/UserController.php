@@ -211,7 +211,7 @@ class UserController extends Zend_Controller_Action
         $this->_helper->layout->setLayout("private");
 
         $page = $this->_request->getParam('page');
-        if(!is_numeric($page)) $page = null;
+        if(!is_numeric($page)) $page = 1;
 
         $this->_profileModel = new Application_Model_Profile();
 

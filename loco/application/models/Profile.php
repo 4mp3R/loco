@@ -8,7 +8,7 @@ class Application_Model_Profile {
         $this->_profileModel = new Application_Model_Resources_Profile();
     }
 
-    public function getAllProfiles($page) {
+    public function getAllProfiles($page = null) {
         return $this->_profileModel->getAllProfiles($page);
     }
 
