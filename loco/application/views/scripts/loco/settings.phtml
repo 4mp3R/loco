@@ -1,7 +1,17 @@
 <div class="page">
     <div class="container page-content">
 
-        <h1 class="page-heading float-left">Gestione F.A.Q.</h1>
+        <h1 class="page-heading">
+            Gestione F.A.Q.
+            <a class=" button button-primary float-right" href="
+            <?= $this->url(array(
+                'controller' => 'loco',
+                'action' => 'faq-add'
+            ), 'default', true);
+            ?>
+        ">Aggiungi</a>
+
+        </h1>
 
         <?php if(null == $this->faq): ?>
             <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
@@ -11,14 +21,6 @@
                     ), 'default', true
                 ); ?>">Annulla</a></h1>
         <?php endif; ?>
-
-        <a class=" button button-primary float-right" href="
-            <?= $this->url(array(
-            'controller' => 'loco',
-            'action' => 'faq-add'
-        ), 'default', true);
-        ?>
-        ">Aggiungi</a>
 
         <div class="grid">
             <?php
@@ -62,27 +64,32 @@
 
         </div>
 
-        <hr/>
+        <hr class="big"/>
 
-        <h1 class="page-heading">Gestione delle tipologie degli annunci</h1>
-        <a class="button button-selected float-right" href="<?= $this->url(array(
-            'controller' => 'accomodation',
-            'action' => 'type-add'
-        ), 'default', true) ?>">Nuova tipologia</a>
+        <h1 class="page-heading">
+            Gestione delle tipologie degli annunci
+            <a class="button button-selected float-right" href="<?= $this->url(array(
+                'controller' => 'accomodation',
+                'action' => 'type-add'
+            ), 'default', true) ?>">Nuova tipologia</a>
+        </h1>
+
 
         <?php foreach($this->data as $d): ?>
-            <h3>Tipologia: <?= $d['type']->name ?></h3>
 
-            <a class="button button-primary float-left" href="<?= $this->url(array(
-                'controller' => 'accomodation',
-                'action' => 'type-edit',
-                'type' => $d['type']->id
-            ), 'default', true) ?>">Modifica</a>
-            <a class="button button-danger float-left" href="<?= $this->url(array(
-                'controller' => 'accomodation',
-                'action' => 'type-delete',
-                'type' => $d['type']->id
-            ), 'default', true) ?>">Elimina</a>
+            <h5>
+                Tipologia: <?= $d['type']->name ?>
+                <a class="button button-primary float-right" href="<?= $this->url(array(
+                    'controller' => 'accomodation',
+                    'action' => 'type-edit',
+                    'type' => $d['type']->id
+                ), 'default', true) ?>">Modifica</a>
+                <a class="button button-danger float-right" href="<?= $this->url(array(
+                    'controller' => 'accomodation',
+                    'action' => 'type-delete',
+                    'type' => $d['type']->id
+                ), 'default', true) ?>">Elimina</a>
+            </h5>
 
             <table class='table table-bordered table-striped'>
                 <thead>
@@ -98,6 +105,8 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <hr/>
 
         <?php endforeach; ?>
     </div>

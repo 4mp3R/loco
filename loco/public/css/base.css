@@ -555,3 +555,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     border-color: #ebccd1;
     color: #a94442;
 }
+
+hr.big {
+    margin: 50px 0;
+}

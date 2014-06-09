@@ -1,7 +1,9 @@
-<div class="container">
-    <h1 class="page-heading">
-        <a class="button button-danger float-right button-goback" href="#">Annulla</a>
-    </h1>
-    <h3>Modifica delle tipologia "<?= $this->type[0]->name ?>"</h3>
-    <?= $this->form ?>
+<div class="page">
+    <div class="container page-content">
+        <h1 class="page-heading">
+            Modifica delle tipologia "<?= $this->type[0]->name ?>"
+            <a class="button button-danger float-right button-goback" href="#">Annulla</a>
+        </h1>
+        <?= $this->form ?>
+    </div>
 </div>

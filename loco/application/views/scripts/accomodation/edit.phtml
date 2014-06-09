@@ -1,23 +1,32 @@
-<div class="container">
-    <h3>Modifica dell'annuncio</h3>
-    <h1 class="page-heading"><?= $this->message; ?>
-        <a class="button button-danger float-right button-goback" href="#">Annulla</a>
-    </h1>
-    <?php if(null != $this->photos): ?>
-        <table class="table table-bordered table-striped">
-            <?php foreach($this->photos as $photo): ?>
-                <tr>
-                <td><img class="accommodation_img_400x200" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" /></td>
-                <td><a class="button button-danger" href="
+<div class="page">
+    <div class="container page-content">
+        <h1 class="page-heading">
+            Modifica dell'annuncio
+            <a class="button button-danger float-right button-goback" href="#">Annulla</a>
+        </h1>
+        <?php if($this->message): ?>
+            <div class="alert alert-info">
+                <?= $this->message; ?>
+            </div>
+        <?php endif; ?>
+        <div class="grid">
+            <?php if(null != $this->photos): ?>
+            <table class="table table-bordered table-striped">
+                <?php foreach($this->photos as $photo): ?>
+                    <tr>
+                        <td><img class="accommodation_img_400x200" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" /></td>
+                        <td><a class="button button-danger" href="
                     <?= $this->url(array(
-                        'controller' => 'accomodation',
-                        'action' => 'delete-photo',
-                        'id' => $photo->id
-                    ), 'default', true) ?>
+                                'controller' => 'accomodation',
+                                'action' => 'delete-photo',
+                                'id' => $photo->id
+                            ), 'default', true) ?>
                 ">Elimina</a></td>
-                </tr>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </table>
-    <?= $this->form; ?>
+                    </tr>
+                <?php endforeach; ?>
+                <?php endif; ?>
+            </table>
+            <?= $this->form; ?>
+        </div>
+    </div>
 </div>

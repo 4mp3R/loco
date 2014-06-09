@@ -427,6 +427,13 @@ hr {
 .button-margin {
     margin-top: 13px;
 }
+.page-heading {
+    overflow: auto;
+}
+.page-heading .button {
+    line-height: 20px;
+    font-size: 14px;
+}
 
 .login_error {
     color: red;

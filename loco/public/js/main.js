@@ -38,8 +38,12 @@ $(document).ready(function() {
 
     }
 
+    var updating = false;
     function updateMessages() {
+        if(updating = true) return;
+        updating = true;
         $.get(base+'/message/getnew/int1/' + $('.messages-content').attr('data-int1') + '/int2/' + $('.messages-content').attr('data-int2') + '/timestamp/' + $('.messages-content').attr('data-timestamp'), function(data) {
+            updating = false;
             if(data.length > 0) {
                 for(var i = 0; i < data.length; i++) {
 

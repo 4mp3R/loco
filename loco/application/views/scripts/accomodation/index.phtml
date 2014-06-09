@@ -1,13 +1,12 @@
 <div class="page">
     <div class="container page-content">
 
-        <h1 class="page-heading">Locali</h1>
-        <a class="button button-selected" href="
+        <h1 class="page-heading">Locali  <a class="button button-selected float-right" href="
             <?= $this->url(array(
-            'controller' => 'accomodation',
-            'action' => 'add'
-        ), 'default', true); ?>
-        ">Nuovo annuncio</a>
+                'controller' => 'accomodation',
+                'action' => 'add'
+            ), 'default', true); ?>
+        ">Nuovo annuncio</a></h1>
 
         <div class="grid">
 
@@ -29,14 +28,13 @@
                         <td><?= $d['accomodation']->address; ?></td>
                         <td><?= count($d['options']); ?></td>
                         <td>
-                            <a class="button button-primary" href="
+                            <a class="button" href="
                                 <?= $this->url(array(
                                 'controller' => 'accomodation',
                                 'action' => 'get',
                                 'id' => $d['accomodation']->id
                             ), 'default', true); ?>
                             ">Dettagli</a>
-                            <!--<a class="button button-selected" href="#">Interessati</a>-->
                         </td>
                     </tr>
                 <?php endforeach; ?>

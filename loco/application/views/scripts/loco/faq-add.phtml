@@ -1,11 +1,12 @@
-<div class="container">
-    <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
-            array(
-                'controller' => 'loco',
-                'action' => 'settings'
-            ), 'default', true
-        ); ?>">Annulla</a></h1>
-    <h3>Creazione di un nuovo elemento della F.A.Q.</h3>
-    <?php if(isset($this->form)) echo $this->form; ?>
+<div class="page">
+    <div class="container page-content">
+        <h1 class="page-heading"><?= $this->message; ?><a class="button button-danger float-right" href="<?= $this->url(
+                array(
+                    'controller' => 'loco',
+                    'action' => 'settings'
+                ), 'default', true
+            ); ?>">Annulla</a></h1>
+        <h3>Creazione di un nuovo elemento della F.A.Q.</h3>
+        <?php if(isset($this->form)) echo $this->form; ?>
+    </div>
 </div>
-

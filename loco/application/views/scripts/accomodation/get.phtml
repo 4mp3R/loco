@@ -39,22 +39,26 @@
                                     <a class="button button-disabled float-right">Alloggio Le e' stato assegnato con successo!</a>
                                 <?php endif ?>
                             <?php else: ?>
-                                <a class="button button-primary float-right" href="<?=$this->url(array(
-                                    'controller' => 'accomodation',
-                                    'action' => 'edit',
-                                    'accomodation' => $this->accomodation[0]->id
-                                ), 'default', true) ?>">Modifica</a>
-                                <a class="button button-danger float-right" href="<?= $this->url(array(
-                                    'controller' => 'accomodation',
-                                    'action' => 'delete',
-                                    'id' => $this->accomodation[0]->id
-                                ), 'default', true) ?>">Elimina</a>
+                                <div class="grid">
+                                    <a class="button button-primary float-right" href="<?=$this->url(array(
+                                        'controller' => 'accomodation',
+                                        'action' => 'edit',
+                                        'accomodation' => $this->accomodation[0]->id
+                                    ), 'default', true) ?>">Modifica</a>
+                                </div>
+                                <br>
+                                <div class="grid">
+                                    <a class="button button-danger float-right" href="<?= $this->url(array(
+                                        'controller' => 'accomodation',
+                                        'action' => 'delete',
+                                        'id' => $this->accomodation[0]->id
+                                    ), 'default', true) ?>">Elimina</a>
+                                </div>
                             <?php endif; ?>
                         </div>
                     </div>
                 </div>
                 <hr/>
-
                 <div>
                     <div class="col-1-1">
                         <h3>Descrizione</h3>
@@ -86,16 +90,26 @@
                         </table>
                     </div>
                 </div>
-
             </div>
 
-            <?php if($this->accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username || 'admin' == Zend_Auth::getInstance()->getIdentity()->role): ?>
-                <?php if(null != $this->interestedLessees): ?>
-                    <div class="col-1-1">
-                        <p><h3>I locatari che hanno mostrato l'interesse nell'annuncio</h3></p>
+            <div class="col-4-12">
+                <div class="gallery">
+                    <?php foreach($this->photos as $photo): ?>
+                        <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
+                    <?php endforeach; ?>
+                </div>
+            </div>
 
-                        <table class="table table-bordered table-stripped table-40percent-w">
-                            <thead>
+            <hr/>
+
+            <div>
+                <?php if($this->accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username || 'admin' == Zend_Auth::getInstance()->getIdentity()->role): ?>
+                    <?php if(null != $this->interestedLessees): ?>
+                        <div class="col-1-1">
+                            <p><h3>I locatari che hanno mostrato l'interesse nell'annuncio</h3></p>
+
+                            <table class="table table-bordered table-stripped table-40percent-w">
+                                <thead>
                                 <th>Nome</th>
                                 <th>Cognome</th>
                                 <th>Email</th>
@@ -103,8 +117,8 @@
                                 <th>Data di nasita</th>
                                 <th>Codice fiscale</th>
                                 <th>Telefono</th>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 <?php foreach($this->interestedLessees as $i): ?>
                                     <tr>
                                         <td><a href="<?= $this->url(array(
@@ -112,7 +126,7 @@
                                                     'action' => 'profile-view',
                                                     'username' => $i->username
                                                 ),
-                                            'default', true) ?>"><?= $i->name ?></a></td>
+                                                'default', true) ?>"><?= $i->name ?></a></td>
                                         <td><?= $i->surname ?></td>
                                         <td><?= $i->email ?></td>
                                         <td><?= $i->sex ?></td>
@@ -121,24 +135,17 @@
                                         <td><?= $i->phone ?></td>
                                     </tr>
                                 <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php else: ?>
-                    <div class="col-1-1">
-                        <p>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-1-1">
+                            <p>
                             <h3>Nessun locatario interessato</h3>
-                        </p>
-                    </div>
+                            </p>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
-            <?php endif; ?>
-
-            <div class="col-4-12">
-                <div class="gallery">
-                    <?php foreach($this->photos as $photo): ?>
-                        <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
-                    <?php endforeach; ?>
-                </div>
             </div>
 
         </div>
