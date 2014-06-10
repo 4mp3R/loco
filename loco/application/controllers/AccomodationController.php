@@ -320,18 +320,20 @@ class AccomodationController extends Zend_Controller_Action
                     $features = $this->_accomodationModel->getFeaturesByType($request->getParam('type'));
                     $filteredAccomodations = array();
 
+                    $params = $request->getParams();
+
                    foreach($accomodations as $a) {
                        $filterOK = true;
 
                         foreach($features as $f) {
-                            $formFeatureName =  str_replace(' ', '_', $type[0]->name.'_'.$f->name) . "<br>";
-echo $formFeatureName."<br>";
-                            if($request->getParam($formFeatureName) != null) {
+                            $formFeatureName =  str_replace(' ', '_', $type[0]->name.'_'.$f->name);
+
+                            if($params[$formFeatureName] != null) {
                                 $data = $this->_accomodationModel->getDataByAccomodationAndFeature($a->id, $f->id);
                                 $data = $data[0];
-echo "<br>Form param: ".$formFeatureName." = ".$request->getParam($formFeatureName)."<br>";
-echo "DB value: ".$data->feature_value."<br>";
-                                if($data->feature_value != $request->getParam($formFeatureName)) $filterOK = false;
+
+                                if($data->feature_value != $request->getParam($formFeatureName)
+                                && $data->feature_value =! 0) $filterOK = false;
                             }
                         }
 
@@ -375,7 +377,7 @@ echo "DB value: ".$data->feature_value."<br>";
 
         //we need to pass the search GET params to url helper
         //var_dump(http_build_query($_GET));
-        $this->view->requestGETParams = http_build_query($_GET);
+        $this->view->requestGET = $_GET;
 
 
         $this->view->accomodations = $accomodations;
