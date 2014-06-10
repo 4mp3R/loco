@@ -305,6 +305,12 @@ hr {
     background: #222 url(../img/ancona.jpg) no-repeat left center;
 }
 
+.login-cont {
+    position: relative;
+    left: -100%;
+    opacity: 0;
+}
+
 /*
     Search
  */
@@ -453,3 +459,4 @@ img.profilo_top {
     position: relative;
     top: 10px;
 }
+
