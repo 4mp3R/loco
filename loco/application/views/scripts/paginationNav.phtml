@@ -25,6 +25,3 @@
 <?php if($this->current != $this->last): ?>
 <a href="<?= $this->url(array('page' => $this->last), null, false).$params ?>"> Ultima pagina</a>
 <?php endif; ?>
-
-<?= "<br>".$this->url(array('page' => 1), null, false)."<br>" ?>
-<?= $this->url(array('page' => 1), null, true) ?>

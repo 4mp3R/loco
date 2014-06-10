@@ -26,7 +26,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
     }
 
     public function getLatestAccomodations($n) {
-        $query = $this->select()->order('id DESC')->limit($n);
+        $query = $this->select()->order('created DESC')->limit($n);
 
         return $this->fetchAll($query);
     }
@@ -132,7 +132,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
             $q->where("type = '$type'");
         }
 
-        $q->order('created');
+        $q->order('created DESC');
 
         if(null != $page) {
             $adapter = new Zend_Paginator_Adapter_DbTableSelect($q);

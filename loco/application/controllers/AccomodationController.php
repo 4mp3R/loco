@@ -325,11 +325,12 @@ class AccomodationController extends Zend_Controller_Action
 
                         foreach($features as $f) {
                             $formFeatureName =  str_replace(' ', '_', $type[0]->name.'_'.$f->name) . "<br>";
-
+echo $formFeatureName."<br>";
                             if($request->getParam($formFeatureName) != null) {
                                 $data = $this->_accomodationModel->getDataByAccomodationAndFeature($a->id, $f->id);
                                 $data = $data[0];
-
+echo "<br>Form param: ".$formFeatureName." = ".$request->getParam($formFeatureName)."<br>";
+echo "DB value: ".$data->feature_value."<br>";
                                 if($data->feature_value != $request->getParam($formFeatureName)) $filterOK = false;
                             }
                         }
@@ -339,6 +340,13 @@ class AccomodationController extends Zend_Controller_Action
                    }
 
                     $accomodations = $filteredAccomodations;
+
+                    $adapter = new Zend_Paginator_Adapter_Array($accomodations);
+                    $paginator = new Zend_Paginator($adapter);
+                    $paginator->setItemCountPerPage(2);
+                    $paginator->setCurrentPageNumber($page);
+                    $accomodations = $paginator;
+                    $paginatorBar =$accomodations;
 
                 } else {
                     /////////////////////DA PAGINARE
