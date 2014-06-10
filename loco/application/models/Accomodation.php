@@ -127,8 +127,8 @@ class Application_Model_Accomodation {
         return $this->_accomodationTypeModel->lastInsertedId();
     }
 
-    public function searchGenericAccomodation($data) {
-        return $this->_accomodationModel->searchGenericAccomodation($data);
+    public function searchGenericAccomodation($data, $page = null) {
+        return $this->_accomodationModel->searchGenericAccomodation($data, $page);
     }
 
     public function getDataByAccomodationAndFeature($accomodation_id, $accomodation_feature) {

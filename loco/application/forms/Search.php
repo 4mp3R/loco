@@ -10,7 +10,7 @@ class Application_Form_Search extends Zend_Form {
             'None' => 'Nessuna preferenza'
         );
 
-        $this->setMethod("post");
+        $this->setMethod("get");
         $this->setName("search_form");
         $this->setAction("");
         $this->setAttrib('class', 'form');

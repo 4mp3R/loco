@@ -82,7 +82,7 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
                       ->where("fee = '$fee'");
     }
 
-    public function searchGenericAccomodation($data) {
+    public function searchGenericAccomodation($data, $page = null) {
         $q = $this->select();
 
         if($data['keywords'] != null) {
@@ -134,6 +134,31 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
 
         $q->order('created');
 
-        return $this->fetchAll($q);
+        if(null != $page) {
+            $adapter = new Zend_Paginator_Adapter_DbTableSelect($q);
+            $paginator = new Zend_Paginator($adapter);
+            $paginator->setItemCountPerPage(2);
+            $paginator->setCurrentPageNumber($page);
+
+            return $paginator;
+        } else return $this->fetchAll($q);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

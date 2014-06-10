@@ -292,8 +292,27 @@ class AccomodationController extends Zend_Controller_Action
         $types = array();
         $photos = array();
 
+        $page = $this->_request->getParam('page');
+        if(null === $page) $page = 1;
+
+        $paginatorBar = null;
+
+/*
+        if(null != $request->getParam('complete')) {    //search params set, perform search
+            if($searchForm->isValid($request->getParams()) && $request->getParam('type') != 'None' && 1 == count($this->_accomodationModel->getAccType($request->getParam('type'))))
+            { //
+                //instructions
+            }
+                 else {
+                    $accomodations = $this->_accomodationModel->searchGenericAccomodation($request->getParams());
+                }
+            } else {    //no search params, show latest accomodations inserted
+            $accomodations = $this->_accomodationModel->getLatestAccomodations(4);
+        }
+*/
+
         //user entered some search params
-        if($request->isPost()) {
+        if(null != $request->getParam('complete')) {
             if($searchForm->isValid($request->getParams())) {
                 if($request->getParam('type') != 'None' && 1 == count($this->_accomodationModel->getAccType($request->getParam('type')))) {
                     $accomodations = $this->_accomodationModel->searchGenericAccomodation($request->getParams());
@@ -322,24 +341,41 @@ class AccomodationController extends Zend_Controller_Action
                     $accomodations = $filteredAccomodations;
 
                 } else {
-                    $accomodations = $this->_accomodationModel->searchGenericAccomodation($request->getParams());
+                    /////////////////////DA PAGINARE
+                    $accomodations = $this->_accomodationModel->searchGenericAccomodation($request->getParams(), $page);
+                    $paginatorBar = $accomodations;
                 }
             }
         } else {    //no search params, show latest accomodations inserted
             $accomodations = $this->_accomodationModel->getLatestAccomodations(4);
         }
 
+        $i = 0;
+        foreach($accomodations as $a) {
+            $lessers[$i] = $this->_profileModel->getProfile($a->lesser);
+            $photos[$i] = $this->_accomodationModel->getPhotosForAccomodation($a->id);
+            $types[$i] = $this->_accomodationModel->getAccType($a->type);
+            $i++;
+        }
+/*
         for($i=0; $i<count($accomodations); $i++) {
             $lessers[$i] = $this->_profileModel->getProfile($accomodations[$i]->lesser);
             $photos[$i] = $this->_accomodationModel->getPhotosForAccomodation($accomodations[$i]->id);
             $types[$i] = $this->_accomodationModel->getAccType($accomodations[$i]->type);
         }
+*/
+
+        //we need to pass the search GET params to url helper
+        //var_dump(http_build_query($_GET));
+        $this->view->requestGETParams = http_build_query($_GET);
+
 
         $this->view->accomodations = $accomodations;
         $this->view->lessers = $lessers;
         $this->view->accomodations_type = $types;
         $this->view->photos = $photos;
         $this->view->form = $searchForm;
+        $this->view->paginatorBar = $paginatorBar;
     }
 
     public function typeListAction() {

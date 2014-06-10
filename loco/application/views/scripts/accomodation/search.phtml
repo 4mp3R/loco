@@ -9,14 +9,16 @@
     </div>
     <div class="content grid">
 
-        <?php for($i=0; $i<count($this->accomodations); $i++): ?>
+        <?php //for($i=0; $i<count($this->accomodations); $i++): ?>
+        <?php $i=0; ?>
+        <?php foreach($this->accomodations as $a): ?>
             <div class="col-1-2">
                 <div class="panel">
                     <div class="panel-image">
                         <img class="accommodation_img_large" src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt=""/>
                     </div>
                     <div class="panel-heading text-center">
-                        <h2 class="panel-title"><?= $this->accomodations[$i]->title ?><br><span class="prezzo"><?= $this->accomodations[$i]->fee ?> €/ mese</span></h2>
+                        <h2 class="panel-title"><?= $a->title ?><br><span class="prezzo"><?= $a->fee ?> €/ mese</span></h2>
                     </div>
                     <div class="panel-body grid">
                         <div class="col-1-2">
@@ -34,24 +36,27 @@
                                             'username' => $this->lessers[$i][0]->username
                                         ), 'default', true); ?>
                                 "><?= $this->lessers[$i][0]->name . " ". $this->lessers[$i][0]->surname?></a></span></li>
-                                <li><b>Periodo:</b> <span><?= $this->accomodations[$i]->available_from ?> / <?= $this->accomodations[$i]->available_untill ?></span></li>
+                                <li><b>Periodo:</b> <span><?= $a->available_from ?> / <?= $a->available_untill ?></span></li>
                             </ul>
                         </div>
                         <div class="col-1-1 text-justified">
-                            <?= strlen($this->accomodations[$i]->description) > 203 ? substr($this->accomodations[$i]->description,0,200).'...' : $this->accomodations[$i]->description; ?>
+                            <?= strlen($a->description) > 203 ? substr($a->description,0,200).'...' : $a->description; ?>
                         </div>
                         <div class="col-1-1 text-center">
                             <a class="button button-primary" href="
                                 <?= $this->url(array(
                                     'controller' => 'accomodation',
                                     'action' => 'get',
-                                    'id' => $this->accomodations[$i]->id
+                                    'id' => $a->id
                             ), 'default', true); ?>
                             ">Dettagli</a>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endfor; ?>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+
+        <?php if($this->paginatorBar != null) echo $this->paginationControl($this->paginatorBar, 'Sliding',null, array('params' => $this->requestGETParams)); ?>
     </div>
 </div>
