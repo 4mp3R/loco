@@ -29,9 +29,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/normalize.css'));
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/base.css'));
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/style.css'));
+        $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/custom-theme/jquery-ui-1.10.4.custom.min.css'));
 
         $this->_view->headScript()->appendFile($this->_view->baseUrl('js/jquery.js'), 'text/javascript');
         $this->_view->headScript()->appendFile($this->_view->baseUrl('js/main.js'), 'text/javascript');
+        $this->_view->headScript()->appendFile($this->_view->baseUrl('js/jquery-ui-1.10.4.custom.min.js'), 'text/javascript');
 
         $this->_view->headTitle('Loco!');
     }

@@ -7,12 +7,53 @@ $(document).ready(function() {
     var path = $('meta[name="path"]').attr('value');
     var base = $('meta[name="base"]').attr('value');
 
+    var datepicker_opts = {
+        numberOfMonths: 3,
+        showButtonPanel: true,
+        dateFormat: "yy-mm-dd"
+    };
+
+    var slider_opts = {
+        range: true,
+        min: 50,
+        max: 1000,
+        values: [ 50, 500 ],
+        slide: function( event, ui ) {
+            console.log(ui)
+            $( "#rangeslider-fee > label > span.from" ).text("€" + ui.values[ 0 ] );
+            $( "#rangeslider-fee > label > span.to" ).text( "€" + ui.values[ 1 ] );
+            $('#fee_from').val(ui.values[0]);
+            $('#fee_to').val(ui.values[1]);
+        }
+    }
+
     if(path == 'loco/statistics') {
 
         // Anima i numeri
         $('.stat').each(function(){
             countUp($(this).children('span'), 0, $(this).data('count'), .4*1000);
         })
+
+    } else if (path == 'accomodation/search') {
+
+        $('#available_from').datepicker(datepicker_opts);
+        $('#available_untill').datepicker(datepicker_opts);
+        $('#fee_from-element').prepend('<div id="rangeslider-fee"><label>Canone da <span class="prezzo from"></span> a <span class="prezzo to"></span></label><br/><br/><div></div></div>');
+        $('#fee_from').hide();
+        $('#fee_to').hide();
+        $('#rangeslider-fee > div').slider(slider_opts);
+
+        $( "#rangeslider-fee > label > span.from" ).text("€" + $( "#rangeslider-fee > div" ).slider( "values", 0 ));
+        $( "#rangeslider-fee > label > span.to" ).text("€" + $( "#rangeslider-fee > div" ).slider( "values", 1 ));
+
+        $('#type').change(function(e) {
+            var val = $(this).val();
+            var name = $(this).find("option:selected").text();
+            $('.search-display-group').hide();
+            $('#fieldset-'+name).show();
+        });
+        $('.search-display-group').hide();
+
 
     } else if (path == 'message/list') {
 
