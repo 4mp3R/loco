@@ -53,11 +53,11 @@ class Application_Model_Acl extends Zend_Acl {
             ->addResource(new Zend_Acl_Resource("accomodation_edit"))
             ->addResource(new Zend_Acl_Resource("accomodation_delete-photo"))
             ->addResource(new Zend_Acl_Resource("accomodation_delete"))
-            ->addResource(new Zend_Acl_Resource("accomodation_lessee-select"))
+            ->addResource(new Zend_Acl_Resource("accomodation_assign"))
             ->addResource(new Zend_Acl_Resource("contract_create"))
             ->addResource(new Zend_Acl_Resource("contract_confirm"))
             ->allow("lesser", array(
-                "accomodation_index", "accomodation_add", "accomodation_edit", "accomodation_lessee-select", "accomodation_delete-photo", "accomodation_delete", "contract_create", "contract_confirm"
+                "accomodation_index", "accomodation_add", "accomodation_edit", "accomodation_assign", "accomodation_delete-photo", "accomodation_delete", "contract_create", "contract_confirm"
             ));
 
         $this->addRole(new Zend_Acl_Role("admin"), "lesser")

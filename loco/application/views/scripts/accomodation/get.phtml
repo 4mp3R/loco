@@ -16,19 +16,22 @@
                                 'action' => 'profile-view',
                                 'username' => $this->accomodation[0]->lesser
                             ), 'default', true) ?>"><?= $this->accomodation[0]->lesser ?></a></b><br>
+                        <?php if($this->accomodation[0]->assigned != null): ?>
+                        Assegnato: <b><?= $this->accomodation[0]->assigned ?></b>
+                        <?php endif; ?>
                     </div>
                     <div class="col-1-2">
                         <div>
                             <?php if($this->accomodation[0]->lesser != Zend_Auth::getInstance()->getIdentity()->username
                                     && 'admin' != Zend_Auth::getInstance()->getIdentity()->role): ?>
-                                <?php if(0 == count($this->option)): ?>
+                                <?php if(0 == count($this->option) && $this->accomodation[0]->assigned == null): ?>
                                     <a class="button button-primary float-right" href="<?=$this->url(array(
                                         'controller' => 'accomodation',
                                         'action' => 'option',
                                         'username' => $this->username,
                                         'accomodation' => $this->accomodation[0]->id
                                     ), 'default', true) ?>">Opziona</a>
-                                <?php elseif($this->option[0]->state == 'optioned'): ?>
+                                <?php elseif($this->accomodation[0]->assigned == null && $this->option[0]->state == 'optioned'): ?>
                                     <a class="button button-danger float-right" href="<?=$this->url(array(
                                         'controller' => 'accomodation',
                                         'action' => 'deoption',
@@ -36,7 +39,7 @@
                                         'accomodation' => $this->accomodation[0]->id
                                     ), 'default', true) ?>">Deopziona</a>
                                 <?php else: ?>
-                                    <a class="button button-disabled float-right">Alloggio Le e' stato assegnato con successo!</a>
+                                    <a class="button button-disabled float-right">Disattivato il <?= $this->accomodation[0]->assigned ?></a>
                                 <?php endif ?>
                             <?php else: ?>
                                 <div class="grid">
@@ -54,6 +57,27 @@
                                         'id' => $this->accomodation[0]->id
                                     ), 'default', true) ?>">Elimina</a>
                                 </div>
+                                <?php if($this->accomodation[0]->assigned == null): ?>
+                                    <br>
+                                    <div class="grid">
+                                        <a class="button button-primary float-right" href="<?= $this->url(array(
+                                            'controller' => 'accomodation',
+                                            'action' => 'assign',
+                                            'accomodation' => $this->accomodation[0]->id,
+                                            'set' => 1
+                                        ), 'default', true) ?>">Assegna</a>
+                                    </div>
+                                <?php else: ?>
+                                    <br>
+                                    <div class="grid">
+                                        <a class="button button-active float-right" href="<?= $this->url(array(
+                                            'controller' => 'accomodation',
+                                            'action' => 'assign',
+                                            'accomodation' => $this->accomodation[0]->id,
+                                            'set' => 0
+                                        ), 'default', true) ?>">Rendi attivo</a>
+                                    </div>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
                     </div>

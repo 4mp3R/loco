@@ -667,4 +667,27 @@ class AccomodationController extends Zend_Controller_Action
             }
             $this->view->accomodations = $accomodations;
     }
+
+    public function assignAction() {
+        $accomodation_id = $this->_request->getParam('accomodation');
+        $set = $this->_request->getParam('set');
+
+        if(null != $accomodation_id && 1 == count($this->_accomodationModel->getAccomodation($accomodation_id)) && null != $set) {
+            $accomodation = $this->_accomodationModel->getAccomodation($accomodation_id);
+            $accomodation = $accomodation[0]->toArray();
+
+            if($accomodation['lesser'] == Zend_Auth::getInstance()->getIdentity()->username || 'admin' == Zend_Auth::getInstance()->getIdentity()->role) {
+                if($set == 1) {
+                    $accomodation['assigned'] = date('Y-m-d');
+                    $this->_accomodationModel->updateAccomodation($accomodation['id'] , $accomodation);
+                } else {
+                    $accomodation['assigned'] = null;
+                    $this->_accomodationModel->updateAccomodation($accomodation['id'] , $accomodation);
+                }
+            }
+
+        }
+
+        $this->_helper->redirector("get", "accomodation", null, array("id" => $accomodation_id));
+    }
 }
