@@ -143,6 +143,12 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
             return $paginator;
         } else return $this->fetchAll($q);
     }
+
+    public function getLocatedAccomodations() {
+        $q = $this->select()->where("assigned is not null");
+
+        return $this->fetchAll($q);
+    }
 }
 
 

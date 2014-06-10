@@ -135,7 +135,9 @@ class Application_Model_Accomodation {
         return $this->_accomodationDataModel->getDataByAccomodationAndFeature($accomodation_id, $accomodation_feature);
     }
 
-
+    public function getLocatedAccomodations() {
+        return $this->_accomodationModel->getLocatedAccomodations();
+    }
 
 
 
