@@ -34,7 +34,7 @@ $(document).ready(function() {
             countUp($(this).children('span'), 0, $(this).data('count'), .4*1000);
         })
 
-    } else if (path == 'accomodation/search') {
+    } else if (path == 'accomodation/search' || path == 'accomodation/add' || path == 'accomodation/edit') {
 
         $('#available_from').datepicker(datepicker_opts);
         $('#available_untill').datepicker(datepicker_opts);
@@ -52,7 +52,8 @@ $(document).ready(function() {
             $('.search-display-group').hide();
             $('#fieldset-'+name).show();
         });
-        $('.search-display-group').hide();
+
+        $('#type').trigger('change');
 
 
     } else if (path == 'message/list') {
