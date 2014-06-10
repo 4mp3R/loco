@@ -7,6 +7,8 @@ $(document).ready(function() {
     var path = $('meta[name="path"]').attr('value');
     var base = $('meta[name="base"]').attr('value');
 
+    console.log(path)
+
     var datepicker_opts = {
         numberOfMonths: 3,
         showButtonPanel: true,
@@ -32,7 +34,10 @@ $(document).ready(function() {
         // Anima i numeri
         $('.stat').each(function(){
             countUp($(this).children('span'), 0, $(this).data('count'), .4*1000);
-        })
+        });
+        $('#from').datepicker(datepicker_opts);
+        $('#to').datepicker(datepicker_opts);
+
 
     } else if (path == 'accomodation/search' || path == 'accomodation/add' || path == 'accomodation/edit') {
 
@@ -55,6 +60,12 @@ $(document).ready(function() {
 
         $('#type').trigger('change');
 
+    } else if (path == 'user/login') {
+
+        $('.login .login-cont').animate({
+            left: 0,
+            opacity: 1
+        });
 
     } else if (path == 'message/list') {
 
