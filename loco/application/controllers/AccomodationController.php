@@ -332,13 +332,16 @@ class AccomodationController extends Zend_Controller_Action
                                 $data = $this->_accomodationModel->getDataByAccomodationAndFeature($a->id, $f->id);
                                 $data = $data[0];
 
-                                if($data->feature_value != $request->getParam($formFeatureName)
-                                && $data->feature_value =! 0) $filterOK = false;
+                                if($request->getParam($formFeatureName) != 0 && $request->getParam($formFeatureName) != '0')
+                                    if($data->feature_value != $request->getParam($formFeatureName))
+                                        $filterOK = false;
                             }
                         }
 
-                       if($filterOK)
+                       if($filterOK) {
                            $filteredAccomodations[] = $a;
+                       }
+
                    }
 
                     $accomodations = $filteredAccomodations;
