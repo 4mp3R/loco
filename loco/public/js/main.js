@@ -90,7 +90,14 @@ $(document).ready(function() {
     }
 
     $('form[data-confirm]').submit(function(e) {
-        return submit($(this).data('confirm'));
+        return confirm($(this).data('confirm'));
+    });
+
+    $('a[data-confirm]').click(function(e) {
+        e.preventDefault();
+
+        if(confirm($(this).data('confirm')))
+            window.location = $(this).attr('href');
     });
 
     var updating = false;
