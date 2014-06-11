@@ -20,7 +20,6 @@ class Application_Model_Resources_Profile  extends Zend_Db_Table_Abstract {
 
             return $paginator;
         } else return $this->fetchAll($query);
-
     }
 
     public function getProfile($username) {

@@ -6,30 +6,34 @@
     last
 -->
 
-<?php
-    $params = $this->params;
-?>
+<?php if($this->pageCount != 0): ?>
 
-<div class="grid text-center">
-    <?php if($this->current != 1): ?>
-        <?php $params['page'] = $this->first; ?>
-        <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params)?>">Prima pagina </a>
-    <?php endif; ?>
+    <?php
+        $params = $this->params;
+    ?>
 
-    <?php if($this->current != $this->first): ?>
-        <?php $params['page'] = $this->previous; ?>
-        <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params) ?>">&lt;&lt; Pagina precedente</a>
-    <?php endif; ?>
+    <div class="grid text-center">
+        <?php if($this->current != 1): ?>
+            <?php $params['page'] = $this->first; ?>
+            <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params)?>">Prima pagina </a>
+        <?php endif; ?>
 
-    Pagina <?= $this->current ?> / <?= $this->pageCount ?>
+        <?php if($this->current != $this->first): ?>
+            <?php $params['page'] = $this->previous; ?>
+            <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params) ?>">&lt;&lt; Pagina precedente</a>
+        <?php endif; ?>
 
-    <?php if($this->current != $this->last): ?>
-        <?php $params['page'] = $this->next; ?>
-        <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params) ?>"> Pagina successiva &gt;&gt;</a>
-    <?php endif; ?>
+        Pagina <?= $this->current ?> / <?= $this->pageCount ?>
 
-    <?php if($this->current != $this->last): ?>
-        <?php $params['page'] = $this->last; ?>
-        <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params) ?>"> Ultima pagina</a>
-    <?php endif; ?>
-</div>
+        <?php if($this->current != $this->last): ?>
+            <?php $params['page'] = $this->next; ?>
+            <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params) ?>"> Pagina successiva &gt;&gt;</a>
+        <?php endif; ?>
+
+        <?php if($this->current != $this->last): ?>
+            <?php $params['page'] = $this->last; ?>
+            <a class="button" href="<?= $this->url(array(), null, false).'/?'.http_build_query($params) ?>"> Ultima pagina</a>
+        <?php endif; ?>
+    </div>
+
+<?php endif; ?>

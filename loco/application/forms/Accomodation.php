@@ -108,7 +108,7 @@ class Application_Form_Accomodation extends Zend_Form
         $this->addElement('text', 'fee', array(
             'filters'    => array('StringTrim'),
             'validators' => array(
-                array('StringLength', true, array(4, 128)),
+                array('StringLength', true, array(2, 128)),
                 array('Float', 'locale' => 'it'),
             ),
             'required'   => true,

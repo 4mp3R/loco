@@ -422,7 +422,6 @@ class AccomodationController extends Zend_Controller_Action
             $form->addElement('text', 'name', array(
                 'filters' => array('StringTrim'),
                 'validators' => array(
-                    'Alpha',
                     array('StringLength', true, array(2, 128))
                 ),
                 'required' => true,
@@ -471,7 +470,7 @@ class AccomodationController extends Zend_Controller_Action
                 for($i=0; $i<$feature_count; $i++) {
                     $form->addElement('text', 'feature'.$i, array(
                         'filter' => array('StringTrim'),
-                        'validators' => array(array('StringLength', true, array(4,64))),
+                        'validators' => array(array('StringLength', true, array(2,64))),
                         'required' => true,
                         'label' => 'Nome proprieta '.($i+1)
                     ));
@@ -483,7 +482,7 @@ class AccomodationController extends Zend_Controller_Action
                             'int' => 'Numero intero'
                         ),
                         'filter' => array('StringTrim'),
-                        'validators' => array(array('StringLength', true, array(4,64))),
+                        'validators' => array(array('StringLength', true, array(2,64))),
                         'required' => true,
                         'label' => 'Tipo di dato '.($i+1)
                     ));
@@ -501,7 +500,6 @@ class AccomodationController extends Zend_Controller_Action
             $form->addElement('hidden', 'name', array(
                 'filters' => array('StringTrim'),
                 'validators' => array(
-                    'Alpha',
                     array('StringLength', true, array(2, 128))
                 ),
                 'required' => true,
@@ -533,7 +531,7 @@ class AccomodationController extends Zend_Controller_Action
                         'int' => 'Numero intero'
                     ),
                     'filter' => array('StringTrim'),
-                    'validators' => array(array('StringLength', true, array(4,64))),
+                    'validators' => array(array('StringLength', true, array(2,64))),
                     'required' => true,
                     'label' => 'Tipo di dato '.($i+1)
                 ));
@@ -554,7 +552,7 @@ class AccomodationController extends Zend_Controller_Action
                     ));
                 }
 
-                $this->_helper->redirector('type-list', 'accomodation');
+                $this->_helper->redirector('settings', 'loco');
             }
         }
 

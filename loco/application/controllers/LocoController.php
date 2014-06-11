@@ -182,8 +182,7 @@ class LocoController extends Zend_Controller_Action
         }
 
         $profileModel = new Application_Model_Profile();
-        $users = $profileModel->getAllProfiles();
-        $this->view->user_count = count($users);
+        $this->view->user_count = count($profileModel->getAllProfiles());
 
         $accomodations = $accomodationModel->getAllAccomodations();
         $this->view->accomodation_count = count($accomodations);

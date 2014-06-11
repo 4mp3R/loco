@@ -15,7 +15,9 @@
             <div class="col-1-2">
                 <div class="panel">
                     <div class="panel-image">
-                        <img class="accommodation_img_large" src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt=""/>
+                        <?php if(0 < count($this->photos[$i])): ?>
+                            <img class="accommodation_img_large" src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt=""/>
+                        <?php endif; ?>
                     </div>
                     <div class="panel-heading text-center">
                         <h2 class="panel-title"><?= $a->title ?><br><span class="prezzo"><?= $a->fee ?> €/ mese</span></h2>

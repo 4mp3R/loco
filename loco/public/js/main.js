@@ -58,6 +58,7 @@ $(document).ready(function() {
         $('#type').change(function(e) {
             var val = $(this).val();
             var name = $(this).find("option:selected").text();
+            name = name.replace(' ', '');
             $('.search-display-group').hide();
             $('#fieldset-'+name).show();
         });
