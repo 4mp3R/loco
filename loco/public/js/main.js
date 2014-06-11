@@ -89,7 +89,7 @@ $(document).ready(function() {
 
     }
 
-    $('form[data-submit]').submit(function(e) {
+    $('form[data-confirm]').submit(function(e) {
         return submit($(this).data('confirm'));
     });
 
