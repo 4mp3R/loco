@@ -13,7 +13,7 @@
             'action' => 'type-edit',
             'type' => $d['type']->id
         ), 'default', true) ?>">Modifica</a>
-        <a class="button button-danger float-left" href="<?= $this->url(array(
+        <a class="button button-danger float-left" data-confirm="L'eliminazione della tipologia comporterà l'eliminazione di tutti gli annunci di quella tipologia" href="<?= $this->url(array(
             'controller' => 'accomodation',
             'action' => 'type-delete',
             'type' => $d['type']->id

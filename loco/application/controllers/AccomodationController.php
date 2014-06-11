@@ -622,6 +622,8 @@ class AccomodationController extends Zend_Controller_Action
                 'class'    => 'button button-danger'
             ));
 
+            $form->setAttrib('data-confirm', 'Attenzione! La modifica delle tipologie può provocare degli effetti indesiderati. Si prega di avvisare i locatori che dovranno provvedere a ricontrollare gli annunci');
+
             if('yes' == $request->getParam('complete')) {
                 for($i=0; $i<count($features); $i++) {
 
