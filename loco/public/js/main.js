@@ -7,8 +7,6 @@ $(document).ready(function() {
     var path = $('meta[name="path"]').attr('value');
     var base = $('meta[name="base"]').attr('value');
 
-    console.log(path)
-
     var datepicker_opts = {
         numberOfMonths: 3,
         showButtonPanel: true,
@@ -90,6 +88,10 @@ $(document).ready(function() {
         $('.messages-content').animate({scrollTop: $('.messages-content')[0].scrollHeight});
 
     }
+
+    $('form[data-submit]').submit(function(e) {
+        return submit($(this).data('confirm'));
+    });
 
     var updating = false;
     function updateMessages() {
