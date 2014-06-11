@@ -15,11 +15,12 @@ class Application_Model_Acl extends Zend_Acl {
             ->addResource(new Zend_Acl_Resource("loco_index"))
             ->addResource(new Zend_Acl_Resource("loco_support-view"))
             ->addResource(new Zend_Acl_Resource("loco_faq-view"))
+            ->addResource(new Zend_Acl_Resource("loco_tos-view"))
             ->addResource(new Zend_Acl_Resource("user_register"))
             ->addResource(new Zend_Acl_Resource("user_login"))
             ->addResource(new Zend_Acl_Resource("user_authenticate"))
             ->allow("unregistered", array(
-                "error_error", "loco_index", "loco_faq-view", "user_register", "user_login", "user_authenticate",
+                "error_error", "loco_index", "loco_faq-view", "loco_tos-view", "user_register", "user_login", "user_authenticate",
                 "error_authorization-error", "index_index"
             ));
 
