@@ -87,6 +87,13 @@ $(document).ready(function() {
 
         $('.messages-content').animate({scrollTop: $('.messages-content')[0].scrollHeight});
 
+    } else if(path == 'user/profile-edit' || path == 'user/register') {
+        datepicker_opts['changeMonth'] = true;
+        datepicker_opts['changeYear'] = true;
+        datepicker_opts['numberOfMonths'] = 1;
+        datepicker_opts['defaultDate'] = new Date(1991, 01, 01);
+
+        $('#birth').datepicker(datepicker_opts);
     }
 
     $('form[data-confirm]').submit(function(e) {
