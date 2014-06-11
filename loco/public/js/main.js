@@ -27,6 +27,7 @@ $(document).ready(function() {
         }
     }
 
+
     if(path == 'loco/statistics') {
 
         // Anima i numeri
@@ -45,6 +46,11 @@ $(document).ready(function() {
         $('#fee_from').hide();
         $('#fee_to').hide();
         $('#rangeslider-fee > div').slider(slider_opts);
+
+        if($('#fee_from').val() && $('#fee_to').val()) {
+            $( "#rangeslider-fee > div" ).slider( "values", 0, $('#fee_from').val());
+            $( "#rangeslider-fee > div" ).slider( "values", 1, $('#fee_to').val());
+        }
 
         $( "#rangeslider-fee > label > span.from" ).text("€" + $( "#rangeslider-fee > div" ).slider( "values", 0 ));
         $( "#rangeslider-fee > label > span.to" ).text("€" + $( "#rangeslider-fee > div" ).slider( "values", 1 ));
