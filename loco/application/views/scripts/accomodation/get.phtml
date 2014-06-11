@@ -22,8 +22,46 @@
                     </div>
                     <div class="col-1-2">
                         <div>
-                            <?php if($this->accomodation[0]->lesser != Zend_Auth::getInstance()->getIdentity()->username
-                                    && 'admin' != Zend_Auth::getInstance()->getIdentity()->role): ?>
+                            <?php if($this->accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username || 'admin' == Zend_Auth::getInstance()->getIdentity()->role): ?>
+                                <div class="grid">
+                                    <a class="button button-primary float-right" href="<?=$this->url(array(
+                                        'controller' => 'accomodation',
+                                        'action' => 'edit',
+                                        'accomodation' => $this->accomodation[0]->id
+                                    ), 'default', true) ?>">Modifica</a>
+                                </div>
+                                <br>
+                                <div class="grid">
+                                    <a class="button button-danger float-right" href="<?= $this->url(array(
+                                        'controller' => 'accomodation',
+                                        'action' => 'delete',
+                                        'id' => $this->accomodation[0]->id
+                                    ), 'default', true) ?>">Elimina</a>
+                                </div>
+                                <?php if($this->accomodation[0]->lesser == Zend_Auth::getInstance()->getIdentity()->username): ?>
+                                    <?php if($this->accomodation[0]->assigned == null): ?>
+                                        <br>
+                                        <div class="grid">
+                                            <a class="button button-primary float-right" href="<?= $this->url(array(
+                                                'controller' => 'accomodation',
+                                                'action' => 'assign',
+                                                'accomodation' => $this->accomodation[0]->id,
+                                                'set' => 1
+                                            ), 'default', true) ?>">Assegna</a>
+                                        </div>
+                                    <?php else: ?>
+                                        <br>
+                                        <div class="grid">
+                                            <a class="button button-active float-right" href="<?= $this->url(array(
+                                                'controller' => 'accomodation',
+                                                'action' => 'assign',
+                                                'accomodation' => $this->accomodation[0]->id,
+                                                'set' => 0
+                                            ), 'default', true) ?>">Rendi attivo</a>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endif;?>
+                            <?php else: ?>
                                 <?php if(0 == count($this->option) && $this->accomodation[0]->assigned == null): ?>
                                     <a class="button button-primary float-right" href="<?=$this->url(array(
                                         'controller' => 'accomodation',
@@ -41,43 +79,6 @@
                                 <?php else: ?>
                                     <a class="button button-disabled float-right">Disattivato il <?= $this->accomodation[0]->assigned ?></a>
                                 <?php endif ?>
-                            <?php else: ?>
-                                <div class="grid">
-                                    <a class="button button-primary float-right" href="<?=$this->url(array(
-                                        'controller' => 'accomodation',
-                                        'action' => 'edit',
-                                        'accomodation' => $this->accomodation[0]->id
-                                    ), 'default', true) ?>">Modifica</a>
-                                </div>
-                                <br>
-                                <div class="grid">
-                                    <a class="button button-danger float-right" href="<?= $this->url(array(
-                                        'controller' => 'accomodation',
-                                        'action' => 'delete',
-                                        'id' => $this->accomodation[0]->id
-                                    ), 'default', true) ?>">Elimina</a>
-                                </div>
-                                <?php if($this->accomodation[0]->assigned == null): ?>
-                                    <br>
-                                    <div class="grid">
-                                        <a class="button button-primary float-right" href="<?= $this->url(array(
-                                            'controller' => 'accomodation',
-                                            'action' => 'assign',
-                                            'accomodation' => $this->accomodation[0]->id,
-                                            'set' => 1
-                                        ), 'default', true) ?>">Assegna</a>
-                                    </div>
-                                <?php else: ?>
-                                    <br>
-                                    <div class="grid">
-                                        <a class="button button-active float-right" href="<?= $this->url(array(
-                                            'controller' => 'accomodation',
-                                            'action' => 'assign',
-                                            'accomodation' => $this->accomodation[0]->id,
-                                            'set' => 0
-                                        ), 'default', true) ?>">Rendi attivo</a>
-                                    </div>
-                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
                     </div>
