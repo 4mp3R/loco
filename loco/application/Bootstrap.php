@@ -26,8 +26,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headMeta()->appendHttpEquiv('Description', '');
         $this->_view->headLink()->headLink(array('rel' => 'icon shortcut favicon','href' => $this->_view->baseUrl('favicon.ico')));
 
-        $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/normalize.css'));
-        $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/base.css'));
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/style.css'));
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/custom-theme/jquery-ui-1.10.4.custom.min.css'));
 
