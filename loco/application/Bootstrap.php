@@ -48,5 +48,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initPaginationControls() {
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('paginationNav.phtml');
     }
+/*
+    protected function _initDatabase() {
+        include_once (APPLICATION_PATH . '/../../include/connectZP.php');
+        $db = new Zend_Db_Adapter_Pdo_Mysql(array(
+            'host'     => $HOST,
+            'username' => $USER,
+            'password' => $PASSWORD,
+            'dbname'   => $DB
+        ));
+
+        Zend_Db_Table_Abstract::setDefaultAdapter($db);
+    }
+*/
 }
 
