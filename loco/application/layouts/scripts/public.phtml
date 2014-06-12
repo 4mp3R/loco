@@ -2,13 +2,9 @@
 
 <?= $this->doctype() ?>
 <html>
-<head>
-    <?= $this->headMeta() ?>
-    <?= $this->headLink() ?>
-    <?= $this->headTitle() ?>
-    <meta name="path" content="<?= Zend_Controller_Front::getInstance()->getRequest()->getControllerName(); ?>/<?= Zend_Controller_Front::getInstance()->getRequest()->getActionName(); ?>"/>
-    <meta name="base" content="<?= $this->baseUrl(); ?>"/>
-</head>
+
+<?= $this->render('header.phtml'); ?>
+
 <body>
     <!--<div id="loader">Loading</div>-->
     <div class="menu">
@@ -58,42 +54,7 @@
     <!-- All that the view has produces will go here -->
     <?= $this->layout()->content ?>
 
-    <div class="footer">
-        <div class="container">
-            <div class="grid">
-                <div class="col-1-3">
-                    <h1 class="logo"><a href="#">Loco</a></h1>
-                    <p>Copyright 2014 Loco SRL</p>    
-                </div>
-                <div class="col-1-3">
-                    <b>Site Map</b>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div>
-                <div class="col-1-3">
-                    <b>Altra roba</b>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?= $this->render('footer.phtml'); ?>
 
     <?= $this->headScript() ?>
 

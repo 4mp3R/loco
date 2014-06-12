@@ -965,7 +965,7 @@ hr {
     height: 300px;
 }
 .footer .container {
-    padding: 50px 0;    
+    padding: 40px 0 0;
 }
 .footer .logo {
     background-image: url(../img/logo_gray.png);

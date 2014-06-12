@@ -161,7 +161,7 @@ $(document).ready(function() {
         if(from == to) return;
         var i = setInterval(function() {
             element.text(from++);
-            if(from == to) clearInterval(i);
+            if(from == to+1) clearInterval(i);
         }, frame);
     }
 

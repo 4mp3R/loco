@@ -26,6 +26,10 @@ class Application_Model_Resources_Profile  extends Zend_Db_Table_Abstract {
         return $this->find($username);
     }
 
+    public function getProfilesCount() {
+        return $this->fetchAll($this->select()->from('profile', array("num"=>"COUNT(*)")))[0]->num;
+    }
+
     public function addProfile($data) {
         $this->insert($data);
     }

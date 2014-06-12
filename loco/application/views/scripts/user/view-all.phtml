@@ -27,7 +27,7 @@
                 <tbody>
                     <?php foreach($this->allProfiles as $profile): ?>
                         <tr>
-                            <td><img class="profile" src="data:image/jpeg;base64,<?php echo base64_encode($profile->profile_image); ?>" /></td>
+                            <td><img class="profile" src="data:image/jpeg;base64,<?php echo base64_encode($profile->profile_image); ?>" alt="Immagine profilo"/></td>
                             <td><a href="
                                 <?= $this->url(array(
                                     'controller' => 'user',

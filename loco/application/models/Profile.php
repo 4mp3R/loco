@@ -12,6 +12,10 @@ class Application_Model_Profile {
         return $this->_profileModel->getAllProfiles($page);
     }
 
+    public function getProfilesCount() {
+        return $this->_profileModel->getProfilesCount();
+    }
+
     public function getProfile($username) {
         return $this->_profileModel->getProfile($username);
     }

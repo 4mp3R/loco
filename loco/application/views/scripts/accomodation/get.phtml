@@ -120,7 +120,7 @@
             <div class="col-4-12">
                 <div class="gallery">
                     <?php foreach($this->photos as $photo): ?>
-                        <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" />
+                        <img class="accommodation_img_large float-left" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>"  alt="Immagine dell'annuncio" title="Immagine dell'annuncio" />
                     <?php endforeach; ?>
                 </div>
             </div>

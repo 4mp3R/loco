@@ -16,7 +16,7 @@
                 <div class="panel">
                     <div class="panel-image">
                         <?php if(0 < count($this->photos[$i])): ?>
-                            <img class="accommodation_img_large" src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt=""/>
+                            <img class="accommodation_img_large" src="data:image/jpeg;base64,<?= base64_encode($this->photos[$i][0]->photo); ?>" alt="Immagine dell'annuncio" title="Immagine dell'annuncio"/>
                         <?php endif; ?>
                     </div>
                     <div class="panel-heading text-center">

@@ -159,6 +159,10 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
 
         return $this->fetchAll($q);
     }
+
+    public function getCount() {
+        return $this->fetchAll($this->select()->from('accomodation', array("num"=>"COUNT(*)")))[0]->num;
+    }
 }
 
 

@@ -67,6 +67,10 @@ class Application_Model_Accomodation {
         return $this->_optionModel->getOption($username, $accomodation);
     }
 
+    public function getCount() {
+        return $this->_accomodationModel->getCount();
+    }
+
     public function getOptionsByAccomodation($accomodation) {
         return $this->_optionModel->getOptionsByAccomodation($accomodation);
     }

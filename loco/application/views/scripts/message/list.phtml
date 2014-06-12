@@ -16,7 +16,7 @@
                                 'interlocutor' => $i['username']
                             )
                         ); ?>">
-                            <img src="data:image/jpeg;base64,<?php echo base64_encode($i['profile_image']); ?>" class="float-left profile" alt=""/>
+                            <img alt="Immagine profilo" src="data:image/jpeg;base64,<?php echo base64_encode($i['profile_image']); ?>" class="float-left profile" />
                             <b><?= $i['username']; ?></b>
                         </a>
                     </li>
@@ -34,7 +34,7 @@
             <?php foreach($this->messages as $m): ?>
                 <div class="message grid">
                     <div class="col-3-12">
-                        <img src="data:image/jpeg;base64,<?php echo base64_encode($m['author_profile_image']); ?>" class="float-left profile" alt=""/>
+                        <img alt="Immagine profilo" src="data:image/jpeg;base64,<?php echo base64_encode($m['author_profile_image']); ?>" class="float-left profile" />
                         <b><?= $m['author']; ?></b>
                         <p><?= $m['timestamp']; ?></p>
                     </div>

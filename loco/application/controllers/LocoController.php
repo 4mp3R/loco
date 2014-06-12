@@ -5,6 +5,7 @@ class LocoController extends Zend_Controller_Action
 
     protected $_staticsModel;
     protected $_accomodationModel;
+    protected $_profileModel;
     protected $_faqForm;
 
     public function init() {
@@ -12,6 +13,7 @@ class LocoController extends Zend_Controller_Action
 
         $this->_staticsModel = new Application_Model_Statics();
         $this->_accomodationModel = new Application_Model_Accomodation();
+        $this->_profileModel = new Application_Model_Profile();
         $this->_faqForm = new Application_Form_Faq();
     }
 
@@ -176,6 +178,10 @@ class LocoController extends Zend_Controller_Action
         $this->view->accomodations = $accomodations;
         $this->view->optioned = $optioned;
         $this->view->located = $located;
+
+        $this->view->accomodation_count = $this->_accomodationModel->getCount();
+        $this->view->user_count = $this->_profileModel->getProfilesCount();
+        $this->view->located_accomodation_count = count($this->_accomodationModel->getLocatedByIntervalAndType(null, null, null));
 
         $this->view->form = $form;
     }

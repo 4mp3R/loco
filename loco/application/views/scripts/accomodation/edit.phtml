@@ -14,7 +14,7 @@
             <table class="table table-bordered table-striped">
                 <?php foreach($this->photos as $photo): ?>
                     <tr>
-                        <td><img class="accommodation_img_400x200" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" /></td>
+                        <td><img class="accommodation_img_400x200" src="data:image/jpeg;base64,<?= base64_encode($photo->photo); ?>" alt="Immagine dell'annuncio" title="Immagine dell'annuncio" /></td>
                         <td><a class="button button-danger" href="
                     <?= $this->url(array(
                                 'controller' => 'accomodation',
