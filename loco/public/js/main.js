@@ -4,8 +4,8 @@ $(document).ready(function() {
   //      $('#loader').fadeOut();
     //}, 500);
 
-    var path = $('meta[name="path"]').attr('value');
-    var base = $('meta[name="base"]').attr('value');
+    var path = $('meta[name="path"]').attr('content');
+    var base = $('meta[name="base"]').attr('content');
 
     var datepicker_opts = {
         numberOfMonths: 3,
