@@ -1,17 +1,13 @@
 <?php
 
-/*
- * $item = array("question" => <question>, "answer" => <answer>
- */
-
 class Application_Model_Resources_Faq extends Zend_Db_Table_Abstract {
 
     protected $_name = "faq";
     protected $_primary = "id";
 
     public function getFaq() {
-        $query = $this->select(); //$query = "select * from faq";
-        return $this->fetchAll($query); //q -->DB-->[tuple]
+        $query = $this->select();
+        return $this->fetchAll($query);
     }
 
     public function getFaqItem($id) {

@@ -157,6 +157,8 @@ class LocoController extends Zend_Controller_Action
             $type_id = null;
         }
 
+        if($type_id == 'none') $type_id = null;
+
         if(null != $type_id) $type = $this->_accomodationModel->getAccType($type_id);
         else $type = null;
 

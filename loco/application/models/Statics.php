@@ -34,12 +34,4 @@ class Application_Model_Statics {
         $this->_faqModel->addFaq($data);
     }
 
-    public function getSlogan() {
-
-    }
-
-    public function getTutorial() {
-
-    }
-
 } 

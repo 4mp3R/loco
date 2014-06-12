@@ -34,5 +34,4 @@ class Application_Model_Resources_Accomodationtype  extends Zend_Db_Table_Abstra
         $this->delete("id = '$id'");
     }
 
-
 }

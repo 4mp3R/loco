@@ -143,13 +143,6 @@ class Application_Model_Accomodation {
         return $this->_accomodationModel->getLocatedByIntervalAndType($from, $to, $type_id);
     }
 
-
-
-
-
-
-
-
     public function getAccomodation($id) {
         return $this->_accomodationModel->getAccomodation($id);
     }
@@ -165,9 +158,6 @@ class Application_Model_Accomodation {
     public function addAccomodationType($data) {
         return $this->_accomodationTypeModel->addAccomodationType($data);
     }
-
-
-
 
     public function updateAccomodation($id ,$datiaggiornati) {
         return $this->_accomodationModel->updateAccomodation($id ,$datiaggiornati);
@@ -189,53 +179,8 @@ class Application_Model_Accomodation {
         return $this->_accomodationFeatureModel->updateAccomodationfeature($data);
     }
 
-
-
-    public function getInterestedLessees() {
-
-    }
-
-    public function assignLesseeForAccomodation() {
-
-    }
-
-    public function getAccomodationByFee(){
-        return $this->_accomodationeModel->getAccomodationByFee($fee);
-    }
-
-
-
     public function getAccomodationdata($accomodation_id) {
         return $this->_accomodationDataModel->getAccomodationdata($accomodation_id);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    public function addAccomodationfeature() {
-        return $this->_accomodationfeatureModel->addAccomodationfeature($dati);
-    }
-
-    public function updateAccomodationfeature() {
-        return $this->_accomodationfeatureModel->updateAccomodationfeature($id ,$datiaggiornati);
-    }
-
-    public function deleteAccomodationfeature() {
-        return $this->_accomodationfeatureModel->deleteAccomodationfeature($id);
-    }
-
-
-
-    public function updateAccomodationtype() {
-        return $this->_accomodationtypeModel->updateAccomodationtype($id ,$datiaggiornati);
     }
 
     public function deleteAccomodationtype($id) {

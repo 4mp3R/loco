@@ -647,7 +647,7 @@ class AccomodationController extends Zend_Controller_Action
         if(null != $type && 1 == count($this->_accomodationModel->getAccomodationType($type)))
             $this->_accomodationModel->deleteAccomodationType($type);
 
-        $this->_helper->redirector('type-list', 'accomodation');
+        $this->_helper->redirector('settings', 'loco');
     }
 
     public function viewOptionsAction() {

@@ -33,5 +33,4 @@ class Application_Model_Resources_Accomodationfeature  extends Zend_Db_Table_Abs
         $this->delete("id = '$id'");
     }
 
-
 }

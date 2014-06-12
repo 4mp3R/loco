@@ -44,8 +44,4 @@ class Application_Model_Resources_Option extends Zend_Db_Table_Abstract {
         $this->delete("lessee='".$username."' AND accomodation=".$accomodation);
     }
 
-    public function setLocated($username, $accomodation) {
-
-    }
-
 }
