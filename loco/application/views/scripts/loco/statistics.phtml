@@ -69,10 +69,9 @@
                 <ul class="list-unstyled">
                     <?php foreach($this->located as $l) {
                         echo "<li>";
-                        echo $l['option']->date;
-                        echo " <b>".$l['option']->lessee."</b>";
-                        echo " => ".$l['accomodation'][0]->title;
-                        echo " di <b>".$l['accomodation'][0]->lesser."</b>";
+                        echo $l->assigned;
+                        echo " => ".$l->title;
+                        echo " di <b>".$l->lesser."</b>";
                         echo "</li>";
                     } ?>
                 </ul>

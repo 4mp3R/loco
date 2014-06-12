@@ -139,7 +139,9 @@ class Application_Model_Accomodation {
         return $this->_accomodationModel->getLocatedAccomodations();
     }
 
-
+    public function getLocatedByIntervalAndType($from, $to, $type_id) {
+        return $this->_accomodationModel->getLocatedByIntervalAndType($from, $to, $type_id);
+    }
 
 
 

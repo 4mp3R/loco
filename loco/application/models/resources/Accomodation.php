@@ -149,6 +149,16 @@ class Application_Model_Resources_Accomodation extends Zend_Db_Table_Abstract {
 
         return $this->fetchAll($q);
     }
+
+    public function getLocatedByIntervalAndType($from, $to, $type_id) {
+        $q = $this->select()->where("assigned is not null");
+
+        if($from) $q->where("assigned > '$from'");
+        if($to) $q->where("assigned < '$to'");
+        if($type_id) $q->where("type = '$type_id'");
+
+        return $this->fetchAll($q);
+    }
 }
 
 

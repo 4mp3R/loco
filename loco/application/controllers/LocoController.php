@@ -157,41 +157,19 @@ class LocoController extends Zend_Controller_Action
             $type_id = null;
         }
 
-        if($type_id == 'none') $type_id = null;
+        if(null != $type_id) $type = $this->_accomodationModel->getAccType($type_id);
+        else $type = null;
 
-        $accomodationModel = new Application_Model_Accomodation();
+        $accomodations = $this->_accomodationModel->getAccomodationsByIntervalAndType($from, $to, $type_id);
 
-        $accomodations = $accomodationModel->getAccomodationsByIntervalAndType($from, $to, $type_id);
+        $optioned = $this->_accomodationModel->getOptionsByIntervalAndType($from, $to, $type_id);
 
-        $options = $accomodationModel->getOptionsByIntervalAndType($from, $to, $type_id);
+        $located = $this->_accomodationModel->getLocatedByIntervalAndType($from, $to, $type_id);
 
-        $typeName = null;
-
-        if(null != $type_id) {
-            $accomodationTypeModel = new Application_Model_Resources_Accomodationtype();
-            $type = $accomodationTypeModel->getAccomodationType($type_id);
-            $typeName = $type[0]->name;
-        }
-
-        $optioned = array();
-        $located = array();
-
-        foreach($options as $o) {
-            if($o['option']->state == 'optioned') $optioned[] = $o;
-            else $located[] = $o;
-        }
-
-        $profileModel = new Application_Model_Profile();
-        $this->view->user_count = count($profileModel->getAllProfiles());
-
-        $accomodations = $accomodationModel->getAllAccomodations();
-        $this->view->accomodation_count = count($accomodations);
-
-        $this->view->located_accomodation_count = count($this->_accomodationModel->getLocatedAccomodations());
-;
         $this->view->from = $from;
         $this->view->to = $to;
-        $this->view->typeName = $typeName;
+        if(null != $type) $this->view->typeName = $type[0]->name;
+        else $this->view->typeName = null;
 
         $this->view->accomodations = $accomodations;
         $this->view->optioned = $optioned;
